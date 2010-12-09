@@ -1,20 +1,27 @@
 package infowall.domain.model;
 
-import org.codehaus.jackson.node.ObjectNode;
-import org.ektorp.support.CouchDbDocument;
-
 /**
  *
  */
-public class DashboardItem extends CouchDbDocument {
+public class DashboardItem {
 
-    private ObjectNode data;
+    private String name;
+    private String title;
 
-    public ObjectNode getData() {
-        return data;
+
+    public String getName() {
+        return name;
     }
 
-    public void setData(ObjectNode data) {
-        this.data = data;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

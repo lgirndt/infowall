@@ -9,6 +9,7 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+
     <servlet>
         <servlet-name>spring</servlet-name>
         <servlet-class>
@@ -24,4 +25,6 @@
         <servlet-name>spring</servlet-name>
         <url-pattern>/action/*</url-pattern>
     </servlet-mapping>
+
+
 </web-app>

@@ -1,0 +1,10 @@
+{
+    "_id" : "first-dasboard",
+    "title": "My First Dashboard",
+    "items" : [
+        {
+            "name" : "some-count",
+            "title": "Some Count"
+        }
+    ]
+}

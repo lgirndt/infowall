@@ -1,6 +1,6 @@
 package infowall.web.controller;
 
-import infowall.domain.persistence.DashboardItemRepository;
+import infowall.domain.persistence.DashboardRepository;
 import org.codehaus.jackson.node.ObjectNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class HelloWorldController {
 
     @Autowired
-    private DashboardItemRepository dashboardItemRepository;
+    private DashboardRepository dashboardRepository;
 
     private final Logger logger = LoggerFactory.getLogger(HelloWorldController.class);
 
@@ -44,7 +44,7 @@ public class HelloWorldController {
         item.setId(123);
         item.setData(node);
         */
-        
-        return dashboardItemRepository.get(id).getData();
+
+        return null;
     }
 }
