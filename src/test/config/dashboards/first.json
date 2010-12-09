@@ -1,10 +1,11 @@
 {
     "_id" : "first-dasboard",
     "title": "My First Dashboard",
-    "items" : [
-        {
-            "name" : "some-count",
-            "title": "Some Count"
-        }
+    "items" :
+        [
+            {"name" : "some-count","title": "Some Count"},
+            {"name" : "violations","title": "Code Violations"},
+            {"name" : "bugs","title": "Open Bugs"},
+            {"name" : "storypoints","title": "Open Story Points"}
     ]
 }
