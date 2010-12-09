@@ -7,8 +7,8 @@
     <h1>Dashboards</h1>
     Please choose:
     <ul>
-        <c:forEach var="dashbard" items="${dashboards}">
-            <li><a href="/action/dashboard/${bashboard.id}">${dashbard.title}</a></li>
+        <c:forEach var="dashboard" items="${dashboards}">
+            <li><a href="<c:url value='/action/dashboard/${dashboard.id}'/>">${dashboard.title}</a></li>
         </c:forEach>
     </ul>
     </body>

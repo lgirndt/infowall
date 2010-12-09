@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,5 +34,14 @@ public class DashboardController {
         logger.info("loaded dashboards: " + dashboards);
 
         return new ModelAndView("dashboard/list","dashboards", dashboards);
+    }
+
+    @RequestMapping("/dashboard/{dashboardId}")
+    ModelAndView showDashboard(@PathVariable String dashboardId){
+        Dashboard dashboard = process.getDashboard(dashboardId);
+        if(dashboard == null){
+            return new ModelAndView("redirect:/action/dashboards");
+        }
+        return new ModelAndView("dashboard/index","dashboard",dashboard);
     }
 }
