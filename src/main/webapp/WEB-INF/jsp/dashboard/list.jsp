@@ -8,7 +8,7 @@
     Please choose:
     <ul>
         <c:forEach var="dashboard" items="${dashboards}">
-            <li><a href="<c:url value='/action/dashboard/${dashboard.id}'/>">${dashboard.title}</a></li>
+            <li><a href="<c:url value='/app/dashboard/${dashboard.id}'/>">${dashboard.title}</a></li>
         </c:forEach>
     </ul>
     </body>

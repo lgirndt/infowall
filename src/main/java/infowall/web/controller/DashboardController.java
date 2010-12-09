@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+import static infowall.web.spring.ControllerDsl.redirect;
+import static infowall.web.spring.ControllerDsl.render;
 
 /**
  *
@@ -27,21 +28,17 @@ public class DashboardController {
         this.process = process;
     }
 
-    @RequestMapping("/dashboards")
+    @RequestMapping("/dashboard")
     ModelAndView listDashboards(){
-        List<Dashboard> dashboards = process.listAllDashboards();
-
-        logger.info("loaded dashboards: " + dashboards);
-
-        return new ModelAndView("dashboard/list","dashboards", dashboards);
+        return render("dashboard/list","dashboards", process.listAllDashboards());
     }
 
     @RequestMapping("/dashboard/{dashboardId}")
     ModelAndView showDashboard(@PathVariable String dashboardId){
         Dashboard dashboard = process.getDashboard(dashboardId);
         if(dashboard == null){
-            return new ModelAndView("redirect:/action/dashboards");
+            return redirect("/dashboard");
         }
-        return new ModelAndView("dashboard/index","dashboard",dashboard);
+        return render("dashboard/index","dashboard",dashboard);
     }
 }
