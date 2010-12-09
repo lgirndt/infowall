@@ -51,7 +51,7 @@
             <artifactId>spring-context-support</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
-                <!--
+        <!--
             Web application development utilities applicable to both Servlet and Portlet Environments
             (depends on spring-core, spring-beans, spring-context)
             Define this if you use Spring MVC, or wish to use Struts, JSF, or another web framework with Spring (org.springframework.web.*)
@@ -104,6 +104,18 @@
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-mapper-asl</artifactId>
             <version>1.6.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.ektorp</groupId>
+            <artifactId>org.ektorp</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.ektorp</groupId>
+            <artifactId>org.ektorp.spring</artifactId>
+            <version>1.0.2</version>
         </dependency>
 
         <!-- Test Depedencies -->

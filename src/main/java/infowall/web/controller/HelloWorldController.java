@@ -1,9 +1,10 @@
 package infowall.web.controller;
 
-import org.codehaus.jackson.map.ObjectMapper;
+import infowall.domain.persistence.DashboardItemRepository;
 import org.codehaus.jackson.node.ObjectNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HelloWorldController {
+
+    @Autowired
+    private DashboardItemRepository dashboardItemRepository;
 
     private final Logger logger = LoggerFactory.getLogger(HelloWorldController.class);
 
@@ -25,15 +29,22 @@ public class HelloWorldController {
         return new ModelAndView("hello", "message", message);
     }
 
-    @RequestMapping("/json")
+    @RequestMapping("/json/{id}")
     @ResponseBody
-    public ObjectNode json(){
+    public ObjectNode json(@PathVariable String id){
 
         logger.info("create json");
 
+        /*
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode node = mapper.createObjectNode();
         node.put("foo","bar");
-        return node;
+
+        DashboardItem item = new DashboardItem();
+        item.setId(123);
+        item.setData(node);
+        */
+        
+        return dashboardItemRepository.get(id).getData();
     }
 }
