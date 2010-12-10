@@ -1,6 +1,7 @@
 package infowall.web.controller;
 
 import infowall.domain.process.ItemValueProcess;
+import org.codehaus.jackson.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,5 +31,11 @@ public class ItemValueController {
 
         itemValueProcess.storeSimpleValue(dashboardId,itemName, value);
         return "OK";
+    }
+
+    @RequestMapping(value="/item/{dashboardId}/{itemName}", method = RequestMethod.GET)
+    @ResponseBody
+    public ObjectNode getValueDate(@PathVariable String dashboardId,@PathVariable String itemName){
+        return itemValueProcess.getValue(dashboardId,itemName);
     }
 }

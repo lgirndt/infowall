@@ -41,6 +41,10 @@ public class ItemValueProcess {
     }
 
     public ObjectNode getValue(String dashboardId,String itemName){
-        return null;
+
+        String id = itemValueRepository.findMostRecentItemValueId(dashboardId,itemName);
+        ItemValue itemValue = itemValueRepository.get(id);
+
+        return itemValue.getData();
     }
 }
