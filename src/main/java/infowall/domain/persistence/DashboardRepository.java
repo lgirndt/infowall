@@ -1,11 +1,17 @@
 package infowall.domain.persistence;
 
 import infowall.domain.model.Dashboard;
-import org.ektorp.support.GenericRepository;
+
+import java.util.List;
 
 /**
  *
  */
-public interface DashboardRepository extends GenericRepository<Dashboard> {
+public interface DashboardRepository {
 
+    List<Dashboard> getAll();
+
+    Dashboard get(String dashboardId);
+
+    void put(Dashboard dashboard);
 }

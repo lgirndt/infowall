@@ -7,12 +7,10 @@ import org.ektorp.support.CouchDbRepositorySupport;
 import org.ektorp.support.View;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  *
  */
-@Service
 @View( name = "all", map = "function(doc) { if (doc.type == 'dashboard' ) emit( null, doc._id )}")
 public final class CouchDbDashboardRepository
         extends CouchDbRepositorySupport<Dashboard>

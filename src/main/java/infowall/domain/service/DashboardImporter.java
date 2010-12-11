@@ -6,7 +6,6 @@ import infowall.domain.model.Dashboard;
 import infowall.domain.persistence.DashboardRepository;
 import infowall.infrastructure.ConfigRoot;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.ektorp.DocumentNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,16 +61,7 @@ public class DashboardImporter {
     private void storeDashboards(List<Dashboard> dashboards) {
         for(Dashboard dashboard : dashboards){
 
-            try {
-                Dashboard existing = dashboardRepository.get(dashboard.getId());
-
-                dashboard.setRevision(existing.getRevision());
-                dashboardRepository.update(dashboard);
-
-                // TODO IMPROVE
-            }catch(DocumentNotFoundException e){
-                dashboardRepository.add(dashboard);
-            }
+            dashboardRepository.put(dashboard);
         }
     }
 

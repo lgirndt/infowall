@@ -8,14 +8,12 @@ import org.ektorp.support.CouchDbRepositorySupport;
 import org.ektorp.support.View;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  *
  */
-@Service
 public class CouchDbItemValueRepository
         extends CouchDbRepositorySupport<ItemValue>
         implements ItemValueRepository, InitializingBean {
