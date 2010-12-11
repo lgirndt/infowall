@@ -66,6 +66,19 @@ public class ItemValueDaoTest extends AbstractTransactionalJUnit4SpringContextTe
         assertNull( itemValueDao.find(new DashboardItemRef("a","b")) );
     }
 
+    @Test
+    public void findMostRecent() throws Exception{
+        DashboardItemRef itemRef = new DashboardItemRef("d", "i");
+        String data = "{\"foo\":\"bar\"}";
+
+        ItemValue val = itemValue(itemRef, data);
+
+        itemValueDao.insert(val);
+        ItemValue actual = itemValueDao.findMostRecent(itemRef);
+
+        assertNotNull(actual.getId());
+    }
+
     private ItemValue someItemValue() throws IOException {
         DashboardItemRef itemRef = new DashboardItemRef("d", "i");
         String data = "{\"foo\":\"bar\"}";

@@ -55,13 +55,35 @@ public class ItemValueDao {
         );
     }
 
+    @Deprecated
     public ItemValue find(DashboardItemRef itemRef) {
-        List<ItemValue> itemVal = jdbcTemplate.query(
+        return justOne(jdbcTemplate.query(
                 "SELECT id,creation,dashboard_id,item_name,data,last_update,update_count " +
                         "FROM item_value " +
                         "WHERE dashboard_id = ? and item_name = ?",
                 new ItemValueRowMapper(),
-                itemRef.getDashboardId(), itemRef.getItemName());
+                itemRef.getDashboardId(), itemRef.getItemName()));
+    }
+
+    public ItemValue findMostRecent(DashboardItemRef itemRef){
+        return justOne(jdbcTemplate.query(
+                "select t.id,t.creation,t.dashboard_id,t.item_name,t.data,t.last_update,t.update_count from " +
+                        "item_value t," +
+                        "(select dashboard_id,item_name, max(last_update) as last_update " +
+                        "   from item_value " +
+                        // "   where dashboard_id = ? and item_name = ?" +
+                        "   group by dashboard_id,item_name" +
+                        ") v " +
+                        "where " +
+                        "   v.dashboard_id = t.dashboard_id " +
+                        "   and v.item_name = t.item_name " +
+                        "   and v.last_update = t.last_update " +
+                        "   and v.dashboard_id = ? and v.item_name = ?",
+                new ItemValueRowMapper(),
+                itemRef.getDashboardId(), itemRef.getItemName()));
+    }
+
+    private ItemValue justOne(List<ItemValue> itemVal) {
         if (itemVal.size() == 1) {
             return itemVal.get(0);
         }
