@@ -12,9 +12,10 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.util.List;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.*;
 
 /**
  *
@@ -77,6 +78,20 @@ public class ItemValueDaoTest extends AbstractTransactionalJUnit4SpringContextTe
         ItemValue actual = itemValueDao.findMostRecent(itemRef);
 
         assertNotNull(actual.getId());
+    }
+
+    @Test
+    public void findMostRecentItemValues() throws Exception {
+        ItemValue first = someItemValue();
+        ItemValue second = someItemValue();
+        ItemValue third = someItemValue();
+
+        itemValueDao.insert(first);
+        itemValueDao.insert(second);
+        itemValueDao.insert(third);
+
+        List<ItemValue> result = itemValueDao.findMostRecentItemValues(first.getItemRef(),2);
+        assertThat(result.size(), is(2));
     }
 
     private ItemValue someItemValue() throws IOException {
