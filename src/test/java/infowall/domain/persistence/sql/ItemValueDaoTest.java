@@ -2,6 +2,8 @@ package infowall.domain.persistence.sql;
 
 import infowall.domain.model.DashboardItemRef;
 import infowall.domain.model.ItemValue;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.node.ObjectNode;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,6 +11,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
 import javax.annotation.Resource;
+import java.io.IOException;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 /**
  *
@@ -37,5 +43,55 @@ public class ItemValueDaoTest extends AbstractTransactionalJUnit4SpringContextTe
         itemValue.setLastUpdate(new DateTime());
 
         itemValueDao.insert(itemValue);        
+    }
+
+    @Test
+    public void findExisting() throws Exception {
+        DashboardItemRef itemRef = new DashboardItemRef("d", "i");
+        String data = "{\"foo\":\"bar\"}";
+
+        ItemValue val = itemValue(itemRef, data);
+
+        itemValueDao.insert(val);
+        ItemValue actual = itemValueDao.find(itemRef);
+
+        assertNotNull(actual.getId());
+    }
+
+    @Test
+    public void findNotExisting() throws Exception {
+        ItemValue val = someItemValue();
+
+        itemValueDao.insert(val);
+        assertNull( itemValueDao.find(new DashboardItemRef("a","b")) );
+    }
+
+    private ItemValue someItemValue() throws IOException {
+        DashboardItemRef itemRef = new DashboardItemRef("d", "i");
+        String data = "{\"foo\":\"bar\"}";
+
+        return itemValue(itemRef, data);
+    }
+
+    @Test
+    public void update() throws Exception{
+        ItemValue itemValue = someItemValue();
+        itemValueDao.insert(itemValue);
+        ItemValue withId = itemValueDao.find(itemValue.getItemRef());
+        withId.update(new DateTime());
+        itemValueDao.update(withId);
+    }
+
+    private ItemValue itemValue(DashboardItemRef itemRef, String data) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        ItemValue val = new ItemValue();
+
+        val.setItemRef(itemRef);
+        val.setCreation(new DateTime());
+        val.setUpdateCount(0);
+        val.setLastUpdate(new DateTime());
+
+        val.setData(mapper.readValue(data, ObjectNode.class));
+        return val;
     }
 }

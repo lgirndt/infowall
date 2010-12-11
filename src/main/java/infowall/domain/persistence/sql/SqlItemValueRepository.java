@@ -44,6 +44,7 @@ public class SqlItemValueRepository implements ItemValueRepository {
 
     @Override
     public ItemValue findMostRecentItemValue(DashboardItemRef itemRef) {
-        return dao.findMostRecentItemValue(itemRef);
+        return null;
+        //return dao.findMostRecentItemValue(itemRef);
     }
 }

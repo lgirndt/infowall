@@ -6,7 +6,9 @@ import org.joda.time.DateTime;
 /**
  *
  */
-public class ItemValue extends TypedCouchDbDocument{
+public class ItemValue {
+
+    private Long id;
 
     private DashboardItemRef itemRef;
 
@@ -17,7 +19,14 @@ public class ItemValue extends TypedCouchDbDocument{
     private long updateCount;
 
     public ItemValue() {
-        super("itemValue");
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public DashboardItemRef getItemRef() {

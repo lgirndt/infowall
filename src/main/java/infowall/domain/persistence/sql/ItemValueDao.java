@@ -3,12 +3,17 @@ package infowall.domain.persistence.sql;
 import infowall.domain.model.DashboardItemRef;
 import infowall.domain.model.ItemValue;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.node.ObjectNode;
 import org.joda.time.DateTime;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  *
@@ -24,43 +29,88 @@ public class ItemValueDao {
     }
 
     public void insert(ItemValue itemValue) {
-        try {
-            String data = serializeData(itemValue);
 
-            jdbcTemplate.update(
+        jdbcTemplate.update(
                 "INSERT INTO item_value " +
-                "(creation,dashboard_id,data,item_name,last_update,update_count)" +
-                " VALUES (?,?,?,?,?,?)",
+                        "(creation,dashboard_id,data,item_name,last_update,update_count)" +
+                        " VALUES (?,?,?,?,?,?)",
 
                 toTimestamp(itemValue.getCreation()),
                 itemValue.getItemRef().getDashboardId(),
-                data,
+                serializeData(itemValue),
                 itemValue.getItemRef().getItemName(),
                 toTimestamp(itemValue.getLastUpdate()),
                 itemValue.getUpdateCount());
-            
+    }
+
+    public void update(ItemValue itemValue) {
+        jdbcTemplate.update(
+                "UPDATE item_value SET " +
+                        "data = ?, last_update = ?, update_count = ? " +
+                        "WHERE id = ?",
+                serializeData(itemValue),
+                toTimestamp(itemValue.getLastUpdate()),
+                itemValue.getUpdateCount(),
+                itemValue.getId()
+        );
+    }
+
+    public ItemValue find(DashboardItemRef itemRef) {
+        List<ItemValue> itemVal = jdbcTemplate.query(
+                "SELECT id,creation,dashboard_id,item_name,data,last_update,update_count " +
+                        "FROM item_value " +
+                        "WHERE dashboard_id = ? and item_name = ?",
+                new ItemValueRowMapper(),
+                itemRef.getDashboardId(), itemRef.getItemName());
+        if (itemVal.size() == 1) {
+            return itemVal.get(0);
+        }
+        return null;
+    }
+
+    private String serializeData(ItemValue itemValue) {
+        try {
+            return mapper.writeValueAsString(itemValue.getData());
         } catch (IOException e) {
             throw new DaoException(e);
         }
     }
 
-    private String serializeData(ItemValue itemValue) throws IOException {
-        return mapper.writeValueAsString(itemValue.getData());
+    private ObjectNode deserializeData(String str) {
+        try {
+            return mapper.readValue(str, ObjectNode.class);
+        } catch (IOException e) {
+            throw new DaoException(e);
+        }
     }
 
-    private Timestamp toTimestamp(DateTime dateTime) {
+    private static Timestamp toTimestamp(DateTime dateTime) {
         return new Timestamp(dateTime.getMillis());
     }
 
-    public ItemValue find(DashboardItemRef itemRef) {
-        return null;
+    private static DateTime toDateTime(Timestamp ts) {
+        return new DateTime(ts.getTime());
     }
 
-    public void update(ItemValue itemValue) {
+    private class ItemValueRowMapper implements RowMapper<ItemValue> {
 
-    }
+        @Override
+        public ItemValue mapRow(ResultSet rs, int rowNum) throws SQLException {
+            ItemValue val = new ItemValue();
+            val.setId(rs.getLong(1));
+            val.setCreation(toDateTime(rs.getTimestamp(2)));
 
-    ItemValue findMostRecentItemValue(DashboardItemRef itemRef){
-        return null;
+            DashboardItemRef itemRef = new DashboardItemRef(
+                    rs.getString(3),
+                    rs.getString(4)
+            );
+            val.setItemRef(itemRef);
+
+            val.setData(deserializeData(rs.getString(5)));
+            val.setLastUpdate(toDateTime(rs.getTimestamp(6)));
+            val.setUpdateCount(rs.getInt(7));
+
+            return val;
+        }
     }
 }

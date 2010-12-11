@@ -8,8 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.easymock.EasyMock.*;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
 
 /**
  *
@@ -79,16 +77,16 @@ public class SqlItemValueRepositoryTest {
         mocks.verifyAll();
     }
 
-    @Test
-    public void findMostRecentItemValueExisting(){
-        ItemValue expected = mockItemValue();
-        expect(dao.findMostRecentItemValue(eq(itemRef()))).andReturn(expected);
-
-        mocks.replayAll();
-        ItemValue actual = repository.findMostRecentItemValue(itemRef());
-        assertThat(actual, is(expected));
-        mocks.verifyAll();
-    }
+//    @Test
+//    public void findMostRecentItemValueExisting(){
+//        ItemValue expected = mockItemValue();
+//        expect(dao.findMostRecentItemValue(eq(itemRef()))).andReturn(expected);
+//
+//        mocks.replayAll();
+//        ItemValue actual = repository.findMostRecentItemValue(itemRef());
+//        assertThat(actual, is(expected));
+//        mocks.verifyAll();
+//    }
 
     private void expectEqualData(ItemValue existing, ItemValue itemValue, boolean same) {
         expect(existing.equalData(itemValue)).andReturn(same);
