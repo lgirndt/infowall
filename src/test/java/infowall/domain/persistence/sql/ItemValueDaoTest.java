@@ -1,37 +1,41 @@
 package infowall.domain.persistence.sql;
 
+import infowall.domain.model.DashboardItemRef;
+import infowall.domain.model.ItemValue;
+import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
+import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
 import javax.annotation.Resource;
-
-import static org.junit.Assert.assertNotNull;
 
 /**
  *
  */
 @ContextConfiguration(locations = "classpath:/spring/test-context.xml")
-public class ItemValueDaoTest extends AbstractJUnit4SpringContextTests{
+public class ItemValueDaoTest extends AbstractTransactionalJUnit4SpringContextTests
+/*AbstractJUnit4SpringContextTests*/ {
 
     @Resource
-    private SqlItemValueRepository itemValueRepository;
+    private ItemValueDao itemValueDao;
     
     @Before
     public void setUp() throws Exception {
+        this.executeSqlScript("/sql/create-schema.sql",false);
     }
 
     @Test
-    public void testPut() throws Exception {
-        assertNotNull(itemValueRepository);
-    }
+    public void insert(){
 
-    @Test
-    public void testFindMostRecentItemValue() throws Exception {
-    }
+        DashboardItemRef itemRef = new DashboardItemRef("d","i");
 
-    @Test
-    public void testGet() throws Exception {
+        ItemValue itemValue = new ItemValue();
+
+        itemValue.setItemRef(itemRef);
+        itemValue.setCreation(new DateTime());
+        itemValue.setLastUpdate(new DateTime());
+
+        itemValueDao.insert(itemValue);        
     }
 }

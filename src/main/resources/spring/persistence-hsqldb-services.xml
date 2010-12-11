@@ -24,6 +24,10 @@
         <constructor-arg ref="dao"/>
     </bean>
 
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
     <bean id="dashboardRepository" class="infowall.domain.persistence.sql.InMemoryDashboardRepository"/>
 
 </beans>
