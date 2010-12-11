@@ -30,7 +30,7 @@ public class ItemValueController {
             @PathVariable String value){
 
         itemValueProcess.storeSimpleValue(dashboardId,itemName, value);
-        return "OK";
+        return "OK\n";
     }
 
     @RequestMapping(value="/item/{dashboardId}/{itemName}", method = RequestMethod.GET)
