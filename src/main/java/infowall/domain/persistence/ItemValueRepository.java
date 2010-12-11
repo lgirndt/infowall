@@ -1,13 +1,15 @@
 package infowall.domain.persistence;
 
 import infowall.domain.model.ItemValue;
-import org.ektorp.support.GenericRepository;
 
 /**
  *
  */
-public interface ItemValueRepository extends GenericRepository<ItemValue> {
+public interface ItemValueRepository {
 
-    ItemValue findLatesItemValue(String dashboardId,String itemName);
-    public String findMostRecentItemValueId(String dashboardId, String itemName);
+    public ItemValue findMostRecentItemValue(String dashboardId, String itemName);
+
+    ItemValue get(String id);
+
+    void put(ItemValue itemValue);
 }

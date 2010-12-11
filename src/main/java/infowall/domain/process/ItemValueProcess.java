@@ -37,13 +37,16 @@ public class ItemValueProcess {
         DashboardItemRef ref = new DashboardItemRef(dashboardId,itemName);
         itemValue.setItemRef(ref);
 
-        itemValueRepository.add(itemValue);
+        itemValueRepository.put(itemValue);
     }
 
     public ObjectNode getValue(String dashboardId,String itemName){
 
-        String id = itemValueRepository.findMostRecentItemValueId(dashboardId,itemName);
-        ItemValue itemValue = itemValueRepository.get(id);
+        ItemValue itemValue = itemValueRepository.findMostRecentItemValue(dashboardId,itemName);
+
+        if(itemValue == null){
+            return null;
+        }
 
         return itemValue.getData();
     }
