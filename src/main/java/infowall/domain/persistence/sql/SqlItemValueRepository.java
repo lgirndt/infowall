@@ -5,6 +5,8 @@ import infowall.domain.model.ItemValue;
 import infowall.domain.persistence.ItemValueRepository;
 import org.joda.time.DateTime;
 
+import java.util.List;
+
 /**
  *
  */
@@ -19,7 +21,7 @@ public class SqlItemValueRepository implements ItemValueRepository {
     @Override
     public void put(ItemValue itemValue) {
         DashboardItemRef itemRef = itemValue.getItemRef();
-        ItemValue existing = dao.find(itemRef);
+        ItemValue existing = dao.findMostRecent(itemRef);
 
         if (existsWithEqualData(existing, itemValue)) {
             update(existing);
@@ -43,7 +45,7 @@ public class SqlItemValueRepository implements ItemValueRepository {
     }
 
     @Override
-    public ItemValue findMostRecentItemValue(DashboardItemRef itemRef) {
-        return dao.findMostRecent(itemRef);
+    public List<ItemValue> findMostRecentItemValues(DashboardItemRef itemRef,int itemCount) {
+        return dao.findMostRecentItemValues(itemRef,itemCount);
     }
 }

@@ -1,11 +1,14 @@
 package infowall.domain.persistence.sql;
 
+import com.google.common.collect.Lists;
 import infowall.domain.model.DashboardItemRef;
 import infowall.domain.model.ItemValue;
 import infowall.testing.Mocks;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.List;
 
 import static org.easymock.EasyMock.*;
 import static org.hamcrest.Matchers.is;
@@ -30,7 +33,7 @@ public class SqlItemValueRepositoryTest {
     public void putNew() throws Exception {
 
         DashboardItemRef itemRef = itemRef();
-        expect(dao.find(itemRef)).andReturn(null);
+        expect(dao.findMostRecent(itemRef)).andReturn(null);
 
         ItemValue itemValue = mockItemValue();
         expectGetItemRef(itemValue, itemRef);
@@ -52,7 +55,7 @@ public class SqlItemValueRepositoryTest {
         expectGetItemRef(itemValue, itemRef());
         expectInit(itemValue);
 
-        expect(dao.find(eq(itemRef()))).andReturn(existing);
+        expect(dao.findMostRecent(eq(itemRef()))).andReturn(existing);
         expectEqualData(existing, itemValue, false);
         dao.insert(itemValue);
 
@@ -70,7 +73,7 @@ public class SqlItemValueRepositoryTest {
         expectGetItemRef(itemValue, itemRef());
         existing.update((DateTime) anyObject());
 
-        expect(dao.find(eq(itemRef()))).andReturn(existing);
+        expect(dao.findMostRecent(eq(itemRef()))).andReturn(existing);
         expectEqualData(existing,itemValue,true);
         dao.update(existing);
 
@@ -80,12 +83,14 @@ public class SqlItemValueRepositoryTest {
     }
 
     @Test
-    public void findMostRecentItemValueExisting(){
-        ItemValue expected = mockItemValue();
-        expect(dao.findMostRecent(eq(itemRef()))).andReturn(expected);
+    public void findMostRecentItemValuesExisting(){
+        ItemValue expectedItem = mockItemValue();
+
+        List<ItemValue> expected = Lists.<ItemValue>newArrayList(expectedItem);
+        expect(dao.findMostRecentItemValues(eq(itemRef()),eq(2))).andReturn(expected);
 
         mocks.replayAll();
-        ItemValue actual = repository.findMostRecentItemValue(itemRef());
+        List<ItemValue> actual = repository.findMostRecentItemValues(itemRef(),2);
         assertThat(actual, is(expected));
         mocks.verifyAll();
     }

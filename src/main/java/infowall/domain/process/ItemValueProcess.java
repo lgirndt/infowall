@@ -2,12 +2,15 @@ package infowall.domain.process;
 
 import infowall.domain.model.DashboardItemRef;
 import infowall.domain.model.ItemValue;
+import infowall.domain.model.ItemValuePair;
 import infowall.domain.persistence.ItemValueRepository;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ObjectNode;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  *
@@ -39,14 +42,28 @@ public class ItemValueProcess {
         itemValueRepository.put(itemValue);
     }
 
-    public ObjectNode getValue(String dashboardId,String itemName){
+    public ItemValuePair showRecentValues(DashboardItemRef itemRef){
 
-        ItemValue itemValue = itemValueRepository.findMostRecentItemValue(new DashboardItemRef(dashboardId,itemName));
+        List<ItemValue> itemValues = itemValueRepository.findMostRecentItemValues(itemRef,2);
 
-        if(itemValue == null){
+        if(itemValues == null ||  itemValues.size() == 0){
             return null;
         }
 
-        return itemValue.getData();
+        return toPair(itemValues);
+    }
+
+    private ItemValuePair toPair(List<ItemValue> itemValues) {
+
+        final ItemValue curr = itemValues.get(0);
+        final ItemValue prev;
+
+        if(itemValues.size()>1){
+            prev = itemValues.get(1);
+        }else {
+            prev = null;
+        }
+
+        return new ItemValuePair(curr,prev);
     }
 }

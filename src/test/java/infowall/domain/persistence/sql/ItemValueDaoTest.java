@@ -54,7 +54,7 @@ public class ItemValueDaoTest extends AbstractTransactionalJUnit4SpringContextTe
         ItemValue val = itemValue(itemRef, data);
 
         itemValueDao.insert(val);
-        ItemValue actual = itemValueDao.find(itemRef);
+        ItemValue actual = itemValueDao.findMostRecent(itemRef);
 
         assertNotNull(actual.getId());
     }
@@ -64,7 +64,7 @@ public class ItemValueDaoTest extends AbstractTransactionalJUnit4SpringContextTe
         ItemValue val = someItemValue();
 
         itemValueDao.insert(val);
-        assertNull( itemValueDao.find(new DashboardItemRef("a","b")) );
+        assertNull( itemValueDao.findMostRecent(new DashboardItemRef("a","b")) );
     }
 
     @Test
@@ -105,7 +105,7 @@ public class ItemValueDaoTest extends AbstractTransactionalJUnit4SpringContextTe
     public void update() throws Exception{
         ItemValue itemValue = someItemValue();
         itemValueDao.insert(itemValue);
-        ItemValue withId = itemValueDao.find(itemValue.getItemRef());
+        ItemValue withId = itemValueDao.findMostRecent(itemValue.getItemRef());
         withId.update(new DateTime());
         itemValueDao.update(withId);
     }
