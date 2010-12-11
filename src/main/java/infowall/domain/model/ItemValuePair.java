@@ -1,5 +1,9 @@
 package infowall.domain.model;
 
+import org.codehaus.jackson.map.ObjectMapper;
+
+import java.io.IOException;
+
 /**
  *
  */
@@ -18,5 +22,14 @@ public class ItemValuePair {
 
     public ItemValue getPrevious() {
         return previous;
+    }
+
+    String toJSON(){
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.writeValueAsString(this);
+        } catch (IOException e) {
+            return "{}";
+        }
     }
 }

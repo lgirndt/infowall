@@ -1,20 +1,22 @@
 package infowall.domain.model;
 
+import org.codehaus.jackson.map.ObjectMapper;
+
+import java.io.IOException;
 import java.util.List;
 
 /**
  *
  */
-public class Dashboard extends TypedCouchDbDocument {
+public class Dashboard  {
 
-    private static final String TYPE = "dashboard";
+    private String id;
 
     private String title;
 
     private List<DashboardItem> items;
 
     public Dashboard() {
-        super(TYPE);
     }
 
     public List<DashboardItem> getItems() {
@@ -31,5 +33,22 @@ public class Dashboard extends TypedCouchDbDocument {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String toJSON() {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.writeValueAsString(this);
+        } catch (IOException e) {
+            return "{}";
+        }
     }
 }

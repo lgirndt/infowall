@@ -2,9 +2,7 @@
 <html>
     <head>
         <title>Dashboards</title>
-        <link href="${pageContext.request.contextPath}/static/css/reset.css" rel="stylesheet" type="text/css">
-        <link href="${pageContext.request.contextPath}/static/css/text.css" rel="stylesheet" type="text/css">
-        <link href="${pageContext.request.contextPath}/static/css/default.css" rel="stylesheet" type="text/css">
+        <%@ include file="/WEB-INF/jsp/include/head.jsp"%>
     </head>
     <body>
     <h1>Dashboards</h1>
