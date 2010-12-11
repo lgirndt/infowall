@@ -1,34 +1,49 @@
 package infowall.domain.persistence.sql;
 
+import infowall.domain.model.DashboardItemRef;
 import infowall.domain.model.ItemValue;
 import infowall.domain.persistence.ItemValueRepository;
-import org.springframework.jdbc.core.JdbcTemplate;
-
-import javax.sql.DataSource;
+import org.joda.time.DateTime;
 
 /**
  *
  */
-public class SqlItemValueRepository implements ItemValueRepository{
+public class SqlItemValueRepository implements ItemValueRepository {
 
-    private final JdbcTemplate jdbcTemplate;
+    private final ItemValueDao dao;
 
-    public SqlItemValueRepository(final DataSource dataSource){
-        jdbcTemplate = new JdbcTemplate(dataSource);
-    }
-    
-    @Override
-    public void put(ItemValue entity) {
-        //To change body of implemented methods use File | Settings | File Templates.
+    public SqlItemValueRepository(ItemValueDao dao) {
+        this.dao = dao;
     }
 
     @Override
-    public ItemValue findMostRecentItemValue(String dashboardId, String itemName) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public void put(ItemValue itemValue) {
+        DashboardItemRef itemRef = itemValue.getItemRef();
+        ItemValue existing = dao.find(itemRef);
+
+        if (existsWithEqualData(existing, itemValue)) {
+            update(existing);
+        } else {
+            insertAsNew(itemValue);
+        }
+    }
+
+    private void insertAsNew(ItemValue itemValue) {
+        itemValue.init(new DateTime());
+        dao.insert(itemValue);
+    }
+
+    private void update(ItemValue existing) {
+        existing.update(new DateTime());
+        dao.update(existing);
+    }
+
+    private boolean existsWithEqualData(ItemValue existing, ItemValue itemValue) {
+        return existing != null && existing.equalData(itemValue);
     }
 
     @Override
-    public ItemValue get(String id) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public ItemValue findMostRecentItemValue(DashboardItemRef itemRef) {
+        return dao.findMostRecentItemValue(itemRef);
     }
 }

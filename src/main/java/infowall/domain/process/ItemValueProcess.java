@@ -5,10 +5,9 @@ import infowall.domain.model.ItemValue;
 import infowall.domain.persistence.ItemValueRepository;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ObjectNode;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
 
 /**
  *
@@ -31,8 +30,8 @@ public class ItemValueProcess {
 
         ItemValue itemValue = new ItemValue();
         itemValue.setData(data);
-        itemValue.setCreation(new Date());
-        itemValue.setLastUpdate(new Date());
+        itemValue.setCreation(new DateTime());
+        itemValue.setLastUpdate(new DateTime());
 
         DashboardItemRef ref = new DashboardItemRef(dashboardId,itemName);
         itemValue.setItemRef(ref);
@@ -42,7 +41,7 @@ public class ItemValueProcess {
 
     public ObjectNode getValue(String dashboardId,String itemName){
 
-        ItemValue itemValue = itemValueRepository.findMostRecentItemValue(dashboardId,itemName);
+        ItemValue itemValue = itemValueRepository.findMostRecentItemValue(new DashboardItemRef(dashboardId,itemName));
 
         if(itemValue == null){
             return null;

@@ -1,8 +1,7 @@
 package infowall.domain.model;
 
 import org.codehaus.jackson.node.ObjectNode;
-
-import java.util.Date;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -13,8 +12,8 @@ public class ItemValue extends TypedCouchDbDocument{
 
     private ObjectNode data;
 
-    private Date creation;
-    private Date lastUpdate;
+    private DateTime creation;
+    private DateTime lastUpdate;
     private long updateCount;
 
     public ItemValue() {
@@ -29,19 +28,19 @@ public class ItemValue extends TypedCouchDbDocument{
         this.itemRef = itemRef;
     }
 
-    public Date getCreation() {
+    public DateTime getCreation() {
         return creation;
     }
 
-    public void setCreation(Date creation) {
+    public void setCreation(DateTime creation) {
         this.creation = creation;
     }
 
-    public Date getLastUpdate() {
+    public DateTime getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Date lastUpdate) {
+    public void setLastUpdate(DateTime lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 
@@ -59,5 +58,20 @@ public class ItemValue extends TypedCouchDbDocument{
 
     public void setData(ObjectNode data) {
         this.data = data;
+    }
+
+    public boolean equalData(ItemValue that){
+        return this.data.equals(that.data);
+    }
+
+    public void update(DateTime now){
+        updateCount++;
+        lastUpdate = now;
+    }
+
+    public void init(DateTime now){
+        updateCount = 0;
+        lastUpdate = now;
+        creation = now;
     }
 }

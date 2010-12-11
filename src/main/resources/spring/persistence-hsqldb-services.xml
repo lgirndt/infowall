@@ -16,8 +16,12 @@
         <property name="password" value="${db.password}"/>
     </bean>
 
-    <bean id="itemValueRepository" class="infowall.domain.persistence.sql.SqlItemValueRepository">
+    <bean id="dao" class="infowall.domain.persistence.sql.ItemValueDao">
         <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <bean id="itemValueRepository" class="infowall.domain.persistence.sql.SqlItemValueRepository">
+        <constructor-arg ref="dao"/>
     </bean>
 
     <bean id="dashboardRepository" class="infowall.domain.persistence.sql.InMemoryDashboardRepository"/>

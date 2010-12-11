@@ -1,5 +1,6 @@
 package infowall.domain.persistence;
 
+import infowall.domain.model.DashboardItemRef;
 import infowall.domain.model.ItemValue;
 
 /**
@@ -7,9 +8,7 @@ import infowall.domain.model.ItemValue;
  */
 public interface ItemValueRepository {
 
-    public ItemValue findMostRecentItemValue(String dashboardId, String itemName);
-
-    ItemValue get(String id);
+    public ItemValue findMostRecentItemValue(DashboardItemRef itemRef);
 
     void put(ItemValue itemValue);
 }
