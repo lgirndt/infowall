@@ -1,3 +1,5 @@
+<link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
+
 <link href="<c:url value='/static/css/reset.css'/>" rel="stylesheet" type="text/css">
 <link href="<c:url value='/static/css/text.css'/>" rel="stylesheet" type="text/css">
 <link href="<c:url value='/static/css/default.css'/>" rel="stylesheet" type="text/css">

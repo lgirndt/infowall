@@ -9,7 +9,7 @@
 <!--
 <div class="single-value">
 <div class="current back-{{status}}">{{current}}</div>
-<div class="diff"v><span>{{diff}}</span></div>
+<div class="diff text-{{diffStatus}}"><span>{{diff}}</span></div>
 </div>
 -->
 </script>
