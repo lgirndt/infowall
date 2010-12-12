@@ -10,6 +10,8 @@ body {
     z-index:100;
     width:100%;
     text-align:center;
+    font-size:5em;
+    -webkit-box-shadow: inset 0 0 10px #000;
 }
 
 #container {
@@ -21,4 +23,45 @@ body {
 
 .view {
     position:absolute;
+    background-color:#000;
 }
+
+.view .single-value {
+    width:30em;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:12em;
+}
+
+.view .single-value .current {
+    padding:0.1em 0 0.2em 0;
+    font-size:14em;
+    font-weight:bold;
+    text-align:center;
+    color:#fff;
+    border: 0.06em solid #fff;
+    -webkit-border-radius:0.1em;
+    text-shadow:rgba(1,1,1,0.8) 0px 0px 10px;
+    -webkit-box-shadow: inset 0 0 10px rgba(1,1,1,0.8);
+}
+
+.view .single-value .back-ok {
+    background-color:green;
+    background:-webkit-gradient(linear,left bottom,left top,color-stop(0, rgb(0,136,0)),color-stop(1, rgb(0,204,0)));
+    background:-moz-linear-gradient(
+        center bottom,
+        rgb(0,136,0) 0%,
+        rgb(0,204,0) 100%
+    );
+}
+
+.view .single-value .back-fail {
+    background-color:red;
+    background:-webkit-gradient(linear,left bottom,left top,color-stop(0, rgb(136,0,0)),color-stop(1, rgb(204,0,0)));
+    background:-moz-linear-gradient(
+        center bottom,
+        rgb(136,0,0) 0%,
+        rgb(204,0,0) 100%
+    );
+}
+

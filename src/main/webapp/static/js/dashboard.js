@@ -11,18 +11,50 @@
 
     SingleValueView = function(views){
         this.views = views;
+        this.defaultStatusThreshold = 0;
+        this.relations = {
+            gt : function(a,b){return a > b},
+            lt : function(a,b){return a < b}
+        };
+        this.defaultRelation = 'gt';
     };
 
-    SingleValueView.prototype.transformModel = function(model){
+    SingleValueView.prototype.transformModel = function(model,item){
 
-        var title    = model.current.title;
         var current  = model.current.data.value;
         var previous = model.previous.data.value;
+
         return {
-            title : title,
             current : current,
-            previous: previous
+            previous: previous,
+            status :  this.calcStatus(this.current,item),
+            diff :  current - previous
         }
+    };
+
+    SingleValueView.prototype.calcStatus = function(val,item){
+        var statusThreshold = item.statusThreshold || this.defaultStatusThreshold;
+        var statusRelation  = item.statusRelation;
+        if(this.relation(statusRelation,val,statusThreshold)){
+            return 'ok';
+        }
+        else {
+            return 'fail';
+        }
+    };
+
+    SingleValueView.prototype.relation = function(name,a,b){
+        var rel;
+        if(name){
+            rel = this.relations[name];
+        }
+        if(!rel){
+            if(name){
+                error("relation does not exist: " + name);
+            }
+            rel = this.relations[this.defaultRelation];
+        }
+        return rel(a,b);
     };
 
     /**
@@ -136,7 +168,7 @@
         $.ajax({
             url : this.baseUrl + "/" + item.name,
             success:function(data){
-                var model = view.transformModel(data);
+                var model = view.transformModel(data,item);
                 var html = $.mustache(template,model);
                 $(dest).html(html);
                 if(callback){
@@ -193,15 +225,21 @@
         var width = $(this.container).width();
         var height = $(this.container).height();
         console.log("height:" + height);
+        var fxDuration = this.fxDuration;
         $(elem)
             .width(width)
             .height(height)
             .offset({left:0,top:height});
         this.renderEngine.renderItem(item.name,elem,function(){
-            $(elem).animate({top:0},this.fxDuration,function(){
-                var views = $('.view',this.container);
-                if(views.length > 1){
-                    $(views[0]).remove();
+            $(elem).animate(
+            {top:0},
+            {
+                duration: fxDuration,
+                complete : function(){
+                    var views = $('.view',this.container);
+                    if(views.length > 1){
+                        $(views[0]).remove();
+                    }
                 }
             });
         });

@@ -7,10 +7,9 @@
 </head>
 <script type="text/mustache" id="template-single-value">
 <!--
-<div>
-<h2>{{title}}</div>
-<div>{{current}}</div>
-<div>{{previous}}</div>
+<div class="single-value">
+<div class="current back-{{status}}">{{current}}</div>
+<div class="diff"v>{{diff}}</div>
 </div>
 -->
 </script>
@@ -33,7 +32,8 @@
         var slideShow = new infowall.SlideShow({
             items : dashboard.items,
             renderEngine : renderEngine,
-            container : '#container'
+            container : '#container',
+            fxDuration: 1000
         });
         slideShow.start();
     });
