@@ -1,7 +1,7 @@
 /*global window,jQuery*/
 (function (window, $, undefined) {
 
-    var TemplateManager,RenderEngine,SingleValueView;
+    var TemplateManager,RenderEngine,SingleValueView,SlideShow;
 
     function error(msg){
         if(window.console){
@@ -13,8 +13,16 @@
         this.views = views;
     };
 
-    SingleValueView.prototype.prepareModel = function(model){
-        return model.current;
+    SingleValueView.prototype.transformModel = function(model){
+
+        var title    = model.current.title;
+        var current  = model.current.data.value;
+        var previous = model.previous.data.value;
+        return {
+            title : title,
+            current : current,
+            previous: previous
+        }
     };
 
     /**
@@ -112,7 +120,7 @@
         this.templates = opts.templates || {};
     };
 
-    RenderEngine.prototype.renderItem = function(name,dest){
+    RenderEngine.prototype.renderItem = function(name,dest,callback){
         var entry = this.entries[name];
         if(!entry){
             error('Cannot render item "' + name + '", because it does not consist.');
@@ -131,18 +139,75 @@
         $.ajax({
             url : this.baseUrl + "/" + item.name,
             success:function(data){
-                var model = view.prepareModel(data);
+                var model = view.transformModel(data);
                 var html = $.mustache(template,model);
-                $(dest).append(html);
+                $(dest).html(html);
+                if(callback){
+                    callback();
+                }
             }
         });
 
 
     };
 
+    SlideShow = function(opts){
+        this.renderEngine = opts.renderEngine;
+        this.items = opts.items;
+        this.container = $(opts.container);
+        this.delay = (opts.delay || 5) * 1000;
+
+        this.currItemId = 0;
+
+
+    };
+
+    SlideShow.prototype.start = function(){
+        this.replace();
+        this.animateNext();
+    };
+
+    SlideShow.prototype.animateNext = function(){
+        var self = this;
+        this.timer = setTimeout(function(){
+            self.start();
+        },this.delay);
+    };
+
+    SlideShow.prototype.replace = function(){
+        var item = this.nextItem();
+        this.replaceTitle(item);
+        this.replaceView(item);
+    };
+
+    SlideShow.prototype.replaceTitle = function(item){
+        $('#title').html(item.title);
+    };
+
+    SlideShow.prototype.replaceView = function(item){
+        var elem = $('<div class="view"></div>').appendTo(this.container);
+        this.renderEngine.renderItem(item.name,elem,function(){
+            var views = $('.view',this.container);
+            if(views.length > 1){
+                $(views[0]).remove();
+            }
+        });
+    };
+
+    SlideShow.prototype.nextItem = function(){
+        return this.items[this.nextItemId()];
+    };
+
+    SlideShow.prototype.nextItemId = function(){
+        var curr = this.currItemId;
+        this.currItemId = (curr + 1) % this.items.length;
+        return curr;
+    };
+
 	window.infowall = {};
 	window.infowall.TemplateManager = TemplateManager;
     window.infowall.RenderEngine = RenderEngine;
     window.infowall.SingleValueView = SingleValueView;
+    window.infowall.SlideShow = SlideShow;
 
 }(window, jQuery));

@@ -7,7 +7,11 @@
 </head>
 <script type="text/mustache" id="template-single-value">
 <!--
-Hallo Welt
+<div>
+<h2>{{title}}</div>
+<div>{{current}}</div>
+<div>{{previous}}</div>
+</div>
 -->
 </script>
 <body>
@@ -26,20 +30,26 @@ Hallo Welt
             },
             baseUrl : "<c:url value='/app/item/${dashboard.id}'/>"
         });
-        renderEngine.renderItem('bugs','#dest');
+        var slideShow = new infowall.SlideShow({
+            items : dashboard.items,
+            renderEngine : renderEngine,
+            container : '#container'
+        });
+        slideShow.start();
+
+        console.log('body:' +  $('body').innerHeight());
+        console.log('title' + $('#title').height());
+        $('#container').height(
+            $('body').innerHeight() - $('#container').offset().top
+        )
+
     });
 })(jQuery);
 </script>
-<h1>${dashboard.title}</h1>
-<h2>Items</h2>
-<ul>
-<c:forEach var="item" items="${dashboard.items}">
-    <li>${item.title}</li>
-</c:forEach>
-</ul>
+<h1 id="title">Hello World</h1>
+<div id="container">
+  <div class="view">tick tick tick ...</div>
+</div>
 
-<div id="dest"></div>
-
-<a href="<c:url value='/app/dashboard'/>">Dashboards</a>
 </body>
 </html>

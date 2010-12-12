@@ -3,9 +3,7 @@
     "title": "My First Dashboard",
     "items" :
         [
-            {"name" : "some-count","title": "Some Count"},
-            {"name" : "violations","title": "Code Violations"},
             {"name" : "bugs","title": "Open Bugs"},
-            {"name" : "storypoints","title": "Open Story Points"}
-    ]
+            {"name" : "some-count","title": "Some Count"}
+        ]
 }
