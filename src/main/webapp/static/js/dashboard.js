@@ -248,7 +248,7 @@
             var views = $('.view',this.container);
             $(elem).animate( {top:0},{duration: fxDuration} );
             if(views.length > 1){
-                $(views[0]).fadeOut(fxDuration,function(){$(this).remove()});
+                $(views[0]).animate({top:-width},fxDuration,function(){$(this).remove()});
             }
         });
     };
