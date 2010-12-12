@@ -231,17 +231,11 @@
             .height(height)
             .offset({left:0,top:height});
         this.renderEngine.renderItem(item.name,elem,function(){
-            $(elem).animate(
-            {top:0},
-            {
-                duration: fxDuration,
-                complete : function(){
-                    var views = $('.view',this.container);
-                    if(views.length > 1){
-                        $(views[0]).remove();
-                    }
-                }
-            });
+            var views = $('.view',this.container);
+            $(elem).animate( {top:0},{duration: fxDuration} );
+            if(views.length > 1){
+                $(views[0]).fadeOut(fxDuration,function(){$(this).remove()});
+            }
         });
     };
 
