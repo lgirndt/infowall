@@ -9,7 +9,7 @@
 <!--
 <div class="single-value">
 <div class="current back-{{status}}">{{current}}</div>
-<div class="diff"v>{{diff}}</div>
+<div class="diff"v><span>{{diff}}</span></div>
 </div>
 -->
 </script>
@@ -33,7 +33,7 @@
             items : dashboard.items,
             renderEngine : renderEngine,
             container : '#container',
-            fxDuration: 1000
+            fxDuration: 600
         });
         slideShow.start();
     });

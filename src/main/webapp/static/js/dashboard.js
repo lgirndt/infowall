@@ -11,24 +11,28 @@
 
     SingleValueView = function(views){
         this.views = views;
-        this.defaultStatusThreshold = 0;
+        this.defaultStatusThreshold = 1;
         this.relations = {
             gt : function(a,b){return a > b},
             lt : function(a,b){return a < b}
         };
-        this.defaultRelation = 'gt';
+        this.defaultRelation = 'lt';
     };
 
     SingleValueView.prototype.transformModel = function(model,item){
 
         var current  = model.current.data.value;
         var previous = model.previous.data.value;
-
+        var diff =  current - previous;
+        if(diff>0){
+            diff = '+' + diff;
+        }
         return {
             current : current,
             previous: previous,
-            status :  this.calcStatus(this.current,item),
-            diff :  current - previous
+            status :  this.calcStatus(current,item),
+            diff : diff,
+            diffStatus : this.calcDiffStatus(diff,item)
         }
     };
 
@@ -42,6 +46,16 @@
             return 'fail';
         }
     };
+
+    SingleValueView.prototype.calcDiffStatus = function(val,item){
+        var diffStatusRelation = item.statusRelation;
+        if(this.relation(diffStatusRelation,val,0)){
+            return 'ok';
+        }
+        else {
+            return 'fail';
+        }
+    }
 
     SingleValueView.prototype.relation = function(name,a,b){
         var rel;
