@@ -3,6 +3,22 @@ body {
     color:#fef;
 }
 
+#title {
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:100;
+    width:100%;
+    text-align:center;
+}
+
 #container {
-    background-color:#106050;
+    position:relative;
+    overflow:hidden;
+    width:100%;
+    height:100%;
+}
+
+.view {
+    position:absolute;
 }

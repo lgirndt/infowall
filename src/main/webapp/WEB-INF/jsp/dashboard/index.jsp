@@ -36,13 +36,6 @@
             container : '#container'
         });
         slideShow.start();
-
-        console.log('body:' +  $('body').innerHeight());
-        console.log('title' + $('#title').height());
-        $('#container').height(
-            $('body').innerHeight() - $('#container').offset().top
-        )
-
     });
 })(jQuery);
 </script>

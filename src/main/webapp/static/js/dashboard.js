@@ -35,9 +35,6 @@
      * YOUR MUSTACHE CODE HERE
      * -->
      * </script>
-     *
-     *
-     *
      */
 	TemplateManager = function () {};
 
@@ -156,7 +153,7 @@
         this.items = opts.items;
         this.container = $(opts.container);
         this.delay = (opts.delay || 5) * 1000;
-
+        this.fxDuration = opts.fxDuration || 600;
         this.currItemId = 0;
 
 
@@ -181,16 +178,32 @@
     };
 
     SlideShow.prototype.replaceTitle = function(item){
-        $('#title').html(item.title);
+        var duration = this.fxDuration/2;
+        $('#title')
+                .fadeOut(duration)
+                .queue(function(next){
+                    $(this).html(item.title)
+                    next();
+                })
+                .fadeIn(duration);
     };
 
     SlideShow.prototype.replaceView = function(item){
         var elem = $('<div class="view"></div>').appendTo(this.container);
+        var width = $(this.container).width();
+        var height = $(this.container).height();
+        console.log("height:" + height);
+        $(elem)
+            .width(width)
+            .height(height)
+            .offset({left:0,top:height});
         this.renderEngine.renderItem(item.name,elem,function(){
-            var views = $('.view',this.container);
-            if(views.length > 1){
-                $(views[0]).remove();
-            }
+            $(elem).animate({top:0},this.fxDuration,function(){
+                var views = $('.view',this.container);
+                if(views.length > 1){
+                    $(views[0]).remove();
+                }
+            });
         });
     };
 
