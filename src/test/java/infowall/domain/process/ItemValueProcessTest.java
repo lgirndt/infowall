@@ -9,25 +9,27 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static org.easymock.EasyMock.eq;
-import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.*;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 /**
  *
  */
 public class ItemValueProcessTest {
+    private Mocks mocks;
+    private ItemValueRepository repository;
+    private ItemValueProcess process;
+
     @Before
     public void setUp() throws Exception {
+        mocks = new Mocks();
+        repository = mocks.createMock(ItemValueRepository.class);
+        process = new ItemValueProcess(repository);
     }
 
     @Test
     public void testShowRecentValues() throws Exception {
-        Mocks mocks = new Mocks();
-
-        ItemValueRepository repository = mocks.createMock(ItemValueRepository.class);
-        ItemValueProcess process = new ItemValueProcess(repository);
 
         ItemValue curr = mocks.createMock(ItemValue.class);
         ItemValue prev = mocks.createMock(ItemValue.class);
@@ -37,6 +39,32 @@ public class ItemValueProcessTest {
         ItemValuePair pair = process.showRecentValues(itemRef());
         assertThat(pair.getCurrent(), is(curr));
         assertThat(pair.getPrevious(), is(prev));
+        mocks.verifyAll();
+    }
+
+    @Test
+    public void testStoreItemValue() {
+
+        String dashboardId = "dash";
+        String itemName = "name";
+        String value = "{\"some\":\"valid_json\"}";
+
+        repository.put(anyObject(ItemValue.class));
+
+        mocks.replayAll();
+        assertTrue(process.storeItemValue(dashboardId,itemName,value));
+        mocks.verifyAll();
+    }
+
+    @Test
+    public void testStoreItemValueIllegalJson(){
+        String dashboardId = "dash";
+        String itemName = "name";
+        String value = "{illegal_json";
+
+
+        mocks.replayAll();
+        assertFalse(process.storeItemValue(dashboardId,itemName,value));
         mocks.verifyAll();
     }
 

@@ -1,13 +1,21 @@
 /*global window,jQuery*/
 (function (window, $, undefined) {
 
-    var TemplateManager,RenderEngine,SingleValueView,SlideShow;
+    var TemplateManager,RenderEngine,SingleValueView,TableValueView,SlideShow;
 
     function error(msg){
         if(window.console){
             console.error(msg);
         }
     }
+
+    TableValueView = function(){
+
+    };
+
+    TableValueView.prototype.transformModel = function(model,item){
+        return model.current;
+    };
 
     SingleValueView = function(views){
         this.views = views;
@@ -298,6 +306,7 @@
 	window.infowall.TemplateManager = TemplateManager;
     window.infowall.RenderEngine = RenderEngine;
     window.infowall.SingleValueView = SingleValueView;
+    window.infowall.TableValueView = TableValueView;
     window.infowall.SlideShow = SlideShow;
 
 }(window, jQuery));

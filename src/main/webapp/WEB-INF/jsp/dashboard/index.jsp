@@ -30,12 +30,13 @@
        console.log("hello world");
         var dashboard = ${json};
         var templateManager = new infowall.TemplateManager();
-        var templates = templateManager.getTemplates(['single-value']);
+        var templates = templateManager.getTemplates(['single-value','table-value']);
         var renderEngine = new infowall.RenderEngine({
             items : dashboard.items,
             templates: templates,
             views : {
-                "single-value" : new infowall.SingleValueView()
+                "single-value" : new infowall.SingleValueView(),
+                "table-value"  : new infowall.TableValueView()
             },
             baseUrl : "<c:url value='/app/item/${dashboard.id}'/>"
         });
