@@ -49,9 +49,10 @@
     });
 })(jQuery);
 </script>
-<h1 id="title">Hello World</h1>
+
+<h1 id="title"></h1>
 <div id="container">
-  <div class="view">tick tick tick ...</div>
+  <div class="view"></div>
 </div>
 
 </body>
