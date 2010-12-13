@@ -3,11 +3,17 @@
     "title": "My First Dashboard",
     "items" :
         [
-            {"name" : "bugs","title": "Open Bugs"},
+            {
+                "name" : "bugs",
+                "title": "Open Bugs"
+            },
             {
                 "name" : "some-count",
                 "title": "Some Count",
-                "statusThreshold" : 5 
+                "statusThreshold" : 5,
+                "conf" : {
+                    "view" : "single-value"    
+                }
             }
         ]
 }
