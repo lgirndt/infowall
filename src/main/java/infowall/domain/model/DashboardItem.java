@@ -1,5 +1,7 @@
 package infowall.domain.model;
 
+import org.codehaus.jackson.node.ObjectNode;
+
 /**
  *
  */
@@ -8,6 +10,7 @@ public class DashboardItem {
     private String name;
     private String title;
     private int statusThreshold;
+    private ObjectNode conf;
 
     public String getName() {
         return name;
@@ -31,5 +34,13 @@ public class DashboardItem {
 
     public void setStatusThreshold(int statusThreshold) {
         this.statusThreshold = statusThreshold;
+    }
+
+    public ObjectNode getConf() {
+        return conf;
+    }
+
+    public void setConf(ObjectNode conf) {
+        this.conf = conf;
     }
 }

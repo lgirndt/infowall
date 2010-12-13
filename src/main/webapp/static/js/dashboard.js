@@ -178,7 +178,9 @@
         var items = opts.items || [];
         for(var idx in items){
             var item = items[idx];
-            var viewName = item.view || this.defaultViewName;
+            var itemConf = item.conf || {};
+            
+            var viewName = itemConf.view || this.defaultViewName;
             var view = opts.views[viewName];
             this.entries[item.name] = {
                 item : item,
