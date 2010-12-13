@@ -8,8 +8,18 @@
 <script type="text/mustache" id="template-single-value">
 <!--
 <div class="single-value">
-<div class="current back-{{status}}">{{current}}</div>
-<div class="diff text-{{diffStatus}}"><span>{{diff}}</span></div>
+    <div class="current back-{{status}}">{{current}}</div>
+    <div>
+        <div class="changes"><span class="text-{{diffStatus}}">{{diff}}</span> {{changeText}}</div>
+        <div class="since" class="">{{since}}</div>
+    </div>
+</div>
+-->
+</script>
+<script type="text/mustache" id="template-table-value">
+<!--
+<div class="table-value">
+    TABLE
 </div>
 -->
 </script>

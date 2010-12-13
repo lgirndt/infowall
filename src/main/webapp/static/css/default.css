@@ -71,6 +71,20 @@ body {
     border:10px solid #fff;
 }
 
+.view .single-value .change-info {
+    text-align:center;
+}
+
+.view .single-value .changes {
+    text-align:center;
+    font-size:0.4em;
+}
+
+.view .single-value .since {
+    text-align:center;
+    font-size:0.3em;
+}
+
 .view .single-value .diff span{
     font-size:0.4em;
     vertical-align:middle;

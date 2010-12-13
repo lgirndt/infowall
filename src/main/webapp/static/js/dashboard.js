@@ -32,8 +32,37 @@
             previous: previous,
             status :  this.calcStatus(current,item),
             diff : diff,
-            diffStatus : this.calcDiffStatus(diff,item)
+            diffStatus : this.calcDiffStatus(diff,item),
+            changeText : (diff == -1 || diff == 1) ? "change" : "changes",
+            since : this.calcSince(model)
         }
+    };
+
+    SingleValueView.prototype.calcSince = function(model){
+        var creation = model.current.creation;
+        var now = new Date().getTime();
+        var diff = now - creation;
+        var secs = this.intDiv(diff,1000);
+        if(secs < 60){
+            return "since a few seconds ago.";
+        }
+        var minutes = this.intDiv(secs,60);
+        if(minutes < 5){
+            return "since a few minutes ago.";
+        }
+        if(minutes < 120) {
+            return "since " + minutes + " minutes ago.";
+        }
+        var hours = this.intDiv(minutes,60);
+        if(hours < 48) {
+            return "since " + hours + " hours ago.";
+        }
+        var days = this.intDiv(hours,24);
+        return "since " + days + " days ago.";
+    };
+
+    SingleValueView.prototype.intDiv = function(a,b){
+        return Math.floor( a / b );
     };
 
     SingleValueView.prototype.calcStatus = function(val,item){
