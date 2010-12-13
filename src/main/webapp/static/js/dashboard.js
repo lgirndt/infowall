@@ -14,7 +14,13 @@
     };
 
     TableValueView.prototype.transformModel = function(model,item){
-        return model.current;
+        var idx,entry;
+        for(idx in model.current.data.table){
+            entry = model.current.data.table[idx];
+            entry.status = entry.value == 0 ? 'ok' : 'fail';
+        }
+        
+        return model.current.data;
     };
 
     SingleValueView = function(views){
@@ -41,7 +47,7 @@
             status :  this.calcStatus(current,item),
             diff : diff,
             diffStatus : this.calcDiffStatus(diff,item),
-            changeText : (diff == -1 || diff == 1) ? "change" : "changes",
+            // changeText : (diff == -1 || diff == 1) ? "change" : "changes",
             since : this.calcSince(model)
         }
     };
@@ -52,21 +58,21 @@
         var diff = now - creation;
         var secs = this.intDiv(diff,1000);
         if(secs < 60){
-            return "since a few seconds ago.";
+            return "a few seconds ago.";
         }
         var minutes = this.intDiv(secs,60);
         if(minutes < 5){
-            return "since a few minutes ago.";
+            return "a few minutes ago.";
         }
         if(minutes < 120) {
-            return "since " + minutes + " minutes ago.";
+            return "about " + minutes + " minutes ago.";
         }
         var hours = this.intDiv(minutes,60);
         if(hours < 48) {
-            return "since " + hours + " hours ago.";
+            return "about " + hours + " hours ago.";
         }
         var days = this.intDiv(hours,24);
-        return "since " + days + " days ago.";
+        return "about " + days + " days ago.";
     };
 
     SingleValueView.prototype.intDiv = function(a,b){

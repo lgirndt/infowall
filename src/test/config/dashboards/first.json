@@ -4,6 +4,14 @@
     "items" :
         [
             {
+                "name" : "some-table",
+                "title": "Tabular View Example",
+                "statusThreshold" : 5,
+                "conf" : {
+                    "view" : "table-value"
+                }
+            },    
+            {
                 "name" : "bugs",
                 "title": "Open Bugs"
             },
@@ -12,15 +20,7 @@
                 "title": "Some Count",
                 "statusThreshold" : 5,
                 "conf" : {
-                    "view" : "single-value"    
-                }
-            },
-            {
-                "name" : "some-table",
-                "title": "Tabular View Example",
-                "statusThreshold" : 5,
-                "conf" : {
-                    "view" : "table-value"
+                    "view" : "single-value"
                 }
             }
         ]

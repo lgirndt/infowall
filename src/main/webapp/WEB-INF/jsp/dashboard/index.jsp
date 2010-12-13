@@ -10,8 +10,7 @@
 <div class="single-value">
     <div class="current back-{{status}}">{{current}}</div>
     <div>
-        <div class="changes"><span class="text-{{diffStatus}}">{{diff}}</span> {{changeText}}</div>
-        <div class="since" class="">{{since}}</div>
+        <div class="changes"><span class="text-{{diffStatus}}">{{diff}}</span> {{since}}</div>
     </div>
 </div>
 -->
@@ -19,7 +18,11 @@
 <script type="text/mustache" id="template-table-value">
 <!--
 <div class="table-value">
-    TABLE
+<table>
+    {{#table}}
+     <tr><td class="descr text-{{status}}">{{title}}</td><td class="value text-{{status}}">{{value}}</td></tr>
+    {{/table}}
+</table>
 </div>
 -->
 </script>
