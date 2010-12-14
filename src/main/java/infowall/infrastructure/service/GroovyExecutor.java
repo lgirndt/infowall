@@ -4,6 +4,7 @@ import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -14,6 +15,7 @@ import java.util.Collections;
 /**
  *
  */
+@Service
 public class GroovyExecutor {
 
     private final Logger logger = LoggerFactory.getLogger(GroovyExecutor.class);
