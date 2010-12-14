@@ -13,7 +13,8 @@
             },    
             {
                 "name" : "bugs",
-                "title": "Open Bugs"
+                "title": "Open Bugs",
+                "scheduler" : "0/30 * * * * ?"
             },
             {
                 "name" : "some-count",

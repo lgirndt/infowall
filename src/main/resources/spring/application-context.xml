@@ -31,4 +31,6 @@
 
     <import resource="persistence-hsqldb-services.xml"/>
 
+    <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean"/>
+    
 </beans>

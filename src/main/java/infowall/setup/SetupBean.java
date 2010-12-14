@@ -1,6 +1,7 @@
 package infowall.setup;
 
 import infowall.domain.service.DashboardImporter;
+import infowall.domain.service.scheduler.SchedulerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -15,12 +16,14 @@ public class SetupBean implements InitializingBean{
 
     private final Logger logger = LoggerFactory.getLogger(SetupBean.class);
 
-
     private final DashboardImporter dashboardImporter;
+    private final SchedulerService schedulerService;
 
     @Autowired
-    public SetupBean(DashboardImporter dashboardImporter) {
+    public SetupBean(DashboardImporter dashboardImporter,
+                     SchedulerService schedulerService) {
         this.dashboardImporter = dashboardImporter;
+        this.schedulerService = schedulerService;
     }
 
     @Override
@@ -28,5 +31,6 @@ public class SetupBean implements InitializingBean{
         logger.info("Setup Application.");
 
         dashboardImporter.importAllDashboards();
+        schedulerService.registerAllDashboardJobs();
     }
 }

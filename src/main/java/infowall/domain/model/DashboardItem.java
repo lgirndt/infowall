@@ -11,6 +11,7 @@ public class DashboardItem {
     private String title;
     private int statusThreshold;
     private ObjectNode conf;
+    private String scheduler;
 
     public String getName() {
         return name;
@@ -42,5 +43,13 @@ public class DashboardItem {
 
     public void setConf(ObjectNode conf) {
         this.conf = conf;
+    }
+
+    public String getScheduler() {
+        return scheduler;
+    }
+
+    public void setScheduler(String scheduler) {
+        this.scheduler = scheduler;
     }
 }
