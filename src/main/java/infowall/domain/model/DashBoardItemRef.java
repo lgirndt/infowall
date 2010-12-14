@@ -48,4 +48,9 @@ public class DashboardItemRef {
         result = 31 * result + (itemName != null ? itemName.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return dashboardId + "." + itemName;
+    }
 }

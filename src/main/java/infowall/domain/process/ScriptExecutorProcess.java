@@ -1,5 +1,6 @@
 package infowall.domain.process;
 
+import infowall.domain.model.DashboardItemRef;
 import infowall.infrastructure.ConfigRoot;
 import infowall.infrastructure.service.GroovyExecutor;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -22,26 +23,45 @@ public class ScriptExecutorProcess {
 
     private final ConfigRoot configRoot;
     private final GroovyExecutor groovyExecutor;
+    private final ItemValueProcess itemValueProcess;
 
     @Autowired
-    public ScriptExecutorProcess(ConfigRoot configRoot, GroovyExecutor groovyExecutor) {
+    public ScriptExecutorProcess(
+            ConfigRoot configRoot,
+            GroovyExecutor groovyExecutor,
+            ItemValueProcess itemValueProcess) {
         this.configRoot = configRoot;
         this.groovyExecutor = groovyExecutor;
+        this.itemValueProcess = itemValueProcess;
     }
 
-    public ObjectNode printScriptOutput(String dashboardId,String itemName){
-        File root = configRoot.getDirectory();
-        File scriptDir = new File(root,"scripts");
-        File dashboardDir = new File(scriptDir,dashboardId);
-        File itemDir = new File(dashboardDir,itemName + ".groovy");
-
-        ObjectMapper mapper = new ObjectMapper();
+    public ObjectNode printScriptOutput(DashboardItemRef itemRef){
+        String content = execScript(itemRef);
 
         try {
-            return mapper.readValue(groovyExecutor.exec(itemDir),ObjectNode.class);
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.readValue(content,ObjectNode.class);
         } catch (IOException e) {
             logger.error("cannot exec script",e);
             return null;
+        }
+    }
+
+    private String execScript(DashboardItemRef itemRef) {
+        File root = configRoot.getDirectory();
+        File scriptDir = new File(root,"scripts");
+        File dashboardDir = new File(scriptDir,itemRef.getDashboardId());
+        File itemDir = new File(dashboardDir,itemRef.getItemName() + ".groovy");
+        String content = groovyExecutor.exec(itemDir);
+        return content;
+    }
+
+    public void execScriptAndStoreOutput(DashboardItemRef itemRef){
+        String content = execScript(itemRef);
+        if(content != null){
+            itemValueProcess.storeItemValue(itemRef,content);
+        }else {
+            logger.warn("Could not store script result of " + itemRef + ", content was null.");
         }
     }
 }

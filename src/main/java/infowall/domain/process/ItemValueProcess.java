@@ -38,6 +38,11 @@ public class ItemValueProcess {
         storeItem(dashboardId, itemName, data);
     }
 
+
+    public boolean storeItemValue(DashboardItemRef itemRef, String value){
+        return storeItemValue(itemRef.getDashboardId(), itemRef.getItemName(), value);
+    }
+
     public boolean storeItemValue(String dashboardId,String itemName, String value){
         try {
             ObjectNode data = mapper.readValue(value,ObjectNode.class);
