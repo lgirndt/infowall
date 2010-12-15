@@ -143,6 +143,3 @@ $name([]) or $name([:])""")
     }
 }
 
-private enum ElementType {
-    ARRAY, OBJECT
-}
