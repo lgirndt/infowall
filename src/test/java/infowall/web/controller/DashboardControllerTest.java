@@ -4,6 +4,8 @@ import com.google.common.collect.Lists;
 import infowall.domain.model.Dashboard;
 import infowall.domain.process.DashboardProcess;
 import infowall.testing.Mocks;
+import infowall.web.spring.FlashMessage;
+import infowall.web.spring.FlashMessageImpl;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,7 +28,8 @@ public class DashboardControllerTest {
     public void setUp() throws Exception {
         mocks = new Mocks();
         process = mocks.createMock(DashboardProcess.class);
-        controller = new DashboardController(process);
+        FlashMessage flash = mocks.createMock(FlashMessageImpl.class);
+        controller = new DashboardController(process, flash);
     }
 
     @Test

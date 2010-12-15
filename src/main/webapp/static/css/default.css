@@ -167,8 +167,12 @@ body {
 }
 
 #info {
+    position:fixed;
     border:1px solid #32cd32;
+    background-color:#fff;
     color:#32cd32;
     padding:4px;
-    margin: 4px 0;
+    margin: 20px 20px;
+    top:0;
+    left:0;
 }

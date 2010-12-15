@@ -5,12 +5,19 @@
     <%@ include file="/WEB-INF/jsp/include/head.jsp" %>
 </head>
 <body>
+<c:if test="${info != null}">
+    <div id="info">${info}</div>
+    <script type="text/javascript">
+        (function($) {
+            $(document).ready(function() {
+                $('#info').fadeOut(0).fadeIn(800).delay(10000).fadeOut();
+            });
+        })(jQuery);
+    </script>
+</c:if>
+
 <div class="navigation">
     <h1>${dashboard.title}</h1>
-
-    <c:if test="${info != null}">
-        <div id="info">${info}</div>
-    </c:if>
 
     <table>
         <tr>

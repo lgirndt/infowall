@@ -15,7 +15,7 @@
     </bean>
 
 
-    <context:component-scan base-package="infowall"/>
+    <context:component-scan base-package="infowall" scoped-proxy="interfaces"/>
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <!--

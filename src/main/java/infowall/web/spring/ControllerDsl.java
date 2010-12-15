@@ -42,6 +42,23 @@ public class ControllerDsl {
         return new ModelAndView(viewName,actualModel);
     }
 
+    public static ModelAndView render(
+            String viewName,
+            FlashMessage flash,
+            Map<String,?> modelMap){
+
+        Map<String,?> actualModel;
+        String info = flash.consumeInfo();
+        if(info != null){
+            actualModel = new ImmutableMap.Builder<String,Object>()
+                    .putAll(modelMap)
+                    .put("info",info).build();
+        } else {
+            actualModel = modelMap;
+        }
+        return new ModelAndView(viewName,actualModel);
+    }
+
     public static ModelAndView redirect(String requestMapping){
         return new ModelAndView("redirect:/app" + requestMapping);
     }

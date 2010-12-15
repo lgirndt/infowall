@@ -5,6 +5,7 @@ import com.google.common.collect.Maps;
 import infowall.domain.model.Dashboard;
 import infowall.domain.process.DashboardProcess;
 import infowall.web.services.errorhandling.Errors;
+import infowall.web.spring.FlashMessage;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,15 +25,18 @@ import static infowall.web.spring.ControllerDsl.*;
  *
  */
 @Controller
+//@Scope("session")
 public class DashboardController {
 
     private final Logger logger = LoggerFactory.getLogger(DashboardController.class);
 
     private final DashboardProcess process;
+    private final FlashMessage flashMessage;
 
     @Autowired
-    public DashboardController(DashboardProcess process) {
+    public DashboardController(DashboardProcess process, FlashMessage flashMessage) {
         this.process = process;
+        this.flashMessage = flashMessage;
     }
 
     @RequestMapping("/dashboard")
@@ -69,11 +73,16 @@ public class DashboardController {
 
     @RequestMapping("/configure/dashboard/{dashboardId}")
     ModelAndView configureDashboard(@PathVariable String dashboardId){
+
         Dashboard dashboard = process.getDashboard(dashboardId);
         if(dashboard == null){
-            return null;
+            return to404();
         }
-        return render("dashboard/configure","dashboard",dashboard);
+        
+        return render(
+                "dashboard/configure",
+                flashMessage,
+                ImmutableMap.<String, Object>of("dashboard",dashboard));
     }
 
     @RequestMapping("/reload/dashboard/{dashboardId}")
@@ -88,9 +97,9 @@ public class DashboardController {
                     ImmutableMap.<String, Object>of("dashboard", dashboard)
                 );
         if(!errors.haveOccurred()){
-            model.put("info","The configuration has been reloaded.");
+            flashMessage.putInfo("The configuration has been reloaded.");
         }
-        return render("dashboard/configure",errors, model);
+        return redirect("/configure/dashboard/" + dashboardId);
     }
 
 
