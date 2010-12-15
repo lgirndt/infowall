@@ -1,5 +1,11 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <body>
-<h2>Hello World!</h2>
+<%
+    // TODO use urlrewrite
+    String url = request.getContextPath() + "/app/dashboard";
+    response.sendRedirect(url);    
+
+%>
 </body>
 </html>

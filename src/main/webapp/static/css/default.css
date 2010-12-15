@@ -149,7 +149,7 @@ body {
     width:100%;
 }
 
-.navigation td {
+.navigation td, .navigation th{
     padding:6px;
     color:#222;
 }
