@@ -6,6 +6,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
 
+import static com.google.common.collect.ImmutableMap.of;
+
 /**
  *
  */
@@ -20,7 +22,7 @@ public class ControllerDsl {
             String modelName0,Object modelObject0,
             String modelName1,Object modelObject1){
         return new ModelAndView(viewName,
-                ImmutableMap.of(
+                of(
                         modelName0,modelObject0,
                         modelName1,modelObject1)
         );
@@ -52,11 +54,20 @@ public class ControllerDsl {
         if(info != null){
             actualModel = new ImmutableMap.Builder<String,Object>()
                     .putAll(modelMap)
-                    .put("info",info).build();
+                    .put("info",info)
+                    .build();
         } else {
             actualModel = modelMap;
         }
         return new ModelAndView(viewName,actualModel);
+    }
+
+    public static ModelAndView render(
+            String viewName,
+            FlashMessage flash,
+            String modelName,Object modelObject){
+
+        return render(viewName,flash, of(modelName,modelObject));
     }
 
     public static ModelAndView redirect(String requestMapping){
