@@ -1,7 +1,10 @@
 package infowall.web.controller;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import infowall.domain.model.Dashboard;
 import infowall.domain.process.DashboardProcess;
+import infowall.web.services.errorhandling.Errors;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,9 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
-import static infowall.web.spring.ControllerDsl.redirect;
-import static infowall.web.spring.ControllerDsl.render;
+import static infowall.web.spring.ControllerDsl.*;
 
 /**
  *
@@ -72,4 +75,23 @@ public class DashboardController {
         }
         return render("dashboard/configure","dashboard",dashboard);
     }
+
+    @RequestMapping("/reload/dashboard/{dashboardId}")
+    ModelAndView reloadDashboard(@PathVariable String dashboardId){
+        Errors errors = new Errors();
+        Dashboard dashboard = process.reloadDashboard(dashboardId,errors);
+        if(dashboard == null){
+            return to404();
+        }
+        Map<String,Object> model =
+                Maps.newHashMap(
+                    ImmutableMap.<String, Object>of("dashboard", dashboard)
+                );
+        if(!errors.haveOccurred()){
+            model.put("info","The configuration has been reloaded.");
+        }
+        return render("dashboard/configure",errors, model);
+    }
+
+
 }

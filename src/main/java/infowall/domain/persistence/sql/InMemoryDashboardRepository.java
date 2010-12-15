@@ -30,6 +30,11 @@ public class InMemoryDashboardRepository implements DashboardRepository{
     }
 
     @Override
+    public boolean contains(String dashboardId) {
+        return dashboards.containsKey(dashboardId);
+    }
+
+    @Override
     public Dashboard get(String id) {
         Dashboard dashboard = dashboards.get(id);
         // TODO

@@ -47,12 +47,14 @@ public class SchedulerService {
 
         try {
             scheduler.pauseJobGroup(group);
+            scheduler.pauseTriggerGroup(group);
             for (DashboardItem item : dashboard.getItems()) {
                 if (item.getScheduler() != null) {
                     registerJobForItem(group, item);
                 }
             }
             scheduler.resumeJobGroup(group);
+            scheduler.resumeTriggerGroup(group);
 
         } catch (SchedulerException e) {
             logger.error("Cannot register jobs for dashboard " + dashboardId, e);
@@ -65,6 +67,9 @@ public class SchedulerService {
         logger.info("Setup Job for DashboardItem " + item.getName());
 
         String jobName = item.getName();
+        String triggerName = jobName + "-trigger";
+        scheduler.unscheduleJob(triggerName,group);
+
         JobDetail job = new JobDetail(jobName, group, ScriptExecutingJob.class);
         JobDataMap map = new JobDataMap(
                 of("beanFactory", beanFactory,
@@ -74,7 +79,8 @@ public class SchedulerService {
         job.setJobDataMap(map);
         scheduler.addJob(job, true);
 
-        String triggerName = jobName + "-trigger";
+
+
         CronTrigger cronTrigger = new CronTrigger(triggerName, group, jobName, group, item.getScheduler());
         scheduler.scheduleJob(cronTrigger);
     }

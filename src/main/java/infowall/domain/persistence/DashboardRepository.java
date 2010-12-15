@@ -14,4 +14,6 @@ public interface DashboardRepository {
     Dashboard get(String dashboardId);
 
     void put(Dashboard dashboard);
+
+    boolean contains(String dashboardId);
 }

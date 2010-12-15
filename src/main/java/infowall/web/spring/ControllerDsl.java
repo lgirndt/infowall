@@ -1,7 +1,10 @@
 package infowall.web.spring;
 
 import com.google.common.collect.ImmutableMap;
+import infowall.web.services.errorhandling.Errors;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Map;
 
 /**
  *
@@ -23,7 +26,27 @@ public class ControllerDsl {
         );
     }
 
+    public static ModelAndView render(
+            String viewName,
+            Errors errors,
+            Map<String,Object> modelMap){
+        
+        Map<String,Object> actualModel;
+        if(errors.haveOccurred()){
+            actualModel = new ImmutableMap.Builder<String,Object>()
+                    .putAll(modelMap)
+                    .put("errors",errors.getMessages()).build();
+        } else {
+            actualModel = modelMap;
+        }
+        return new ModelAndView(viewName,actualModel);
+    }
+
     public static ModelAndView redirect(String requestMapping){
         return new ModelAndView("redirect:/app" + requestMapping);
+    }
+
+    public static ModelAndView to404(){
+        return new ModelAndView("/status404");
     }
 }

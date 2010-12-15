@@ -8,10 +8,14 @@
 <div class="navigation">
     <h1>${dashboard.title}</h1>
 
+    <c:if test="${info != null}">
+        <div id="info">${info}</div>
+    </c:if>
+
     <table>
         <tr>
             <td>Configuration</td>
-            <td>Reload</td>
+            <td><a href="<c:url value='/app/reload/dashboard/${dashboard.id}'/>">Reload</a></td>
         </tr>
     </table>
     <table>
@@ -28,6 +32,10 @@
             </tr>
         </c:forEach>
     </table>
+
+    <div>
+        <a href="<c:url value='/app/dashboard/'/>">Back</a>
+    </div>
 </div>
 </body>
 </html>

@@ -165,3 +165,10 @@ body {
 .navigation tr:hover {
     background-color:#87cefa;
 }
+
+#info {
+    border:1px solid #32cd32;
+    color:#32cd32;
+    padding:4px;
+    margin: 4px 0;
+}

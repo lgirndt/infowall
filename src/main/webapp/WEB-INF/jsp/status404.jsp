@@ -1,0 +1,1 @@
+<% response.setStatus( 404 ); %>
