@@ -162,10 +162,6 @@ body {
     background-color:#fff8dc;
 }
 
-.navigation tr:hover {
-    background-color:#87cefa;
-}
-
 #info {
     position:fixed;
     border:1px solid #32cd32;
