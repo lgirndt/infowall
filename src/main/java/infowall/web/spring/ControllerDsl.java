@@ -1,6 +1,7 @@
 package infowall.web.spring;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import infowall.web.services.errorhandling.Errors;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -49,15 +50,14 @@ public class ControllerDsl {
             FlashMessage flash,
             Map<String,?> modelMap){
 
-        Map<String,?> actualModel;
+        Map<String,Object> actualModel = Maps.newHashMap( modelMap );
         String info = flash.consumeInfo();
         if(info != null){
-            actualModel = new ImmutableMap.Builder<String,Object>()
-                    .putAll(modelMap)
-                    .put("info",info)
-                    .build();
-        } else {
-            actualModel = modelMap;
+            actualModel.put("info",info);
+        }
+        Errors errors = flash.consumeErrors();
+        if(errors != null && errors.haveOccurred()){
+            actualModel.put("errors",errors.getMessages());
         }
         return new ModelAndView(viewName,actualModel);
     }

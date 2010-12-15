@@ -15,6 +15,27 @@
         })(jQuery);
     </script>
 </c:if>
+<c:if test="${errors != null}">
+    <div id="errors"><h2>Errors have occurred</h2>
+        <ul>
+            <c:forEach items="${errors}" var="error">
+                <li>${error}</li>
+            </c:forEach>
+        </ul>
+        <div>
+            <a href="#" class="close">Close</a>
+        </div>
+    </div>
+    <script type="text/javascript">
+        (function($) {
+            $(document).ready(function() {
+                $('#errors a.close').click(function(){
+                    $('#errors').fadeOut();
+                });
+            });
+        })(jQuery);
+    </script>
+</c:if>
 
 <div class="navigation">
     <h1>${dashboard.title}</h1>

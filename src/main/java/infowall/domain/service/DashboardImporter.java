@@ -45,12 +45,12 @@ public class DashboardImporter {
         mapper = new ObjectMapper();
     }
 
-    public void addListener(DashboardImportListener listener){
+    public void addListener(DashboardImportListener listener) {
         this.listeners.add(listener);
     }
 
-    public void notifyDashboardReloaded(Dashboard dashboard){
-        for(DashboardImportListener listener : listeners){
+    public void notifyDashboardReloaded(Dashboard dashboard) {
+        for (DashboardImportListener listener : listeners) {
             listener.onDashboardReloaded(dashboard);
         }
     }
@@ -58,50 +58,50 @@ public class DashboardImporter {
     public void importAllDashboards() {
         List<File> files = listJsonFiles();
 
-        for(File file : files){
-            importDashboardFromFile(file);
+        for (File file : files) {
+            try {
+                importDashboardFromFile(file);
+            } catch (DashboardImportException e) {
+                logger.error("Failed to import dashboard.", e);
+            }
         }
     }
 
-    public void importDashboard(String dashboardId) throws DashboardImportException{
+    public void importDashboard(String dashboardId) throws DashboardImportException {
         File baseDir = findDashboardBaseDir();
-        if(!baseDir.exists()){
+        if (!baseDir.exists()) {
             throw new DashboardImportException(
                     "Cannot import Dashboard, because the configuration directory does not exist.");
         }
-        File file = new File(baseDir,dashboardId + JSON);
-        if(!file.exists()){
+        File file = new File(baseDir, dashboardId + JSON);
+        if (!file.exists()) {
             throw new DashboardImportException(
                     "Cannot import Dashboard, because no config file exists for Dashboard: " + file.getAbsolutePath());
         }
         importDashboardFromFile(file);
     }
 
-    private void importDashboardFromFile(File file) {
-        try {
-            Dashboard dashboard = convertToDashboard(file);
-            dashboardRepository.put(dashboard);
-            notifyDashboardReloaded(dashboard);
-            logger.info("Imported dashboard " + dashboard.getId());
-        } catch (DashboardImportException e) {
-            logger.error("Failed to import dashboard.",e);
-        }
+    private void importDashboardFromFile(File file) throws DashboardImportException {
+        Dashboard dashboard = convertToDashboard(file);
+        dashboardRepository.put(dashboard);
+        notifyDashboardReloaded(dashboard);
+        logger.info("Imported dashboard " + dashboard.getId());
     }
 
     private Dashboard convertToDashboard(File jsonFile) throws DashboardImportException {
         try {
-                return mapper.readValue(jsonFile, Dashboard.class);
+            return mapper.readValue(jsonFile, Dashboard.class);
 
-            } catch (IOException e) {
-                throw new DashboardImportException(
-                        "Could not parse dashboard file '" + jsonFile.getAbsolutePath() + "' as JSON.",e);
-            }
+        } catch (IOException e) {
+            throw new DashboardImportException(
+                    "Could not parse dashboard file '" + jsonFile.getAbsolutePath() + "' as JSON. " + e.getMessage(), e);
+        }
     }
 
     private List<File> listJsonFiles() {
         File dashboardDir = findDashboardBaseDir();
 
-        if(!dashboardDir.exists()){
+        if (!dashboardDir.exists()) {
             logger.warn("Dashboard config dir does not exist, no dashboards will be imported.");
             return Collections.emptyList();
         }
@@ -116,7 +116,6 @@ public class DashboardImporter {
 
     private File findDashboardBaseDir() {
         File rootDir = configRoot.getDirectory();
-        File dashboardDir = new File(rootDir,"dashboards");
-        return dashboardDir;
+        return new File(rootDir, "dashboards");
     }
 }

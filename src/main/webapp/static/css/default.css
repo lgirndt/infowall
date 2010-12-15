@@ -176,3 +176,19 @@ body {
     top:0;
     left:0;
 }
+
+#errors {
+    color:#dc143c;
+    margin:20px;
+    padding:20px;
+    border:1px solid #dc143c;
+    position:fixed;
+    top:0;
+    left:0;
+    background-color:#000;
+
+}
+
+#errors a {
+    color:#fff;
+}
