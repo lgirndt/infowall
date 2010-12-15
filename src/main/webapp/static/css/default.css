@@ -1,5 +1,16 @@
 body {
-    background:#000;
+    background: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0, rgb(52,56,77)),
+        color-stop(1, rgb(0,0,0))
+    );
+    background: -moz-linear-gradient(
+        center bottom,
+        rgb(92,92,92) 0%,
+        rgb(0,0,0) 100%
+    );
     color:#fef;
 }
 
@@ -18,19 +29,6 @@ body {
     overflow:hidden;
     width:100%;
     height:100%;
-
-    background: -webkit-gradient(
-        linear,
-        left bottom,
-        left top,
-        color-stop(0, rgb(52,56,77)),
-        color-stop(1, rgb(0,0,0))
-    );
-    background: -moz-linear-gradient(
-        center bottom,
-        rgb(92,92,92) 0%,
-        rgb(0,0,0) 100%
-    );
 }
 
 .view {
@@ -132,4 +130,38 @@ body {
 
 .view .table-value td.value {
     text-align:right;
+}
+
+.navigation {
+    border:4px solid #4a4a4a;
+    background-color:#fff;
+    color:#222;
+    margin-left:auto;
+    margin-right:auto;
+    width:400px;
+    margin-top:100px;
+    -webkit-border-radius:15px;
+    padding:8px;
+    -webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+}
+
+.navigation table {
+    width:100%;
+}
+
+.navigation td {
+    padding:6px;
+    color:#222;
+}
+
+.navigation tr:nth-child(2n+1) {
+    background-color:#fffff0;
+}
+
+.navigation tr:nth-child(2n) {
+    background-color:#fff8dc;
+}
+
+.navigation tr:hover {
+    background-color:#87cefa;
 }

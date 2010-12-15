@@ -63,4 +63,13 @@ public class DashboardController {
                 "dashboard",dashboard,
                 "json",dashboard.toJSON());
     }
+
+    @RequestMapping("/configure/dashboard/{dashboardId}")
+    ModelAndView configureDashboard(@PathVariable String dashboardId){
+        Dashboard dashboard = process.getDashboard(dashboardId);
+        if(dashboard == null){
+            return null;
+        }
+        return render("dashboard/configure","dashboard",dashboard);
+    }
 }
