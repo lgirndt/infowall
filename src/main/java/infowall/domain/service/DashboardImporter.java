@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -46,8 +45,8 @@ public class DashboardImporter {
         mapper = new ObjectMapper();
     }
 
-    public void addListeners(Collection<DashboardImportListener> listeners){
-        this.listeners.addAll(listeners);
+    public void addListener(DashboardImportListener listener){
+        this.listeners.add(listener);
     }
 
     public void notifyDashboardReloaded(Dashboard dashboard){

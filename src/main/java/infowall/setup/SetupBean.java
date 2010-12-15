@@ -1,6 +1,7 @@
 package infowall.setup;
 
 import infowall.domain.service.DashboardImporter;
+import infowall.domain.service.scheduler.SchedulerDashboardImportListener;
 import infowall.domain.service.scheduler.SchedulerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +31,8 @@ public class SetupBean implements InitializingBean{
     public void afterPropertiesSet() throws Exception {
         logger.info("Setup Application.");
 
+        dashboardImporter.addListener(new SchedulerDashboardImportListener(schedulerService));
+
         dashboardImporter.importAllDashboards();
-        schedulerService.registerAllDashboardJobs();
     }
 }
