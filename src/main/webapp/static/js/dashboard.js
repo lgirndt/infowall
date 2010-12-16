@@ -53,9 +53,18 @@
             status :  this.calcStatus(current,item),
             diff : diff,
             diffStatus : this.calcDiffStatus(diff,item),
-            // changeText : (diff == -1 || diff == 1) ? "change" : "changes",
-            since : this.calcSince(model)
+            since : this.calcSince(model),
+            unit : this.calcUnit(item)
         }
+    };
+
+    SingleValueView.prototype.calcUnit = function(item){
+        if(item.conf){
+            if(item.conf.unit){
+                return item.conf.unit
+            }
+        }
+        return null;
     };
 
     SingleValueView.prototype.calcSince = function(model){

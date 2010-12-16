@@ -8,7 +8,7 @@
 <script type="text/mustache" id="template-single-value">
 <!--
 <div class="single-value">
-    <div class="current back-{{status}}">{{current}}</div>
+    <div class="current back-{{status}}">{{current}}{{unit}}</div>
     <div>
         <div class="changes"><span class="text-{{diffStatus}}">{{diff}}</span> {{since}}</div>
     </div>

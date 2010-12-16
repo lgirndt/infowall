@@ -18,7 +18,10 @@
             },
             {
                 "name" : "coverage",
-                "title": "Coverage Example"
+                "title": "Coverage Example",
+                "conf" : {
+                    "unit" : "%"
+                }
             },
             {
                 "name" : "some-count",
