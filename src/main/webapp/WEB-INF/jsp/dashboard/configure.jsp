@@ -52,11 +52,11 @@
             <th>Cron Scheduler</th>
             <th>Actions</th>
         </tr>
-        <c:forEach var="item" items="${dashboard.items}">
+        <c:forEach var="cItem" items="${items}">
             <tr>
-                <td>${item.title}</td>
-                <td>${item.scheduler}</td>
-                <td>Edit <c:if test="${item.scheduler != null}">| <a href="">Execute</a></c:if></td>
+                <td>${cItem.item.title}</td>
+                <td>${cItem.item.scheduler}</td>
+                <td>Edit <c:if test="${cItem.executable}">| <a href="<c:url value='/app/configure/exec/dashboard/${dashboard.id}/${cItem.item.name}'/>">Execute</a></c:if></td>
             </tr>
         </c:forEach>
     </table>

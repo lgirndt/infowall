@@ -196,6 +196,12 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.codehaus.groovy.modules.http-builder</groupId>
+            <artifactId>http-builder</artifactId>
+            <version>0.5.0</version>
+        </dependency>
+
         <!-- Test Depedencies -->
 
         <dependency>

@@ -36,11 +36,17 @@
     SingleValueView.prototype.transformModel = function(model,item){
 
         var current  = model.current.data.value;
-        var previous = model.previous.data.value;
-        var diff =  current - previous;
-        if(diff>0){
-            diff = '+' + diff;
+        var previous = null;
+        var diff = null;
+
+        if(model.previous){
+            previous = model.previous.data.value;
+            diff =  current - previous;
+            if(diff>0){
+                diff = '+' + diff;
+            }
         }
+
         return {
             current : current,
             previous: previous,

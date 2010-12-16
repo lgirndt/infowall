@@ -2,7 +2,6 @@ package infowall.web.controller;
 
 import infowall.domain.model.DashboardItemRef;
 import infowall.domain.process.ScriptExecutorProcess;
-import org.codehaus.jackson.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +23,7 @@ public class ScriptExecutorController {
 
     @RequestMapping("/exec/{dashboardId}/{itemName}")
     @ResponseBody
-    public ObjectNode execScriptAndPrint(
+    public String execScriptAndPrint(
             @PathVariable String dashboardId,
             @PathVariable String itemName){
 

@@ -17,6 +17,10 @@
                 "scheduler" : "0/30 * * * * ?"
             },
             {
+                "name" : "coverage",
+                "title": "Coverage Example"
+            },
+            {
                 "name" : "some-count",
                 "title": "Some Count",
                 "statusThreshold" : 5,

@@ -3,6 +3,7 @@ package infowall.web.controller;
 import com.google.common.collect.Lists;
 import infowall.domain.model.Dashboard;
 import infowall.domain.process.DashboardProcess;
+import infowall.domain.process.ScriptExecutorProcess;
 import infowall.testing.Mocks;
 import infowall.web.spring.FlashMessage;
 import infowall.web.spring.FlashMessageImpl;
@@ -29,7 +30,8 @@ public class DashboardControllerTest {
         mocks = new Mocks();
         process = mocks.createMock(DashboardProcess.class);
         FlashMessage flash = mocks.createMock(FlashMessageImpl.class);
-        controller = new DashboardController(process, flash);
+        ScriptExecutorProcess scriptExecutorProcess = mocks.createMock(ScriptExecutorProcess.class);
+        controller = new DashboardController(process, flash, scriptExecutorProcess);
     }
 
     @Test

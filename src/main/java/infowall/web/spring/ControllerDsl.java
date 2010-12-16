@@ -70,6 +70,15 @@ public class ControllerDsl {
         return render(viewName,flash, of(modelName,modelObject));
     }
 
+        public static ModelAndView render(
+            String viewName,
+            FlashMessage flash,
+            String modelName1,Object modelObject1,
+            String modelName2,Object modelObject2){
+
+        return render(viewName,flash, of(modelName1,modelObject1,modelName2,modelObject2));
+    }
+
     public static ModelAndView redirect(String requestMapping){
         return new ModelAndView("redirect:/app" + requestMapping);
     }

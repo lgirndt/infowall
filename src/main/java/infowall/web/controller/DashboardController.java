@@ -1,7 +1,10 @@
 package infowall.web.controller;
 
+import infowall.domain.model.ConfigureDashboard;
 import infowall.domain.model.Dashboard;
+import infowall.domain.model.DashboardItemRef;
 import infowall.domain.process.DashboardProcess;
+import infowall.domain.process.ScriptExecutorProcess;
 import infowall.web.services.errorhandling.Errors;
 import infowall.web.spring.FlashMessage;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -28,11 +31,16 @@ public class DashboardController {
 
     private final DashboardProcess process;
     private final FlashMessage flash;
+    private final ScriptExecutorProcess scriptExecutorProcess;
 
     @Autowired
-    public DashboardController(DashboardProcess process, FlashMessage flash) {
+    public DashboardController(
+            DashboardProcess process,
+            FlashMessage flash,
+            ScriptExecutorProcess scriptExecutorProcess) {
         this.process = process;
         this.flash = flash;
+        this.scriptExecutorProcess = scriptExecutorProcess;
     }
 
     @RequestMapping("/dashboard")
@@ -68,12 +76,14 @@ public class DashboardController {
     @RequestMapping("/configure/dashboard/{dashboardId}")
     ModelAndView configureDashboard(@PathVariable String dashboardId){
 
-        Dashboard dashboard = process.getDashboard(dashboardId);
-        if(dashboard == null){
+        ConfigureDashboard configureDashboard = process.getConfigureDashboard(dashboardId);
+        if(configureDashboard == null){
             return to404();
         }
         
-        return render("dashboard/configure", flash,"dashboard",dashboard);
+        return render("dashboard/configure", flash,
+                "dashboard", configureDashboard.getDashboard(),
+                "items",configureDashboard.getConfigureItems());
     }
 
     @RequestMapping("/reload/dashboard/{dashboardId}")
@@ -92,5 +102,10 @@ public class DashboardController {
         return redirect("/configure/dashboard/" + dashboardId);
     }
 
-
+    @RequestMapping("/configure/exec/dashboard/{dashboardId}/{itemName}")
+    ModelAndView executeScript(@PathVariable String dashboardId,@PathVariable String itemName){
+        scriptExecutorProcess.execScriptAndStoreOutput(new DashboardItemRef(dashboardId,itemName));
+        flash.putInfo("Script executed.");
+        return redirect("/configure/dashboard/" + dashboardId);
+    }
 }

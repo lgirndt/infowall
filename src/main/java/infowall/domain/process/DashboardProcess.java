@@ -1,6 +1,7 @@
 package infowall.domain.process;
 
-import infowall.domain.model.Dashboard;
+import com.google.common.collect.Lists;
+import infowall.domain.model.*;
 import infowall.domain.persistence.DashboardRepository;
 import infowall.domain.service.DashboardImporter;
 import infowall.domain.service.scheduler.DashboardImportException;
@@ -23,13 +24,16 @@ public class DashboardProcess {
 
     private final DashboardRepository dashboardRepository;
     private final DashboardImporter dashboardImporter;
+    private final ScriptFileProvider scriptFileProvider;
 
     @Autowired
     public DashboardProcess(
             DashboardRepository dashboardRepository,
-            DashboardImporter dashboardImporter) {
+            DashboardImporter dashboardImporter,
+            ScriptFileProvider scriptFileProvider) {
         this.dashboardRepository = dashboardRepository;
         this.dashboardImporter = dashboardImporter;
+        this.scriptFileProvider = scriptFileProvider;
     }
 
     public List<Dashboard> listAllDashboards(){
@@ -42,6 +46,20 @@ public class DashboardProcess {
         }catch(DocumentNotFoundException e){
             return null;
         }
+    }
+
+    public ConfigureDashboard getConfigureDashboard(String dashboardId){
+        Dashboard dashboard = getDashboard(dashboardId);
+        if(dashboard == null){
+            return null;
+        }
+        List<ConfigureItem> configureItems = Lists.newArrayList();
+        for(DashboardItem item : dashboard.getItems()){
+            boolean scriptExists = scriptFileProvider.existsScriptFile(new DashboardItemRef(dashboardId,item.getName()));
+            ConfigureItem configureItem = new ConfigureItem(item,scriptExists);
+            configureItems.add(configureItem);
+        }
+        return new ConfigureDashboard(dashboard,configureItems);
     }
 
     public Dashboard reloadDashboard(String dashboardId, ErrorNotifier errorNotifier){
