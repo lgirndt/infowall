@@ -5,7 +5,13 @@
 1. Pull from github `git clone git@github.com:lgirndt/infowall.git`
 1. Build `mvn clean install`
 1. Setup the example HSQLDB TODO
-`java -cp /Users/lars/.m2/repository/org/hsqldb/hsqldb/2.0.0/hsqldb-2.0.0.jar:/Users/lars/.m2/repository/org/hsqldb/sqltool/2.0.0/sqltool-2.0.0.jar org.hsqldb.cmdline.SqlTool --inlineRc=url=jdbc:hsqldb:file:/tmp/infowall-prod.db,user=sa,password= src/main/resources/sql/create-schema.sql`
+`
+MVN_REPO=~/.m2/repository
+export CLASSPATH=$MVN_REPO/org/hsqldb/hsqldb/2.0.0/hsqldb-2.0.0.jar:$MVN_REPO/org/hsqldb/sqltool/2.0.0/sqltool-2.0.0.jar
+DB_FILE=/tmp/infowall-prod.db
+java org.hsqldb.cmdline.SqlTool --inlineRc=url=jdbc:hsqldb:file:$DB_FILE,user=sa,password= src/main/resources/sql/create-schema.sql
+`
+
 1. Insert some example data into infowall
 1. run the server `mvn jetty:run`
 
