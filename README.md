@@ -38,7 +38,7 @@ An item is stored as
 }
 </pre>
 
-### Table View
+#### Table View
 Displays a tabular listing of a descriptive texts with some value.
 
 If the value is 0, the color is of the row is green, otherwise red.
@@ -128,6 +128,8 @@ java org.hsqldb.cmdline.SqlTool --inlineRc=url=jdbc:hsqldb:file:$DB_FILE,user=sa
 1. Insert some example data into infowall
 1. run the server `mvn jetty:run`
 
-
+## Known limitations
+- Just looks great on a Webkit based browser like Google Chrome
+- Just works with HSLQDB
 
 
