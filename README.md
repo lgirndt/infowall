@@ -1,5 +1,15 @@
 # Infowall
 
+## Overview
+Infowall is a Dashboard application, which displays a team's status on a wall
+mounted display. A team status is broken down into single items of information. Each item is
+displayed on its own and the dashboard cycles through all of them, displaying a single item for
+distinct period of time.
+
+### Dashboard Items
+
+Dashboard Items could be retrieved from different sources. They
+
 ## Quickstart
 
 1. Pull from github `git clone git@github.com:lgirndt/infowall.git`
@@ -13,7 +23,6 @@ DB_FILE=/tmp/infowall-prod.db
 
 java org.hsqldb.cmdline.SqlTool --inlineRc=url=jdbc:hsqldb:file:$DB_FILE,user=sa,password= src/main/resources/sql/create-schema.sql
 </pre>
-
 1. Insert some example data into infowall
 1. run the server `mvn jetty:run`
 
