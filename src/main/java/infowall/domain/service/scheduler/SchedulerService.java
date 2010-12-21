@@ -21,7 +21,7 @@ package infowall.domain.service.scheduler;
 
 import infowall.domain.model.Dashboard;
 import infowall.domain.model.DashboardItem;
-import infowall.domain.model.DashboardItemRef;
+import infowall.domain.model.ItemRef;
 import infowall.domain.persistence.DashboardRepository;
 import org.quartz.*;
 import org.slf4j.Logger;
@@ -92,7 +92,7 @@ public class SchedulerService {
         JobDetail job = new JobDetail(jobName, group, ScriptExecutingJob.class);
         JobDataMap map = new JobDataMap(
                 of("beanFactory", beanFactory,
-                        "itemRef", new DashboardItemRef(group,item.getName())
+                        "itemRef", new ItemRef(group,item.getName())
                 ));
 
         job.setJobDataMap(map);

@@ -19,7 +19,7 @@
 
 package infowall.web.controller;
 
-import infowall.domain.model.DashboardItemRef;
+import infowall.domain.model.ItemRef;
 import infowall.domain.process.ScriptExecutorProcess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,6 +46,6 @@ public class ScriptExecutorController {
             @PathVariable String dashboardId,
             @PathVariable String itemName){
 
-        return scriptExecutorProcess.printScriptOutput(new DashboardItemRef(dashboardId,itemName));
+        return scriptExecutorProcess.printScriptOutput(new ItemRef(dashboardId,itemName));
     }
 }

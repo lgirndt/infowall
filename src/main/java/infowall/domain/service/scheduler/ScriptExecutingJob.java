@@ -19,7 +19,8 @@
 
 package infowall.domain.service.scheduler;
 
-import infowall.domain.model.DashboardItemRef;
+import infowall.domain.model.ItemRef;
+import infowall.domain.model.ItemRef;
 import infowall.domain.process.ScriptExecutorProcess;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
@@ -43,7 +44,7 @@ public class ScriptExecutingJob implements StatefulJob {
 
         JobDataMap map = context.getMergedJobDataMap();
         BeanFactory beanFactory = (BeanFactory) map.get("beanFactory");
-        DashboardItemRef itemRef = (DashboardItemRef) map.get("itemRef");
+        ItemRef itemRef = (ItemRef) map.get("itemRef");
 
         ScriptExecutorProcess scriptExecutorProcess = beanFactory.getBean(ScriptExecutorProcess.class);
         scriptExecutorProcess.execScriptAndStoreOutput(itemRef);

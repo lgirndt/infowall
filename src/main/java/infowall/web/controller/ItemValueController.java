@@ -19,7 +19,7 @@
 
 package infowall.web.controller;
 
-import infowall.domain.model.DashboardItemRef;
+import infowall.domain.model.ItemRef;
 import infowall.domain.model.ItemValuePair;
 import infowall.domain.process.ItemValueProcess;
 import infowall.web.model.ReturnStatus;
@@ -67,7 +67,7 @@ public class ItemValueController {
     @RequestMapping(value="/item/{dashboardId}/{itemName}", method = RequestMethod.GET)
     @ResponseBody
     public ItemValuePair getValueDate(@PathVariable String dashboardId,@PathVariable String itemName){
-        return itemValueProcess.showRecentValues(new DashboardItemRef(dashboardId,itemName));
+        return itemValueProcess.showRecentValues(new ItemRef(dashboardId,itemName));
     }
 
     private ReturnStatus status(boolean status) {

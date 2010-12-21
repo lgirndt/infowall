@@ -19,7 +19,7 @@
 
 package infowall.domain.process;
 
-import infowall.domain.model.DashboardItemRef;
+import infowall.domain.model.ItemRef;
 import infowall.domain.model.ItemValue;
 import infowall.domain.model.ItemValuePair;
 import infowall.domain.persistence.ItemValueRepository;
@@ -87,7 +87,7 @@ public class ItemValueProcessTest {
         mocks.verifyAll();
     }
 
-    private DashboardItemRef itemRef() {
-        return new DashboardItemRef("dashboardId","itemName");
+    private ItemRef itemRef() {
+        return new ItemRef("dashboardId","itemName");
     }
 }

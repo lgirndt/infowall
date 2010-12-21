@@ -19,7 +19,8 @@
 
 package infowall.domain.process;
 
-import infowall.domain.model.DashboardItemRef;
+import infowall.domain.model.ItemRef;
+import infowall.domain.model.ItemRef;
 import infowall.infrastructure.service.GroovyExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,7 +51,7 @@ public class ScriptExecutorProcess {
         this.scriptFileProvider = scriptFileProvider;
     }
 
-    public String printScriptOutput(DashboardItemRef itemRef){
+    public String printScriptOutput(ItemRef itemRef){
         String content = execScript(itemRef);
         return content;
         /*
@@ -64,12 +65,12 @@ public class ScriptExecutorProcess {
         */
     }
 
-    private String execScript(DashboardItemRef itemRef) {
+    private String execScript(ItemRef itemRef) {
         File itemFile = scriptFileProvider.toScriptFile(itemRef);
         return groovyExecutor.exec(itemFile);
     }
 
-    public void execScriptAndStoreOutput(DashboardItemRef itemRef){
+    public void execScriptAndStoreOutput(ItemRef itemRef){
         String content = execScript(itemRef);
         if(content != null){
             itemValueProcess.storeItemValue(itemRef,content);

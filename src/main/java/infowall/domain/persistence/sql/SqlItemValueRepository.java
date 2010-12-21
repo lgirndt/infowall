@@ -19,7 +19,7 @@
 
 package infowall.domain.persistence.sql;
 
-import infowall.domain.model.DashboardItemRef;
+import infowall.domain.model.ItemRef;
 import infowall.domain.model.ItemValue;
 import infowall.domain.persistence.ItemValueRepository;
 import org.joda.time.DateTime;
@@ -39,7 +39,7 @@ public class SqlItemValueRepository implements ItemValueRepository {
 
     @Override
     public void put(ItemValue itemValue) {
-        DashboardItemRef itemRef = itemValue.getItemRef();
+        ItemRef itemRef = itemValue.getItemRef();
         ItemValue existing = dao.findMostRecent(itemRef);
 
         if (existsWithEqualData(existing, itemValue)) {
@@ -64,7 +64,7 @@ public class SqlItemValueRepository implements ItemValueRepository {
     }
 
     @Override
-    public List<ItemValue> findMostRecentItemValues(DashboardItemRef itemRef,int itemCount) {
+    public List<ItemValue> findMostRecentItemValues(ItemRef itemRef,int itemCount) {
         return dao.findMostRecentItemValues(itemRef,itemCount);
     }
 }

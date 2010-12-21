@@ -19,7 +19,7 @@
 
 package infowall.domain.persistence.sql;
 
-import infowall.domain.model.DashboardItemRef;
+import infowall.domain.model.ItemRef;
 import infowall.domain.model.ItemValue;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ObjectNode;
@@ -76,7 +76,7 @@ public class ItemValueDao {
         );
     }
 
-    public ItemValue findMostRecent(DashboardItemRef itemRef) {
+    public ItemValue findMostRecent(ItemRef itemRef) {
         return singleResult(jdbcTemplate.query(
                 "select t.id,t.creation,t.dashboard_id,t.item_name,t.data,t.last_update,t.update_count from " +
                         "item_value t," +
@@ -94,7 +94,7 @@ public class ItemValueDao {
                 itemRef.getDashboardId(), itemRef.getItemName()));
     }
 
-    public List<ItemValue> findMostRecentItemValues(DashboardItemRef itemRef, int itemCount) {
+    public List<ItemValue> findMostRecentItemValues(ItemRef itemRef, int itemCount) {
         return jdbcTemplate.query(
                 "SELECT top 2 id,creation,dashboard_id,item_name,data,last_update,update_count " +
                         "FROM item_value " +
@@ -137,7 +137,7 @@ public class ItemValueDao {
             val.setId(rs.getLong(1));
             val.setCreation(toDateTime(rs.getTimestamp(2)));
 
-            DashboardItemRef itemRef = new DashboardItemRef(
+            ItemRef itemRef = new ItemRef(
                     rs.getString(3),
                     rs.getString(4)
             );

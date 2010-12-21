@@ -29,7 +29,7 @@ public class ItemValue {
 
     private Long id;
 
-    private DashboardItemRef itemRef;
+    private ItemRef itemRef;
 
     private ObjectNode data;
 
@@ -48,11 +48,11 @@ public class ItemValue {
         this.id = id;
     }
 
-    public DashboardItemRef getItemRef() {
+    public ItemRef getItemRef() {
         return itemRef;
     }
 
-    public void setItemRef(DashboardItemRef itemRef) {
+    public void setItemRef(ItemRef itemRef) {
         this.itemRef = itemRef;
     }
 

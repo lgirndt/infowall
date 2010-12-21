@@ -20,7 +20,7 @@
 package infowall.domain.persistence.sql;
 
 import com.google.common.collect.Lists;
-import infowall.domain.model.DashboardItemRef;
+import infowall.domain.model.ItemRef;
 import infowall.domain.model.ItemValue;
 import infowall.testing.Mocks;
 import org.joda.time.DateTime;
@@ -51,7 +51,7 @@ public class SqlItemValueRepositoryTest {
     @Test
     public void putNew() throws Exception {
 
-        DashboardItemRef itemRef = itemRef();
+        ItemRef itemRef = itemRef();
         expect(dao.findMostRecent(itemRef)).andReturn(null);
 
         ItemValue itemValue = mockItemValue();
@@ -122,7 +122,7 @@ public class SqlItemValueRepositoryTest {
         return mocks.createMock(ItemValue.class);
     }
 
-    private void expectGetItemRef(ItemValue itemValue, DashboardItemRef itemRef) {
+    private void expectGetItemRef(ItemValue itemValue, ItemRef itemRef) {
         expect(itemValue.getItemRef()).andReturn(itemRef);
     }
 
@@ -131,7 +131,7 @@ public class SqlItemValueRepositoryTest {
         itemValue.init((DateTime) anyObject());
     }
 
-    private DashboardItemRef itemRef() {
-        return new DashboardItemRef("d", "i");
+    private ItemRef itemRef() {
+        return new ItemRef("d", "i");
     }
 }

@@ -21,7 +21,7 @@ package infowall.web.controller;
 
 import infowall.domain.model.ConfigureDashboard;
 import infowall.domain.model.Dashboard;
-import infowall.domain.model.DashboardItemRef;
+import infowall.domain.model.ItemRef;
 import infowall.domain.process.DashboardProcess;
 import infowall.domain.process.ScriptExecutorProcess;
 import infowall.web.services.errorhandling.Errors;
@@ -123,7 +123,7 @@ public class DashboardController {
 
     @RequestMapping("/configure/exec/dashboard/{dashboardId}/{itemName}")
     ModelAndView executeScript(@PathVariable String dashboardId,@PathVariable String itemName){
-        scriptExecutorProcess.execScriptAndStoreOutput(new DashboardItemRef(dashboardId,itemName));
+        scriptExecutorProcess.execScriptAndStoreOutput(new ItemRef(dashboardId,itemName));
         flash.putInfo("Script executed.");
         return redirect("/configure/dashboard/" + dashboardId);
     }

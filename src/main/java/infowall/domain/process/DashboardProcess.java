@@ -74,7 +74,7 @@ public class DashboardProcess {
         }
         List<ConfigureItem> configureItems = Lists.newArrayList();
         for(DashboardItem item : dashboard.getItems()){
-            boolean scriptExists = scriptFileProvider.existsScriptFile(new DashboardItemRef(dashboardId,item.getName()));
+            boolean scriptExists = scriptFileProvider.existsScriptFile(new ItemRef(dashboardId,item.getName()));
             ConfigureItem configureItem = new ConfigureItem(item,scriptExists);
             configureItems.add(configureItem);
         }

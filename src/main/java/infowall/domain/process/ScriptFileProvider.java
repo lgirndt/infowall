@@ -19,7 +19,7 @@
 
 package infowall.domain.process;
 
-import infowall.domain.model.DashboardItemRef;
+import infowall.domain.model.ItemRef;
 import infowall.infrastructure.ConfigRoot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,14 +39,14 @@ public class ScriptFileProvider {
         this.configRoot = configRoot;
     }
 
-    public File toScriptFile(DashboardItemRef itemRef) {
+    public File toScriptFile(ItemRef itemRef) {
         File root = configRoot.getDirectory();
         File scriptDir = new File(root,"scripts");
         File dashboardDir = new File(scriptDir,itemRef.getDashboardId());
         return new File(dashboardDir,itemRef.getItemName() + ".groovy");
     }
 
-    public boolean existsScriptFile(DashboardItemRef itemRef){
+    public boolean existsScriptFile(ItemRef itemRef){
         File file = toScriptFile(itemRef);
         return file.exists();
     }

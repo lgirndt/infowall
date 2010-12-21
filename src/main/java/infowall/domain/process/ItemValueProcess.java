@@ -19,7 +19,7 @@
 
 package infowall.domain.process;
 
-import infowall.domain.model.DashboardItemRef;
+import infowall.domain.model.ItemRef;
 import infowall.domain.model.ItemValue;
 import infowall.domain.model.ItemValuePair;
 import infowall.domain.persistence.ItemValueRepository;
@@ -58,7 +58,7 @@ public class ItemValueProcess {
     }
 
 
-    public boolean storeItemValue(DashboardItemRef itemRef, String value){
+    public boolean storeItemValue(ItemRef itemRef, String value){
         return storeItemValue(itemRef.getDashboardId(), itemRef.getItemName(), value);
     }
 
@@ -92,12 +92,12 @@ public class ItemValueProcess {
         itemValue.setCreation(new DateTime());
         itemValue.setLastUpdate(new DateTime());
 
-        DashboardItemRef ref = new DashboardItemRef(dashboardId,itemName);
+        ItemRef ref = new ItemRef(dashboardId,itemName);
         itemValue.setItemRef(ref);
         return itemValue;
     }
 
-    public ItemValuePair showRecentValues(DashboardItemRef itemRef){
+    public ItemValuePair showRecentValues(ItemRef itemRef){
 
         List<ItemValue> itemValues = itemValueRepository.findMostRecentItemValues(itemRef,2);
 

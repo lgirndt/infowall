@@ -19,7 +19,7 @@
 
 package infowall.domain.persistence.sql;
 
-import infowall.domain.model.DashboardItemRef;
+import infowall.domain.model.ItemRef;
 import infowall.domain.model.ItemValue;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ObjectNode;
@@ -54,7 +54,7 @@ public class ItemValueDaoTest extends AbstractTransactionalJUnit4SpringContextTe
     @Test
     public void insert(){
 
-        DashboardItemRef itemRef = new DashboardItemRef("d","i");
+        ItemRef itemRef = new ItemRef("d","i");
 
         ItemValue itemValue = new ItemValue();
 
@@ -67,7 +67,7 @@ public class ItemValueDaoTest extends AbstractTransactionalJUnit4SpringContextTe
 
     @Test
     public void findExisting() throws Exception {
-        DashboardItemRef itemRef = new DashboardItemRef("d", "i");
+        ItemRef itemRef = new ItemRef("d", "i");
         String data = "{\"foo\":\"bar\"}";
 
         ItemValue val = itemValue(itemRef, data);
@@ -83,12 +83,12 @@ public class ItemValueDaoTest extends AbstractTransactionalJUnit4SpringContextTe
         ItemValue val = someItemValue();
 
         itemValueDao.insert(val);
-        assertNull( itemValueDao.findMostRecent(new DashboardItemRef("a","b")) );
+        assertNull( itemValueDao.findMostRecent(new ItemRef("a","b")) );
     }
 
     @Test
     public void findMostRecent() throws Exception{
-        DashboardItemRef itemRef = new DashboardItemRef("d", "i");
+        ItemRef itemRef = new ItemRef("d", "i");
         String data = "{\"foo\":\"bar\"}";
 
         ItemValue val = itemValue(itemRef, data);
@@ -114,7 +114,7 @@ public class ItemValueDaoTest extends AbstractTransactionalJUnit4SpringContextTe
     }
 
     private ItemValue someItemValue() throws IOException {
-        DashboardItemRef itemRef = new DashboardItemRef("d", "i");
+        ItemRef itemRef = new ItemRef("d", "i");
         String data = "{\"foo\":\"bar\"}";
 
         return itemValue(itemRef, data);
@@ -129,7 +129,7 @@ public class ItemValueDaoTest extends AbstractTransactionalJUnit4SpringContextTe
         itemValueDao.update(withId);
     }
 
-    private ItemValue itemValue(DashboardItemRef itemRef, String data) throws IOException {
+    private ItemValue itemValue(ItemRef itemRef, String data) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         ItemValue val = new ItemValue();
 
