@@ -26,9 +26,10 @@ Furthermore the View shows the amount of difference to the last update of the it
 red otherwise and the duration, how long item has the current value.
 
 This View should be used for distinct quantifiable, trackable pieces of the team's status, like:
-* Code Coverage
-* Known Issues
-* Code Violations
+
+- Code Coverage
+- Known Issues
+- Code Violations
 
 An item is stored as
 <pre>
@@ -54,9 +55,18 @@ An item is stored as
 }
 </pre>
 
+## Configure Infowall
+Infowall has a configuration directory on a local disc. The directory contains for instance the configuration
+of the dasboard and its items or some executable scripts.
+
+The directory has to be provided by a system property `-Dinfowall.config-root=TODIR`, otherwise
+the application fails to start.
+
+Infowall comes with an example directory at ROOT/example/config, have a look at it.
+
 ## Storing Items
 
-Independent of a respective view, the JSON items have to be stored by Infowall. There different
+Independent of a respective view, the JSON items have to be stored by Infowall. There are different
 ways to provide the data to Infowall
 
 ### Using the REST API
@@ -69,7 +79,38 @@ to push it to Infowall. The example shows a coll to a Dashboard with the ID "fir
 curl -v --upload-file src/scrapbook/json/value.json -H "Content-Type:application/json" http://localhost:8080/app/item/first/some-count
 </pre>
 
-###
+### Using Groovy Jobs
+
+You can store groovy scripts at $config-root/scripts/$dashboardId/$itemName.groovy, that
+provide the JSON data for the defined item. These scripts will be triggerd by a cron like mechanism.
+The triggering is configured in a the Dashboard configuration file.
+
+The groovy script might perform arbitrary tasks, it simply has to return the JSON data to STDOUT.
+
+For example, this script simply stores a random value as a single value item
+
+<pre>
+import infowall.infrastructure.json.SimpleJSONBuilder
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+
+final Logger logger = LoggerFactory.getLogger(getClass())
+
+def builder = new SimpleJSONBuilder()
+
+def rndVal = new Random().nextInt(30);
+logger.info("Decided, we have #${rndVal} bugs now.");
+
+builder.result(value:rndVal);
+</pre>
+
+See the example configuration for more examples of groovy scripts.
+
+If you want to test a script, you can call
+<pre>
+curl http://localhost:8080/app/exec/$dashboardId/$itemName
+</pre>
+and you will retrieve the scripts output.
 
 ## Quickstart
 
