@@ -34,6 +34,11 @@
 
     TableValueView.prototype.transformModel = function(model,item){
         var idx,entry;
+
+        if(!model || !model.current || !model.current.data){
+            return {table:[]};
+        }
+
         for(idx in model.current.data.table){
             entry = model.current.data.table[idx];
             entry.status = entry.value == 0 ? 'ok' : 'fail';
@@ -53,6 +58,19 @@
     };
 
     SingleValueView.prototype.transformModel = function(model,item){
+
+        // fallback
+        if (!model || !model.current || !model.current.data || !model.current.data.value) {
+            return {
+                current : '?',
+                previous: '?',
+                status :  'ok',
+                diff : '?',
+                diffStatus : 'ok',
+                since : '?',
+                unit : '?'
+            }
+        }
 
         var current  = model.current.data.value;
         var previous = null;
