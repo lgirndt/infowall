@@ -33,6 +33,6 @@
         <property name="location" value="classpath:/app-test.properties"/>
     </bean>
 
-    <import resource="persistence-hsqldb-services.xml"/>
+    <import resource="persistence-db-services.xml"/>
 
 </beans>

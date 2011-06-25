@@ -51,7 +51,7 @@
     <!-- Should be defined last! -->
     <mvc:annotation-driven/>
 
-    <import resource="persistence-hsqldb-services.xml"/>
+    <import resource="persistence-db-services.xml"/>
 
     <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean"/>
     
