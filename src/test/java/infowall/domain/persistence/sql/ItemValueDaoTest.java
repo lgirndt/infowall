@@ -19,8 +19,16 @@
 
 package infowall.domain.persistence.sql;
 
-import infowall.domain.model.ItemRef;
-import infowall.domain.model.ItemValue;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.annotation.Resource;
+
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ObjectNode;
 import org.joda.time.DateTime;
@@ -29,12 +37,8 @@ import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
-import javax.annotation.Resource;
-import java.io.IOException;
-import java.util.List;
-
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import infowall.domain.model.ItemRef;
+import infowall.domain.model.ItemValue;
 
 /**
  *
@@ -101,9 +105,9 @@ public class ItemValueDaoTest extends AbstractTransactionalJUnit4SpringContextTe
 
     @Test
     public void findMostRecentItemValues() throws Exception {
-        ItemValue first = someItemValue();
-        ItemValue second = someItemValue();
-        ItemValue third = someItemValue();
+        ItemValue first = itemValueWithData("{\"d\":\"first\"}");
+        ItemValue second = itemValueWithData("{\"d\":\"second\"}");
+        ItemValue third = itemValueWithData("{\"d\":\"third\"}");
 
         itemValueDao.insert(first);
         itemValueDao.insert(second);
@@ -111,12 +115,17 @@ public class ItemValueDaoTest extends AbstractTransactionalJUnit4SpringContextTe
 
         List<ItemValue> result = itemValueDao.findMostRecentItemValues(first.getItemRef(),2);
         assertThat(result.size(), is(2));
+        assertThat(result.get(0).getData(),is(third.getData()));
+        assertThat(result.get(1).getData(),is(second.getData()));
     }
 
     private ItemValue someItemValue() throws IOException {
-        ItemRef itemRef = new ItemRef("d", "i");
         String data = "{\"foo\":\"bar\"}";
+        return itemValueWithData(data);
+    }
 
+    private ItemValue itemValueWithData(final String data) throws IOException {
+        ItemRef itemRef = new ItemRef("d", "i");
         return itemValue(itemRef, data);
     }
 

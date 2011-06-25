@@ -19,22 +19,24 @@
 
 package infowall.domain.persistence.sql;
 
-import infowall.domain.model.ItemRef;
-import infowall.domain.model.ItemValue;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.node.ObjectNode;
-import org.joda.time.DateTime;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+import static org.springframework.dao.support.DataAccessUtils.singleResult;
 
-import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
-import static org.springframework.dao.support.DataAccessUtils.singleResult;
+import javax.sql.DataSource;
+
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.node.ObjectNode;
+import org.joda.time.DateTime;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+
+import infowall.domain.model.ItemRef;
+import infowall.domain.model.ItemValue;
 
 /**
  *
@@ -96,10 +98,10 @@ public class ItemValueDao {
 
     public List<ItemValue> findMostRecentItemValues(ItemRef itemRef, int itemCount) {
         return jdbcTemplate.query(
-                "SELECT top 2 id,creation,dashboard_id,item_name,data,last_update,update_count " +
+                "SELECT id,creation,dashboard_id,item_name,data,last_update,update_count " +
                         "FROM item_value " +
                         "WHERE dashboard_id = ? and item_name = ? " +
-                        "ORDER BY last_update DESC",
+                        "ORDER BY last_update DESC LIMIT 0,2",
                 new ItemValueRowMapper(),
                 itemRef.getDashboardId(), itemRef.getItemName()
         );
