@@ -19,13 +19,13 @@
 
 package infowall.web.controller;
 
-import infowall.domain.model.ConfigureDashboard;
-import infowall.domain.model.Dashboard;
-import infowall.domain.model.ItemRef;
-import infowall.domain.process.DashboardProcess;
-import infowall.domain.process.ScriptExecutorProcess;
-import infowall.web.services.errorhandling.Errors;
-import infowall.web.spring.FlashMessage;
+import static infowall.web.spring.ControllerDsl.redirect;
+import static infowall.web.spring.ControllerDsl.render;
+import static infowall.web.spring.ControllerDsl.to404;
+
+import java.io.IOException;
+import java.util.List;
+
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,10 +35,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.IOException;
-import java.util.List;
-
-import static infowall.web.spring.ControllerDsl.*;
+import infowall.domain.model.ConfigureDashboard;
+import infowall.domain.model.Dashboard;
+import infowall.domain.model.ItemRef;
+import infowall.domain.service.DashboardService;
+import infowall.domain.service.script.ScriptExecutorService;
+import infowall.web.services.errorhandling.Errors;
+import infowall.web.spring.FlashMessage;
 
 /**
  *
@@ -48,15 +51,15 @@ public class DashboardController {
 
     private final Logger logger = LoggerFactory.getLogger(DashboardController.class);
 
-    private final DashboardProcess process;
+    private final DashboardService process;
     private final FlashMessage flash;
-    private final ScriptExecutorProcess scriptExecutorProcess;
+    private final ScriptExecutorService scriptExecutorProcess;
 
     @Autowired
     public DashboardController(
-            DashboardProcess process,
+            DashboardService process,
             FlashMessage flash,
-            ScriptExecutorProcess scriptExecutorProcess) {
+            ScriptExecutorService scriptExecutorProcess) {
         this.process = process;
         this.flash = flash;
         this.scriptExecutorProcess = scriptExecutorProcess;

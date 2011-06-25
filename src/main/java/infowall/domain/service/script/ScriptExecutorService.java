@@ -17,34 +17,35 @@
  * under the License.
  */
 
-package infowall.domain.process;
+package infowall.domain.service.script;
 
-import infowall.domain.model.ItemRef;
-import infowall.domain.model.ItemRef;
-import infowall.infrastructure.service.GroovyExecutor;
+import java.io.File;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
+import infowall.domain.model.ItemRef;
+import infowall.domain.service.ItemValueService;
+import infowall.infrastructure.service.GroovyExecutor;
 
 /**
  *
  */
 @Service
-public class ScriptExecutorProcess {
+public class ScriptExecutorService {
 
-    private final Logger logger = LoggerFactory.getLogger(ScriptExecutorProcess.class);
+    private final Logger logger = LoggerFactory.getLogger(ScriptExecutorService.class);
 
     private final GroovyExecutor groovyExecutor;
-    private final ItemValueProcess itemValueProcess;
+    private final ItemValueService itemValueProcess;
     private final ScriptFileProvider scriptFileProvider;
 
     @Autowired
-    public ScriptExecutorProcess(
+    public ScriptExecutorService(
             GroovyExecutor groovyExecutor,
-            ItemValueProcess itemValueProcess,
+            ItemValueService itemValueProcess,
             ScriptFileProvider scriptFileProvider) {
         this.groovyExecutor = groovyExecutor;
         this.itemValueProcess = itemValueProcess;

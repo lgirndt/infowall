@@ -33,8 +33,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.common.collect.Lists;
 
 import infowall.domain.model.Dashboard;
-import infowall.domain.process.DashboardProcess;
-import infowall.domain.process.ScriptExecutorProcess;
+import infowall.domain.service.DashboardService;
+import infowall.domain.service.script.ScriptExecutorService;
 import infowall.web.spring.FlashMessage;
 import infowall.web.spring.FlashMessageImpl;
 
@@ -42,14 +42,14 @@ import infowall.web.spring.FlashMessageImpl;
  *
  */
 public class DashboardControllerTest extends EasyMockSupport {
-    private DashboardProcess process;
+    private DashboardService process;
     private DashboardController controller;
 
     @Before
     public void setUp() throws Exception {
-        process = createMock(DashboardProcess.class);
+        process = createMock(DashboardService.class);
         FlashMessage flash = createMock(FlashMessageImpl.class);
-        ScriptExecutorProcess scriptExecutorProcess = createMock(ScriptExecutorProcess.class);
+        ScriptExecutorService scriptExecutorProcess = createMock(ScriptExecutorService.class);
         controller = new DashboardController(process, flash, scriptExecutorProcess);
     }
 

@@ -19,13 +19,14 @@
 
 package infowall.web.controller;
 
-import infowall.domain.model.ItemRef;
-import infowall.domain.process.ScriptExecutorProcess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import infowall.domain.model.ItemRef;
+import infowall.domain.service.script.ScriptExecutorService;
 
 /**
  *
@@ -33,10 +34,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class ScriptExecutorController {
 
-    private final ScriptExecutorProcess scriptExecutorProcess;
+    private final ScriptExecutorService scriptExecutorProcess;
 
     @Autowired
-    public ScriptExecutorController(ScriptExecutorProcess scriptExecutorProcess) {
+    public ScriptExecutorController(ScriptExecutorService scriptExecutorProcess) {
         this.scriptExecutorProcess = scriptExecutorProcess;
     }
 

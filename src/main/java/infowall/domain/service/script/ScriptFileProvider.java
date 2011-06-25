@@ -17,14 +17,15 @@
  * under the License.
  */
 
-package infowall.domain.process;
+package infowall.domain.service.script;
 
-import infowall.domain.model.ItemRef;
-import infowall.infrastructure.ConfigRoot;
+import java.io.File;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
+import infowall.domain.model.ItemRef;
+import infowall.infrastructure.ConfigRoot;
 
 /**
  *

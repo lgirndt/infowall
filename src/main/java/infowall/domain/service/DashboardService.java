@@ -17,36 +17,42 @@
  * under the License.
  */
 
-package infowall.domain.process;
+package infowall.domain.service;
 
-import com.google.common.collect.Lists;
-import infowall.domain.model.*;
-import infowall.domain.persistence.DashboardRepository;
-import infowall.domain.service.DashboardImporter;
-import infowall.domain.service.scheduler.DashboardImportException;
-import infowall.web.services.errorhandling.ErrorNotifier;
+import java.util.List;
+
 import org.ektorp.DocumentNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.google.common.collect.Lists;
+
+import infowall.domain.model.ConfigureDashboard;
+import infowall.domain.model.ConfigureItem;
+import infowall.domain.model.Dashboard;
+import infowall.domain.model.DashboardItem;
+import infowall.domain.model.ItemRef;
+import infowall.domain.persistence.DashboardRepository;
+import infowall.domain.service.scheduler.DashboardImportException;
+import infowall.domain.service.script.ScriptFileProvider;
+import infowall.web.services.errorhandling.ErrorNotifier;
 
 /**
  *
  */
 @Service
-public class DashboardProcess {
+public class DashboardService {
 
-    private final Logger logger = LoggerFactory.getLogger(DashboardProcess.class);
+    private final Logger logger = LoggerFactory.getLogger(DashboardService.class);
 
     private final DashboardRepository dashboardRepository;
     private final DashboardImporter dashboardImporter;
     private final ScriptFileProvider scriptFileProvider;
 
     @Autowired
-    public DashboardProcess(
+    public DashboardService(
             DashboardRepository dashboardRepository,
             DashboardImporter dashboardImporter,
             ScriptFileProvider scriptFileProvider) {

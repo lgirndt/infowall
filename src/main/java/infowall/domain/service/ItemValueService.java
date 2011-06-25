@@ -17,12 +17,11 @@
  * under the License.
  */
 
-package infowall.domain.process;
+package infowall.domain.service;
 
-import infowall.domain.model.ItemRef;
-import infowall.domain.model.ItemValue;
-import infowall.domain.model.ItemValuePair;
-import infowall.domain.persistence.ItemValueRepository;
+import java.io.IOException;
+import java.util.List;
+
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ObjectNode;
 import org.joda.time.DateTime;
@@ -31,22 +30,24 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.util.List;
+import infowall.domain.model.ItemRef;
+import infowall.domain.model.ItemValue;
+import infowall.domain.model.ItemValuePair;
+import infowall.domain.persistence.ItemValueRepository;
 
 /**
  *
  */
 @Service
-public class ItemValueProcess {
+public class ItemValueService {
 
-    private final Logger logger = LoggerFactory.getLogger(ItemValueProcess.class);
+    private final Logger logger = LoggerFactory.getLogger(ItemValueService.class);
 
     private final ItemValueRepository itemValueRepository;
     private final ObjectMapper mapper;
 
     @Autowired
-    public ItemValueProcess(ItemValueRepository itemValueRepository) {
+    public ItemValueService(ItemValueRepository itemValueRepository) {
         this.itemValueRepository = itemValueRepository;
         mapper = new ObjectMapper();
     }

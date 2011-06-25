@@ -19,9 +19,6 @@
 
 package infowall.domain.service.scheduler;
 
-import infowall.domain.model.ItemRef;
-import infowall.domain.model.ItemRef;
-import infowall.domain.process.ScriptExecutorProcess;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -29,6 +26,9 @@ import org.quartz.StatefulJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
+
+import infowall.domain.model.ItemRef;
+import infowall.domain.service.script.ScriptExecutorService;
 
 /**
  *
@@ -46,7 +46,7 @@ public class ScriptExecutingJob implements StatefulJob {
         BeanFactory beanFactory = (BeanFactory) map.get("beanFactory");
         ItemRef itemRef = (ItemRef) map.get("itemRef");
 
-        ScriptExecutorProcess scriptExecutorProcess = beanFactory.getBean(ScriptExecutorProcess.class);
+        ScriptExecutorService scriptExecutorProcess = beanFactory.getBean(ScriptExecutorService.class);
         scriptExecutorProcess.execScriptAndStoreOutput(itemRef);
     }
 }

@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package infowall.domain.process;
+package infowall.domain.service;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static org.easymock.EasyMock.anyObject;
@@ -40,14 +40,14 @@ import infowall.domain.persistence.ItemValueRepository;
 /**
  *
  */
-public class ItemValueProcessTest extends EasyMockSupport{
+public class ItemValueServiceTest extends EasyMockSupport{
     private ItemValueRepository repository;
-    private ItemValueProcess process;
+    private ItemValueService process;
 
     @Before
     public void setUp() throws Exception {
         repository = createMock(ItemValueRepository.class);
-        process = new ItemValueProcess(repository);
+        process = new ItemValueService(repository);
     }
 
     @Test

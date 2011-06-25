@@ -19,16 +19,21 @@
 
 package infowall.web.controller;
 
-import infowall.domain.model.ItemRef;
-import infowall.domain.model.ItemValuePair;
-import infowall.domain.process.ItemValueProcess;
-import infowall.web.model.ReturnStatus;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
 import static infowall.web.model.ReturnStatus.failed;
 import static infowall.web.model.ReturnStatus.success;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import infowall.domain.model.ItemRef;
+import infowall.domain.model.ItemValuePair;
+import infowall.domain.service.ItemValueService;
+import infowall.web.model.ReturnStatus;
 
 /**
  *
@@ -36,10 +41,10 @@ import static infowall.web.model.ReturnStatus.success;
 @Controller
 public class ItemValueController {
 
-    private final ItemValueProcess itemValueProcess;
+    private final ItemValueService itemValueProcess;
 
     @Autowired
-    public ItemValueController(ItemValueProcess itemValueProcess) {
+    public ItemValueController(ItemValueService itemValueProcess) {
         this.itemValueProcess = itemValueProcess;
     }
 
