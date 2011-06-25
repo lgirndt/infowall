@@ -19,46 +19,49 @@
 
 package infowall.domain.process;
 
+import static com.google.common.collect.Lists.newArrayList;
+import static org.easymock.EasyMock.anyObject;
+import static org.easymock.EasyMock.eq;
+import static org.easymock.EasyMock.expect;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+
+import org.easymock.EasyMockSupport;
+import org.junit.Before;
+import org.junit.Test;
+
 import infowall.domain.model.ItemRef;
 import infowall.domain.model.ItemValue;
 import infowall.domain.model.ItemValuePair;
 import infowall.domain.persistence.ItemValueRepository;
-import infowall.testing.Mocks;
-import org.junit.Before;
-import org.junit.Test;
-
-import static com.google.common.collect.Lists.newArrayList;
-import static org.easymock.EasyMock.*;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
 
 /**
  *
  */
-public class ItemValueProcessTest {
-    private Mocks mocks;
+public class ItemValueProcessTest extends EasyMockSupport{
     private ItemValueRepository repository;
     private ItemValueProcess process;
 
     @Before
     public void setUp() throws Exception {
-        mocks = new Mocks();
-        repository = mocks.createMock(ItemValueRepository.class);
+        repository = createMock(ItemValueRepository.class);
         process = new ItemValueProcess(repository);
     }
 
     @Test
     public void testShowRecentValues() throws Exception {
 
-        ItemValue curr = mocks.createMock(ItemValue.class);
-        ItemValue prev = mocks.createMock(ItemValue.class);
+        ItemValue curr = createMock(ItemValue.class);
+        ItemValue prev = createMock(ItemValue.class);
         expect(repository.findMostRecentItemValues(eq(itemRef()),eq(2))).andReturn(newArrayList(curr,prev));
 
-        mocks.replayAll();
+        replayAll();
         ItemValuePair pair = process.showRecentValues(itemRef());
         assertThat(pair.getCurrent(), is(curr));
         assertThat(pair.getPrevious(), is(prev));
-        mocks.verifyAll();
+        verifyAll();
     }
 
     @Test
@@ -70,9 +73,9 @@ public class ItemValueProcessTest {
 
         repository.put(anyObject(ItemValue.class));
 
-        mocks.replayAll();
+        replayAll();
         assertTrue(process.storeItemValue(dashboardId,itemName,value));
-        mocks.verifyAll();
+        verifyAll();
     }
 
     @Test
@@ -82,9 +85,9 @@ public class ItemValueProcessTest {
         String value = "{illegal_json";
 
 
-        mocks.replayAll();
+        replayAll();
         assertFalse(process.storeItemValue(dashboardId,itemName,value));
-        mocks.verifyAll();
+        verifyAll();
     }
 
     private ItemRef itemRef() {

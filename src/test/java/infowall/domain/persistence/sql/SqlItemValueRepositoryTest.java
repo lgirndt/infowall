@@ -19,32 +19,34 @@
 
 package infowall.domain.persistence.sql;
 
-import com.google.common.collect.Lists;
-import infowall.domain.model.ItemRef;
-import infowall.domain.model.ItemValue;
-import infowall.testing.Mocks;
+import static org.easymock.EasyMock.anyObject;
+import static org.easymock.EasyMock.eq;
+import static org.easymock.EasyMock.expect;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+
+import java.util.List;
+
+import org.easymock.EasyMockSupport;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
+import com.google.common.collect.Lists;
 
-import static org.easymock.EasyMock.*;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import infowall.domain.model.ItemRef;
+import infowall.domain.model.ItemValue;
 
 /**
  *
  */
-public class SqlItemValueRepositoryTest {
-    private Mocks mocks;
+public class SqlItemValueRepositoryTest extends EasyMockSupport{
     private ItemValueDao dao;
     private SqlItemValueRepository repository;
 
     @Before
     public void setUp() throws Exception {
-        mocks = new Mocks();
-        dao = mocks.createMock(ItemValueDao.class);
+        dao = createMock(ItemValueDao.class);
         repository = new SqlItemValueRepository(dao);
     }
 
@@ -60,10 +62,10 @@ public class SqlItemValueRepositoryTest {
 
         dao.insert(itemValue);
         
-        mocks.replayAll();
+        replayAll();
         repository.put(itemValue);
 
-        mocks.verifyAll();
+        verifyAll();
     }
 
     @Test
@@ -78,10 +80,10 @@ public class SqlItemValueRepositoryTest {
         expectEqualData(existing, itemValue, false);
         dao.insert(itemValue);
 
-        mocks.replayAll();
+        replayAll();
         repository.put(itemValue);
 
-        mocks.verifyAll();
+        verifyAll();
     }
 
     @Test
@@ -96,9 +98,9 @@ public class SqlItemValueRepositoryTest {
         expectEqualData(existing,itemValue,true);
         dao.update(existing);
 
-        mocks.replayAll();
+        replayAll();
         repository.put(itemValue);
-        mocks.verifyAll();
+        verifyAll();
     }
 
     @Test
@@ -108,10 +110,10 @@ public class SqlItemValueRepositoryTest {
         List<ItemValue> expected = Lists.<ItemValue>newArrayList(expectedItem);
         expect(dao.findMostRecentItemValues(eq(itemRef()),eq(2))).andReturn(expected);
 
-        mocks.replayAll();
+        replayAll();
         List<ItemValue> actual = repository.findMostRecentItemValues(itemRef(),2);
         assertThat(actual, is(expected));
-        mocks.verifyAll();
+        verifyAll();
     }
 
     private void expectEqualData(ItemValue existing, ItemValue itemValue, boolean same) {
@@ -119,7 +121,7 @@ public class SqlItemValueRepositoryTest {
     }
 
     private ItemValue mockItemValue() {
-        return mocks.createMock(ItemValue.class);
+        return createMock(ItemValue.class);
     }
 
     private void expectGetItemRef(ItemValue itemValue, ItemRef itemRef) {

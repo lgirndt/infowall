@@ -19,37 +19,37 @@
 
 package infowall.web.controller;
 
-import com.google.common.collect.Lists;
-import infowall.domain.model.Dashboard;
-import infowall.domain.process.DashboardProcess;
-import infowall.domain.process.ScriptExecutorProcess;
-import infowall.testing.Mocks;
-import infowall.web.spring.FlashMessage;
-import infowall.web.spring.FlashMessageImpl;
+import static org.springframework.test.web.ModelAndViewAssert.assertModelAttributeValue;
+import static org.springframework.test.web.ModelAndViewAssert.assertViewName;
+
+import java.util.List;
+
 import org.easymock.EasyMock;
+import org.easymock.EasyMockSupport;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+import com.google.common.collect.Lists;
 
-import static org.springframework.test.web.ModelAndViewAssert.assertModelAttributeValue;
-import static org.springframework.test.web.ModelAndViewAssert.assertViewName;
+import infowall.domain.model.Dashboard;
+import infowall.domain.process.DashboardProcess;
+import infowall.domain.process.ScriptExecutorProcess;
+import infowall.web.spring.FlashMessage;
+import infowall.web.spring.FlashMessageImpl;
 
 /**
  *
  */
-public class DashboardControllerTest {
-    private Mocks mocks;
+public class DashboardControllerTest extends EasyMockSupport {
     private DashboardProcess process;
     private DashboardController controller;
 
     @Before
     public void setUp() throws Exception {
-        mocks = new Mocks();
-        process = mocks.createMock(DashboardProcess.class);
-        FlashMessage flash = mocks.createMock(FlashMessageImpl.class);
-        ScriptExecutorProcess scriptExecutorProcess = mocks.createMock(ScriptExecutorProcess.class);
+        process = createMock(DashboardProcess.class);
+        FlashMessage flash = createMock(FlashMessageImpl.class);
+        ScriptExecutorProcess scriptExecutorProcess = createMock(ScriptExecutorProcess.class);
         controller = new DashboardController(process, flash, scriptExecutorProcess);
     }
 
@@ -60,9 +60,9 @@ public class DashboardControllerTest {
 
         EasyMock.expect(process.listAllDashboards()).andReturn(actual);
 
-        mocks.replayAll();
+        replayAll();
         ModelAndView mav = controller.listDashboards();
-        mocks.verifyAll();
+        verifyAll();
 
         assertViewName(mav,"dashboard/list");
         assertModelAttributeValue(mav,"dashboards",actual);
