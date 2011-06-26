@@ -78,10 +78,7 @@
 
         if(model.previous){
             previous = model.previous.data.value;
-            diff =  current - previous;
-            if(diff>0){
-                diff = '+' + diff;
-            }
+            diff = this.calcDiff(current,previous);
         }
 
         return {
@@ -93,6 +90,18 @@
             since : this.calcSince(model),
             unit : this.calcUnit(item)
         }
+    };
+
+    SingleValueView.prototype.calcDiff = function(current,previous){
+        var diff = (current - previous);//
+        if(diff - Math.floor(diff) > 0){
+            diff = diff.toFixed(1);
+        }
+        if(diff > 0){
+            return '+' + diff;
+        }
+
+        return diff.toString();
     };
 
     SingleValueView.prototype.calcUnit = function(item){
