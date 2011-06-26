@@ -11,6 +11,8 @@
     <!-- Shared version number properties -->
     <properties>
         <org.springframework.version>3.0.5.RELEASE</org.springframework.version>
+
+        <infowall.config-root>${project.basedir}/src/test/config</infowall.config-root>
     </properties>
 
     <dependencies>
@@ -353,7 +355,7 @@
                     <systemProperties>
                         <systemProperty>
                             <name>infowall.config-root</name>
-                            <value>${project.basedir}/src/test/config</value>
+                            <value>${infowall.config-root}</value>
                         </systemProperty>
                     </systemProperties>
                 </configuration>
