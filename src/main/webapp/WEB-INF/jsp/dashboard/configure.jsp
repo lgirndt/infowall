@@ -50,7 +50,7 @@
     </table>
 
     <div>
-        <a href="<c:url value='/app/dashboard/'/>">Back</a> | <a href="<c:url value='/app/dashboard/${dashboard.id}'/>">View</a>
+        <a href="<c:url value='/app/dashboard/'/>">Overview</a> | <a href="<c:url value='/app/dashboard/${dashboard.id}'/>">View</a>
     </div>
 </div>
 </body>
