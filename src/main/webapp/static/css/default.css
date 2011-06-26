@@ -50,6 +50,31 @@ body {
     height:100%;
 }
 
+#bottom {
+    position: fixed;
+    bottom:0;
+    left: 0;
+    width: 100%;
+    height:8em;
+}
+
+.control-panel {
+    padding: 15px;
+    font-size: 1.8em;
+    border: 3px solid #fff;
+    -webkit-border-radius:1em;
+    margin: 10px;
+}
+
+.control-panel a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.control-panel a:hover {
+    text-decoration: underline;
+}
+
 .view {
     position:absolute;
     font-size:14em;

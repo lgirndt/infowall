@@ -46,10 +46,22 @@
 -->
 </script>
 <body>
+
+
+<h1 id="title"></h1>
+<div id="container">
+  <div class="view"></div>
+</div>
+<div id="bottom">
+    <div class="control-panel">
+        <a href="<c:url value="/"/>">Overview</a> |
+        <a href="<c:url value="/app/configure/dashboard/${dashboard.id}"/>">Configure</a>
+    </div>
+</div>
+</body>
 <script type="text/javascript">
 (function($){
     $(document).ready(function(){
-       console.log("hello world");
         var dashboard = ${json};
         var templateManager = new infowall.TemplateManager();
         var templates = templateManager.getTemplates(['single-value','table-value']);
@@ -69,14 +81,14 @@
             fxDuration: 600
         });
         slideShow.start();
+
+        $('#bottom').hover(function(){
+            $('.control-panel').fadeIn();
+        },function(){
+            $('.control-panel').fadeOut();
+        });
+        $('.control-panel').delay(1200).fadeOut();
     });
 })(jQuery);
 </script>
-
-<h1 id="title"></h1>
-<div id="container">
-  <div class="view"></div>
-</div>
-
-</body>
 </html>
