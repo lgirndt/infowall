@@ -78,7 +78,8 @@
             items : dashboard.items,
             renderEngine : renderEngine,
             container : '#container',
-            fxDuration: 600
+            fxDuration: 600,
+            animation: dashboard.animation
         });
         slideShow.start();
 

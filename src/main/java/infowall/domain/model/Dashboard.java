@@ -35,6 +35,8 @@ public class Dashboard  {
 
     private List<DashboardItem> items;
 
+    private String animation;
+
     public Dashboard() {
     }
 
@@ -72,6 +74,14 @@ public class Dashboard  {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getAnimation() {
+        return animation;
+    }
+
+    public void setAnimation(final String animation) {
+        this.animation = animation;
     }
 
     public String toJSON() {

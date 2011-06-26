@@ -1,6 +1,7 @@
 {
     "id" : "first",
     "title": "My First Dashboard",
+    "animation": "fade",
     "items" :
         [
             {
