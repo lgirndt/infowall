@@ -26,31 +26,23 @@
 <body>
 <%@ include file="/WEB-INF/jsp/include/messages.jsp" %>
 <div class="navigation">
-    <h1>${dashboard.title}</h1>
-    <table>
-        <tr>
-            <td>Configuration</td>
-            <td><a href="<c:url value='/app/reload/dashboard/${dashboard.id}'/>">Reload</a></td>
-        </tr>
-    </table>
-    <table>
-        <tr>
-            <th>Item</th>
-            <th>Cron Scheduler</th>
-            <th>Actions</th>
-        </tr>
-        <c:forEach var="cItem" items="${items}">
-            <tr>
-                <td>${cItem.item.title}</td>
-                <td>${cItem.item.scheduler}</td>
-                <td><a href="<c:url value="/app/configure/edit/dashboard/${dashboard.id}/${cItem.item.name}"/>">Edit</a>
-                    <c:if test="${cItem.executable}">| <a href="<c:url value='/app/configure/exec/dashboard/${dashboard.id}/${cItem.item.name}'/>">Execute</a></c:if></td>
-            </tr>
-        </c:forEach>
-    </table>
+    <h1>${model.dashboardTitle}</h1>
+    <h2>${model.itemTitle}</h2>
+
+    <form action="<c:url value="/app/configure/save/dashboard"/>" method="POST">
+        <input type="hidden" name="dashboardId" value="${model.itemRef.dashboardId}">
+        <input type="hidden" name="itemName" value="${model.itemRef.itemName}">
+        <div>
+            <label for="insert-data">Enter the item's data as JSON:</label>
+        </div>
+        <textarea id="insert-data" name="data" rows="10" cols="50">${model.data}</textarea>
+        <div>
+            <button type="submit">Save</button>
+        </div>
+    </form>
 
     <div>
-        <a href="<c:url value='/app/dashboard/'/>">Back</a> | <a href="<c:url value='/app/dashboard/${dashboard.id}'/>">View</a>
+        <a href="<c:url value='/app/configure/dashboard/${model.itemRef.dashboardId}'/>">Back</a>
     </div>
 </div>
 </body>

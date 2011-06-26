@@ -21,7 +21,7 @@ import infowall.infrastructure.json.SimpleJSONBuilder
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
-final Logger logger = LoggerFactory.getLogger(getClass())
+final Logger logger = LoggerFactory.getLogger("bugs randomizer")
 
 def builder = new SimpleJSONBuilder()
 

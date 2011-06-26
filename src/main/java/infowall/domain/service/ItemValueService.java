@@ -24,7 +24,6 @@ import java.util.List;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ObjectNode;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,14 +87,8 @@ public class ItemValueService {
     }
 
     private ItemValue createItemValue(String dashboardId, String itemName, ObjectNode data) {
-        ItemValue itemValue = new ItemValue();
-        itemValue.setData(data);
-        itemValue.setCreation(new DateTime());
-        itemValue.setLastUpdate(new DateTime());
-
         ItemRef ref = new ItemRef(dashboardId,itemName);
-        itemValue.setItemRef(ref);
-        return itemValue;
+        return new ItemValue(ref,data);
     }
 
     public ItemValuePair showRecentValues(ItemRef itemRef){

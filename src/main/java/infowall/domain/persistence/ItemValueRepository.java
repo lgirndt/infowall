@@ -19,10 +19,10 @@
 
 package infowall.domain.persistence;
 
+import java.util.List;
+
 import infowall.domain.model.ItemRef;
 import infowall.domain.model.ItemValue;
-
-import java.util.List;
 
 /**
  *
@@ -30,6 +30,7 @@ import java.util.List;
 public interface ItemValueRepository {
 
     List<ItemValue> findMostRecentItemValues(ItemRef itemRef,int itemCount);
+    ItemValue findMostRecentItemValue(ItemRef itemRef);
 
     void put(ItemValue itemValue);
 }

@@ -37,6 +37,11 @@ public class ItemValue {
     private DateTime lastUpdate;
     private long updateCount;
 
+    public ItemValue(ItemRef itemRef,ObjectNode data){
+        this.data = data;
+        this.itemRef = itemRef;
+    }
+
     public ItemValue() {
     }
 
@@ -102,4 +107,5 @@ public class ItemValue {
         lastUpdate = now;
         creation = now;
     }
+
 }

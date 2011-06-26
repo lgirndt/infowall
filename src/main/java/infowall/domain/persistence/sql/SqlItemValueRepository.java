@@ -19,12 +19,13 @@
 
 package infowall.domain.persistence.sql;
 
+import java.util.List;
+
+import org.joda.time.DateTime;
+
 import infowall.domain.model.ItemRef;
 import infowall.domain.model.ItemValue;
 import infowall.domain.persistence.ItemValueRepository;
-import org.joda.time.DateTime;
-
-import java.util.List;
 
 /**
  *
@@ -66,5 +67,10 @@ public class SqlItemValueRepository implements ItemValueRepository {
     @Override
     public List<ItemValue> findMostRecentItemValues(ItemRef itemRef,int itemCount) {
         return dao.findMostRecentItemValues(itemRef,itemCount);
+    }
+
+    @Override
+    public ItemValue findMostRecentItemValue(final ItemRef itemRef) {
+        return dao.findMostRecent(itemRef);
     }
 }

@@ -19,10 +19,10 @@
 
 package infowall.domain.model;
 
-import org.codehaus.jackson.map.ObjectMapper;
-
 import java.io.IOException;
 import java.util.List;
+
+import org.codehaus.jackson.map.ObjectMapper;
 
 /**
  *
@@ -44,6 +44,18 @@ public class Dashboard  {
 
     public void setItems(List<DashboardItem> items) {
         this.items = items;
+    }
+
+    public DashboardItem find(ItemRef itemRef){
+        if(!itemRef.getDashboardId().equals(id)){
+            return null;
+        }
+        for(DashboardItem item : this.items){
+            if(itemRef.getItemName().equals(item.getName())){
+                return item;
+            }
+        }
+        return null;
     }
 
     public String getTitle() {

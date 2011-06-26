@@ -51,16 +51,16 @@ public class DashboardController {
 
     private final Logger logger = LoggerFactory.getLogger(DashboardController.class);
 
-    private final DashboardService process;
+    private final DashboardService dashboardService;
     private final FlashMessage flash;
     private final ScriptExecutorService scriptExecutorProcess;
 
     @Autowired
     public DashboardController(
-            DashboardService process,
+            DashboardService dashboardService,
             FlashMessage flash,
             ScriptExecutorService scriptExecutorProcess) {
-        this.process = process;
+        this.dashboardService = dashboardService;
         this.flash = flash;
         this.scriptExecutorProcess = scriptExecutorProcess;
     }
@@ -68,7 +68,7 @@ public class DashboardController {
     @RequestMapping("/dashboard")
     ModelAndView listDashboards(){
 
-        List<Dashboard> dashboards = process.listAllDashboards();
+        List<Dashboard> dashboards = dashboardService.listAllDashboards();
 
         return render("dashboard/list","dashboards", dashboards);
     }
@@ -86,7 +86,7 @@ public class DashboardController {
 
     @RequestMapping("/dashboard/{dashboardId}")
     ModelAndView showDashboard(@PathVariable String dashboardId){
-        Dashboard dashboard = process.getDashboard(dashboardId);
+        Dashboard dashboard = dashboardService.getDashboard(dashboardId);
         if(dashboard == null){
             return redirect("/dashboard");
         }
@@ -98,7 +98,7 @@ public class DashboardController {
     @RequestMapping("/configure/dashboard/{dashboardId}")
     ModelAndView configureDashboard(@PathVariable String dashboardId){
 
-        ConfigureDashboard configureDashboard = process.getConfigureDashboard(dashboardId);
+        ConfigureDashboard configureDashboard = dashboardService.getConfigureDashboard(dashboardId);
         if(configureDashboard == null){
             return to404();
         }
@@ -111,7 +111,7 @@ public class DashboardController {
     @RequestMapping("/reload/dashboard/{dashboardId}")
     ModelAndView reloadDashboard(@PathVariable String dashboardId){
         Errors errors = new Errors();
-        Dashboard dashboard = process.reloadDashboard(dashboardId,errors);
+        Dashboard dashboard = dashboardService.reloadDashboard(dashboardId,errors);
         if(dashboard == null){
             return to404();
         }
