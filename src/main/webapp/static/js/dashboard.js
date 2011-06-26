@@ -299,24 +299,26 @@
                 e.offset({left:0,top:height});
             },
             newSlideAnimation : function(elem) {
+                return {top:0};
+            },
+            currentSlideAnimation : function(elem) {
                 var width = $(elem).width();
                 return {top:-width};
             },
-            currentSlideAnimation : function(elem) {
-                return {top:0};
-            }
+            serializeAnimation : false
         },
         fade : {
             initNewSlide : function(elem) {
                 var e = $(elem);
-                e.offset({opacity:1});
+                e.css({opacity:0});
             },
             newSlideAnimation : function(elem) {
-                return {opacity:0};
+                return {opacity:1};
             },
             currentSlideAnimation : function(elem) {
-                return {opacity:1};
-            }
+                return {opacity:0};
+            },
+            serializeAnimation:true
         }
     };
 
@@ -373,10 +375,15 @@
             var views = $('.view',this.container);
             var currentAnimation = self.currentSlideAnimation(elem);
             var newAnimation = self.newSlideAnimation(elem);
-            $(elem).animate( currentAnimation,{duration: fxDuration} );
+            var serializeAnimation = self.slideShowAnimation.serializeAnimation;
+
+            var delay = serializeAnimation ? fxDuration  : 0;
+            // animate current
             if(views.length > 1){
-                $(views[0]).animate(newAnimation,fxDuration,function(){$(this).remove()});
+                $(views[0]).animate( currentAnimation,fxDuration,function(){$(this).remove()});
             }
+            // animate new
+            $(elem).delay(delay).animate( newAnimation ,{duration: fxDuration} );
         });
     };
 
