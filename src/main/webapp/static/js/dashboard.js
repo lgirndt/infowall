@@ -60,7 +60,7 @@
     SingleValueView.prototype.transformModel = function(model,item){
 
         // fallback
-        if (!model || !model.current || !model.current.data || !model.current.data.value) {
+        if (!model || !model.current || !model.current.data || model.current.data.value === null) {
             return {
                 current : '?',
                 previous: '?',
