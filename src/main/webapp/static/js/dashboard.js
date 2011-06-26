@@ -309,8 +309,7 @@
         },
         fade : {
             initNewSlide : function(elem) {
-                var e = $(elem);
-                e.css({opacity:0});
+                $(elem).css({opacity:0});
             },
             newSlideAnimation : function(elem) {
                 return {opacity:1};
