@@ -6,6 +6,7 @@ repositories {
 }
 
 def springVersion = '3.0.5.RELEASE'
+def jacksonVersion = '1.6.3'
 
 dependencies {
     groovy "org.codehaus.groovy:groovy-all:1.7.5"
@@ -17,24 +18,31 @@ dependencies {
 	compile "org.springframework:spring-web:${springVersion}"
 	compile "org.springframework:spring-webmvc:${springVersion}"
 	compile "org.springframework:spring-jdbc:${springVersion}"
-	compile "org.slf4j:slf4j-api:1.5.6"
+
+    compile "org.slf4j:slf4j-api:1.5.6"
 	compile "org.slf4j:slf4j-log4j12:1.5.6"
-	compile "org.codehaus.jackson:jackson-core-asl:1.6.3"
-	compile "org.codehaus.jackson:jackson-mapper-asl:1.6.3"
-	compile "org.ektorp:org.ektorp:1.0.2"
+
+    compile "org.codehaus.jackson:jackson-core-asl:${jacksonVersion}"
+	compile "org.codehaus.jackson:jackson-mapper-asl:${jacksonVersion}"
+
+    compile "org.ektorp:org.ektorp:1.0.2"
 	compile "org.ektorp:org.ektorp.spring:1.0.2"
-	compile "com.google.guava:guava:r07"
+
+    compile "com.google.guava:guava:r07"
 	compile "org.hsqldb:hsqldb:2.0.0"
 	compile "org.hsqldb:sqltool:2.0.0"
 	compile "commons-dbcp:commons-dbcp:1.4"
 	compile "joda-time:joda-time:1.6.2"
 	compile "org.codehaus.groovy:groovy-all:1.7.5"
 	compile "org.codehaus.groovy.maven.runtime:gmaven-runtime-default:1.0-rc-3"
-	compile "org.json:json:20090211"
-	compile "opensymphony:quartz-all:1.6.3"
+
+    compile "org.json:json:20090211"
+
+    compile "opensymphony:quartz-all:1.6.3"
 	compile "commons-collections:commons-collections:3.1"
 	compile "org.codehaus.groovy.modules.http-builder:http-builder:0.5.0"
-	compile "mysql:mysql-connector-java:5.1.16"
+
+    compile "mysql:mysql-connector-java:5.1.16"
 
     runtime "javax.servlet:jstl:1.2"
 
