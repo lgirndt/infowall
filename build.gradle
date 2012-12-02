@@ -5,12 +5,15 @@ repositories {
     mavenCentral()
 }
 
+def groovyVersion = '1.7.5'
 def springVersion = '3.0.5.RELEASE'
 def jacksonVersion = '1.6.3'
 def slf4jVersion = '1.5.6'
 
 dependencies {
-    groovy "org.codehaus.groovy:groovy-all:1.7.5"
+    groovy "org.codehaus.groovy:groovy-all:${groovyVersion}"
+
+    compile "org.codehaus.groovy:groovy-all:${groovyVersion}"
 
 	compile "org.springframework:spring-core:${springVersion}"
 	compile "org.springframework:spring-beans:${springVersion}"
@@ -34,8 +37,6 @@ dependencies {
 	compile "org.hsqldb:sqltool:2.0.0"
 	compile "commons-dbcp:commons-dbcp:1.4"
 	compile "joda-time:joda-time:1.6.2"
-
-	compile "org.codehaus.groovy:groovy-all:1.7.5"
 
     compile "org.json:json:20090211"
 
