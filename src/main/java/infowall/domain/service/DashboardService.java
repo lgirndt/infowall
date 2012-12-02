@@ -21,7 +21,6 @@ package infowall.domain.service;
 
 import java.util.List;
 
-import org.ektorp.DocumentNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +34,7 @@ import infowall.domain.model.Dashboard;
 import infowall.domain.model.DashboardItem;
 import infowall.domain.model.ItemRef;
 import infowall.domain.persistence.DashboardRepository;
+import infowall.domain.persistence.sql.NotFoundException;
 import infowall.domain.service.scheduler.DashboardImportException;
 import infowall.domain.service.script.ScriptFileProvider;
 import infowall.web.services.errorhandling.ErrorNotifier;
@@ -68,7 +68,7 @@ public class DashboardService {
     public Dashboard getDashboard(String dashboardId){
         try {
             return dashboardRepository.get(dashboardId);
-        }catch(DocumentNotFoundException e){
+        }catch(NotFoundException e){
             return null;
         }
     }
