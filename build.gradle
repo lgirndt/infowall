@@ -5,7 +5,7 @@ repositories {
     mavenCentral()
 }
 
-def groovyVersion = '1.7.5'
+def groovyVersion = '2.0.4'
 def springVersion = '3.0.5.RELEASE'
 def jacksonVersion = '1.6.3'
 def slf4jVersion = '1.5.6'
