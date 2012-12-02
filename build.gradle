@@ -9,6 +9,7 @@ def groovyVersion = '1.7.5'
 def springVersion = '3.0.5.RELEASE'
 def jacksonVersion = '1.6.3'
 def slf4jVersion = '1.5.6'
+def hsqldbVersion = '2.0.0'
 
 dependencies {
     groovy "org.codehaus.groovy:groovy-all:${groovyVersion}"
@@ -33,9 +34,11 @@ dependencies {
 	compile "org.ektorp:org.ektorp.spring:1.0.2"
 
     compile "com.google.guava:guava:13.0.1"
-	compile "org.hsqldb:hsqldb:2.0.0"
-	compile "org.hsqldb:sqltool:2.0.0"
-	compile "commons-dbcp:commons-dbcp:1.4"
+
+	compile "org.hsqldb:hsqldb:${hsqldbVersion}"
+	compile "org.hsqldb:sqltool:${hsqldbVersion}"
+
+    compile "commons-dbcp:commons-dbcp:1.4"
 	compile "joda-time:joda-time:1.6.2"
 
     compile "org.json:json:20090211"
