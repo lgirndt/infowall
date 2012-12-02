@@ -5,16 +5,18 @@ repositories {
     mavenCentral()
 }
 
+def springVersion = '3.0.5.RELEASE'
+
 dependencies {
     groovy "org.codehaus.groovy:groovy-all:1.7.5"
 
-	compile "org.springframework:spring-core:3.0.5.RELEASE"
-	compile "org.springframework:spring-beans:3.0.5.RELEASE"
-	compile "org.springframework:spring-context:3.0.5.RELEASE"
-	compile "org.springframework:spring-context-support:3.0.5.RELEASE"
-	compile "org.springframework:spring-web:3.0.5.RELEASE"
-	compile "org.springframework:spring-webmvc:3.0.5.RELEASE"
-	compile "org.springframework:spring-jdbc:3.0.5.RELEASE"
+	compile "org.springframework:spring-core:${springVersion}"
+	compile "org.springframework:spring-beans:${springVersion}"
+	compile "org.springframework:spring-context:${springVersion}"
+	compile "org.springframework:spring-context-support:${springVersion}"
+	compile "org.springframework:spring-web:${springVersion}"
+	compile "org.springframework:spring-webmvc:${springVersion}"
+	compile "org.springframework:spring-jdbc:${springVersion}"
 	compile "org.slf4j:slf4j-api:1.5.6"
 	compile "org.slf4j:slf4j-log4j12:1.5.6"
 	compile "org.codehaus.jackson:jackson-core-asl:1.6.3"
@@ -33,10 +35,13 @@ dependencies {
 	compile "commons-collections:commons-collections:3.1"
 	compile "org.codehaus.groovy.modules.http-builder:http-builder:0.5.0"
 	compile "mysql:mysql-connector-java:5.1.16"
-	runtime "javax.servlet:jstl:1.2"
-	testCompile "org.springframework:spring-test:3.0.5.RELEASE"
+
+    runtime "javax.servlet:jstl:1.2"
+
+	testCompile "org.springframework:spring-test:${springVersion}"
 	testCompile "junit:junit:4.8.1"
 	testCompile "org.hamcrest:hamcrest-library:1.1"
 	testCompile "org.easymock:easymock:3.0"
+
     providedCompile "javax.servlet:servlet-api:2.5"
 }
