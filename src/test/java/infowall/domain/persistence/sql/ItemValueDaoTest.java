@@ -33,6 +33,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ObjectNode;
 import org.joda.time.DateTime;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
@@ -43,6 +44,7 @@ import infowall.domain.model.ItemValue;
 /**
  *
  */
+@Ignore
 @ContextConfiguration(locations = "classpath:/spring/test-context.xml")
 public class ItemValueDaoTest extends AbstractTransactionalJUnit4SpringContextTests
 /*AbstractJUnit4SpringContextTests*/ {
