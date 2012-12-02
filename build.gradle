@@ -7,6 +7,7 @@ repositories {
 
 def springVersion = '3.0.5.RELEASE'
 def jacksonVersion = '1.6.3'
+def slf4jVersion = '1.5.6'
 
 dependencies {
     groovy "org.codehaus.groovy:groovy-all:1.7.5"
@@ -19,8 +20,8 @@ dependencies {
 	compile "org.springframework:spring-webmvc:${springVersion}"
 	compile "org.springframework:spring-jdbc:${springVersion}"
 
-    compile "org.slf4j:slf4j-api:1.5.6"
-	compile "org.slf4j:slf4j-log4j12:1.5.6"
+    compile "org.slf4j:slf4j-api:${slf4jVersion}"
+	compile "org.slf4j:slf4j-log4j12:${slf4jVersion}"
 
     compile "org.codehaus.jackson:jackson-core-asl:${jacksonVersion}"
 	compile "org.codehaus.jackson:jackson-mapper-asl:${jacksonVersion}"
