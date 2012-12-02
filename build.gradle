@@ -46,11 +46,11 @@ dependencies {
     compile "mysql:mysql-connector-java:5.1.16"
 
     runtime "javax.servlet:jstl:1.2"
-
-	testCompile "org.springframework:spring-test:${springVersion}"
-	testCompile "junit:junit:4.8.1"
-	testCompile "org.hamcrest:hamcrest-library:1.1"
-	testCompile "org.easymock:easymock:3.0"
-
     providedCompile "javax.servlet:servlet-api:2.5"
+
+    testCompile "org.springframework:spring-test:${springVersion}"
+    testCompile "junit:junit:4.8.1"
+    testCompile "org.hamcrest:hamcrest-library:1.1"
+    testCompile "org.easymock:easymock:3.0"
+
 }
