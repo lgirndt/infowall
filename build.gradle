@@ -34,8 +34,8 @@ dependencies {
 	compile "org.hsqldb:sqltool:2.0.0"
 	compile "commons-dbcp:commons-dbcp:1.4"
 	compile "joda-time:joda-time:1.6.2"
+
 	compile "org.codehaus.groovy:groovy-all:1.7.5"
-	compile "org.codehaus.groovy.maven.runtime:gmaven-runtime-default:1.0-rc-3"
 
     compile "org.json:json:20090211"
 
