@@ -98,7 +98,8 @@
             renderEngine : renderEngine,
             container : '#container',
             fxDuration: 600,
-            animation: dashboard.animation
+            animation: dashboard.animation,
+            delay: dashboard.delay
         });
         slideShow.start();
 

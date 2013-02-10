@@ -37,6 +37,8 @@ public class Dashboard  {
 
     private String animation;
 
+    private int delay;
+
     public Dashboard() {
     }
 
@@ -82,6 +84,14 @@ public class Dashboard  {
 
     public void setAnimation(final String animation) {
         this.animation = animation;
+    }
+
+    public int getDelay() {
+        return delay;
+    }
+
+    public void setDelay(final int delay) {
+        this.delay = delay;
     }
 
     public String toJSON() {
