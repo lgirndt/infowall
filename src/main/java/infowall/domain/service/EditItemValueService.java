@@ -69,6 +69,7 @@ public class EditItemValueService {
 
         }catch (IOException e){
             errorNotifier.addError("Could not write data.");
+            logger.error("Could not write data '{}', {}",data,e);
         }
     }
 }
