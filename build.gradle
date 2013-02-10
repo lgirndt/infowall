@@ -59,3 +59,17 @@ dependencies {
 
 }
 
+task prepareJetty << {
+    if(project.hasProperty('infowall.root')) {
+        def configRoot = project.getProperty('infowall.root')
+        System.properties['infowall.config-root'] = configRoot
+        System.properties['log4j.configuration'] = "file:${configRoot}/log4j.properties"
+    }
+}
+
+jettyRun {
+    httpPort = 9009
+    contextPath = ''
+    dependsOn prepareJetty
+}
+
