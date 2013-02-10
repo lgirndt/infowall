@@ -30,16 +30,10 @@
 
 <div class="container">
 
-
-    <h1>${dashboard.title}</h1>
-
-    <p>
-    <table class="table">
-        <tr>
-            <td>Configuration</td>
-            <td><a href="<c:url value='/app/reload/dashboard/${dashboard.id}'/>">Reload</a></td>
-        </tr>
-    </table>
+    <ul class="breadcrumb">
+        <li><a href="<c:url value='/app/dashboard/'/>">Home</a> <span class="divider">/</span></li>
+        <li class="active">${dashboard.title}</li>
+    </ul>
     <p>
     <table class="table table-striped table-bordered table-hover">
         <tr>
@@ -53,18 +47,23 @@
                 <td>
                     <c:choose>
                         <c:when test="${not empty cItem.item.scheduler}"><code>${cItem.item.scheduler}</code></c:when>
-                        <c:otherwise><em>no scheduler</em></c:otherwise>
+                        <c:otherwise><span class="label">none</span></c:otherwise>
                     </c:choose>
                 </td>
-                <td><a href="<c:url value="/app/configure/edit/dashboard/${dashboard.id}/${cItem.item.name}"/>">Edit</a>
-                    <c:if test="${cItem.executable}">| <a href="<c:url value='/app/configure/exec/dashboard/${dashboard.id}/${cItem.item.name}'/>">Execute</a></c:if></td>
+                <td>
+
+                    <a class="btn btn-small" href="<c:url value="/app/configure/edit/dashboard/${dashboard.id}/${cItem.item.name}"/>">Edit</a>
+                    <c:if test="${cItem.executable}">
+                        <a  class="btn btn-small"  href="<c:url value='/app/configure/exec/dashboard/${dashboard.id}/${cItem.item.name}'/>">Execute</a>
+                    </c:if>
+                </td>
             </tr>
         </c:forEach>
     </table>
-    <div>
-        <a href="<c:url value='/app/dashboard/'/>">Overview</a> | <a
-            href="<c:url value='/app/dashboard/${dashboard.id}'/>">View</a>
-    </div>
+    <p>
+        <a class="btn btn-primary" href="<c:url value='/app/dashboard/${dashboard.id}'/>">View</a>
+        <a class="btn" href="<c:url value='/app/reload/dashboard/${dashboard.id}'/>">Reload Config</a>
+    <p>
 </div>
 <!-- /container -->
 </body>

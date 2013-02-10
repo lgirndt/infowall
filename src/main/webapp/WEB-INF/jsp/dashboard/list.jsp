@@ -29,15 +29,25 @@
 
 <div class="container">
 
+    <ul class="breadcrumb">
+        <li class="active">Home</li>
+    </ul>
+
+
     <h1>Dashboards</h1>
     <table class="table table-striped table-bordered table-hover">
         <c:forEach var="dashboard" items="${dashboards}">
             <tr>
-                <td><a href="<c:url value='/app/dashboard/${dashboard.id}'/>">${dashboard.title}</a></td>
-                <td><a href="<c:url value='/app/configure/dashboard/${dashboard.id}'/>">Configure</a></td>
+                <td>
+                    <a href="<c:url value='/app/dashboard/${dashboard.id}'/>">${dashboard.title}</a>
+                </td>
+                <td >
+                    <a class="btn btn-small" href="<c:url value='/app/configure/dashboard/${dashboard.id}'/>">Configure</a>
+                </td>
             </tr>
         </c:forEach>
     </table>
+
 </div>
 <!-- /container -->
 
