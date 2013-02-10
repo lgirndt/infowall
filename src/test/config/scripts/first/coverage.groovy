@@ -17,17 +17,17 @@
  * under the License.
  */
 
+import groovyx.net.http.ContentType
 import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.Method
-import groovyx.net.http.ContentType
-import org.slf4j.LoggerFactory
 import org.slf4j.Logger
-import infowall.infrastructure.json.SimpleJSONBuilder
+import org.slf4j.LoggerFactory
+import groovy.json.JsonBuilder
 
 final Logger logger = LoggerFactory.getLogger(getClass())
 
 def http = new HTTPBuilder( 'http://nemo.sonarsource.org' )
-def resultBuilder = new SimpleJSONBuilder()
+def resultBuilder = new JsonBuilder()
 
 // perform a GET request, expecting JSON response data
 http.request( Method.GET, ContentType.JSON ) {
@@ -50,7 +50,7 @@ http.request( Method.GET, ContentType.JSON ) {
     logger.info("coverage:" + val)
     resultBuilder.result(value:val)
 
-    println resultBuilder.json
+    println resultBuilder.toString()
 
     // parse the JSON response object:
     /*
