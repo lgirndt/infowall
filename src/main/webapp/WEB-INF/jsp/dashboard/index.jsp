@@ -72,7 +72,7 @@
 </div>
 <div id="bottom">
     <div class="control-panel">
-        <a href="<c:url value="/"/>">Overview</a> |
+        <a href="<c:url value="/"/>">Home</a> |
         <a href="<c:url value="/app/configure/dashboard/${dashboard.id}"/>">Configure</a>
     </div>
 </div>
