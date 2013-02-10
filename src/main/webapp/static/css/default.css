@@ -186,6 +186,11 @@ body.dashboard {
     text-align:right;
 }
 
+.view .html-value {
+    font-size:0.4em;
+    padding: 1.4em 1.4em 0 1.4em;
+}
+
 /*.navigation {*/
     /*border:4px solid #4a4a4a;*/
     /*background-color:#fff;*/

@@ -54,6 +54,15 @@
 </div>
 -->
 </script>
+<script type="text/mustache" id="template-html">
+    <!--
+    <div class="html-value">
+    <table>
+        {{{html}}}
+    </table>
+    </div>
+    -->
+</script>
 <body class="dashboard">
 
 
@@ -73,13 +82,14 @@
     $(document).ready(function(){
         var dashboard = ${json};
         var templateManager = new infowall.TemplateManager();
-        var templates = templateManager.getTemplates(['single-value','table-value']);
+        var templates = templateManager.getTemplates(['single-value','table-value','html']);
         var renderEngine = new infowall.RenderEngine({
             items : dashboard.items,
             templates: templates,
             views : {
                 "single-value" : new infowall.SingleValueView(),
-                "table-value"  : new infowall.TableValueView()
+                "table-value"  : new infowall.TableValueView(),
+                "html"         : new infowall.HtmlView()
             },
             baseUrl : "<c:url value='/app/item/${dashboard.id}'/>"
         });

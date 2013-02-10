@@ -20,7 +20,7 @@
 /*global window,jQuery*/
 (function (window, $, undefined) {
 
-    var TemplateManager,RenderEngine,SingleValueView,TableValueView,SlideShow;
+    var TemplateManager,RenderEngine,SingleValueView,TableValueView,HtmlView,SlideShow;
 
     function error(msg){
         if(window.console){
@@ -173,6 +173,16 @@
             rel = this.relations[this.defaultRelation];
         }
         return rel(a,b);
+    };
+
+    HtmlView = function() {
+    };
+
+    HtmlView.prototype.transformModel = function(model,item){
+        if(!model || !model.current || !model.current.data){
+            return {table:[]};
+        }
+        return model.current.data;
     };
 
     /**
@@ -422,6 +432,7 @@
     window.infowall.RenderEngine = RenderEngine;
     window.infowall.SingleValueView = SingleValueView;
     window.infowall.TableValueView = TableValueView;
+    window.infowall.HtmlView = HtmlView;
     window.infowall.SlideShow = SlideShow;
 
 }(window, jQuery));
