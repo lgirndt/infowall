@@ -19,14 +19,18 @@
   --%>
 
 <html>
-    <head>
-        <title>Dashboards</title>
-        <%@ include file="/WEB-INF/jsp/include/head.jsp"%>
-    </head>
-    <body>
-    <div class="navigation">
+<head>
+    <title>Dashboards</title>
+    <%@ include file="/WEB-INF/jsp/include/head.jsp" %>
+</head>
+<body>
+
+<%@ include file="/WEB-INF/jsp/include/navbar.jsp" %>
+
+<div class="container">
+
     <h1>Dashboards</h1>
-    <table>
+    <table class="table table-striped table-bordered table-hover">
         <c:forEach var="dashboard" items="${dashboards}">
             <tr>
                 <td><a href="<c:url value='/app/dashboard/${dashboard.id}'/>">${dashboard.title}</a></td>
@@ -34,6 +38,8 @@
             </tr>
         </c:forEach>
     </table>
-    </div>
-    </body>
+</div>
+<!-- /container -->
+
+</body>
 </html>

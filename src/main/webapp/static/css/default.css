@@ -18,6 +18,10 @@
  */
 
 body {
+    padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+}
+
+body.dashboard {
     background: -webkit-gradient(
         linear,
         left bottom,
@@ -31,6 +35,7 @@ body {
         rgb(0,0,0) 100%
     );
     color:#fef;
+
 }
 
 #title {
@@ -181,20 +186,20 @@ body {
     text-align:right;
 }
 
-.navigation {
-    border:4px solid #4a4a4a;
-    background-color:#fff;
-    color:#222;
-    margin-left:auto;
-    margin-right:auto;
-    width:400px;
-    margin-top:100px;
-    -webkit-border-radius:15px;
-    -moz-border-radius:15px;
-    padding:8px;
-    -webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
-    -moz-box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
-}
+/*.navigation {*/
+    /*border:4px solid #4a4a4a;*/
+    /*background-color:#fff;*/
+    /*color:#222;*/
+    /*margin-left:auto;*/
+    /*margin-right:auto;*/
+    /*width:400px;*/
+    /*margin-top:100px;*/
+    /*-webkit-border-radius:15px;*/
+    /*-moz-border-radius:15px;*/
+    /*padding:8px;*/
+    /*-webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.8);*/
+    /*-moz-box-shadow: inset 0 0 10px rgba(0,0,0,0.8);*/
+/*}*/
 
 .navigation table {
     width:100%;

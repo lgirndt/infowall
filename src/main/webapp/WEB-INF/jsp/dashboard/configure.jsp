@@ -25,15 +25,23 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/jsp/include/messages.jsp" %>
-<div class="navigation">
+
+<%@ include file="/WEB-INF/jsp/include/navbar.jsp" %>
+
+<div class="container">
+
+
     <h1>${dashboard.title}</h1>
-    <table>
+
+    <p>
+    <table class="table">
         <tr>
             <td>Configuration</td>
             <td><a href="<c:url value='/app/reload/dashboard/${dashboard.id}'/>">Reload</a></td>
         </tr>
     </table>
-    <table>
+    <p>
+    <table class="table table-striped table-bordered table-hover">
         <tr>
             <th>Item</th>
             <th>Cron Scheduler</th>
@@ -42,16 +50,22 @@
         <c:forEach var="cItem" items="${items}">
             <tr>
                 <td>${cItem.item.title}</td>
-                <td>${cItem.item.scheduler}</td>
+                <td>
+                    <c:choose>
+                        <c:when test="${not empty cItem.item.scheduler}"><code>${cItem.item.scheduler}</code></c:when>
+                        <c:otherwise><em>no scheduler</em></c:otherwise>
+                    </c:choose>
+                </td>
                 <td><a href="<c:url value="/app/configure/edit/dashboard/${dashboard.id}/${cItem.item.name}"/>">Edit</a>
                     <c:if test="${cItem.executable}">| <a href="<c:url value='/app/configure/exec/dashboard/${dashboard.id}/${cItem.item.name}'/>">Execute</a></c:if></td>
             </tr>
         </c:forEach>
     </table>
-
     <div>
-        <a href="<c:url value='/app/dashboard/'/>">Overview</a> | <a href="<c:url value='/app/dashboard/${dashboard.id}'/>">View</a>
+        <a href="<c:url value='/app/dashboard/'/>">Overview</a> | <a
+            href="<c:url value='/app/dashboard/${dashboard.id}'/>">View</a>
     </div>
 </div>
+<!-- /container -->
 </body>
 </html>

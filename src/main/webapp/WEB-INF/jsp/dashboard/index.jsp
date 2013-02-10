@@ -21,7 +21,16 @@
 <html>
 <head>
     <title>${dashboard.title}</title>
-    <%@ include file="/WEB-INF/jsp/include/head.jsp"%>
+
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
+
+    <link href="<c:url value='/static/css/reset.css'/>" rel="stylesheet" type="text/css">
+    <link href="<c:url value='/static/css/text.css'/>" rel="stylesheet" type="text/css">
+    <link href="<c:url value='/static/css/default.css'/>" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script type="text/javascript" src="<c:url value='/static/js/jquery.mustache.js'/>"></script>
+
     <script type="text/javascript" src="<c:url value='/static/js/dashboard.js'/>"></script>
 </head>
 <script type="text/mustache" id="template-single-value">
@@ -45,7 +54,7 @@
 </div>
 -->
 </script>
-<body>
+<body class="dashboard">
 
 
 <h1 id="title"></h1>

@@ -19,8 +19,7 @@
 
 <link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
 
-<link href="<c:url value='/static/css/reset.css'/>" rel="stylesheet" type="text/css">
-<link href="<c:url value='/static/css/text.css'/>" rel="stylesheet" type="text/css">
+<link href="<c:url value='/static/css/bootstrap.min.css'/>" rel="stylesheet" type="text/css">
 <link href="<c:url value='/static/css/default.css'/>" rel="stylesheet" type="text/css">
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
