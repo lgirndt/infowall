@@ -63,6 +63,13 @@
     </div>
     -->
 </script>
+<script type="text/mustache" id="template-url">
+    <!--
+    <div class="url-value">
+        <iframe src="{{url}}" width="100%" height="88%"></iframe>
+    </div>
+    -->
+</script>
 <body class="dashboard <c:if test='${not empty dashboard.theme}'>dashboard-theme-${dashboard.theme}</c:if>">
 
 
@@ -82,14 +89,15 @@
     $(document).ready(function(){
         var dashboard = ${json};
         var templateManager = new infowall.TemplateManager();
-        var templates = templateManager.getTemplates(['single-value','table-value','html']);
+        var templates = templateManager.getTemplates(['single-value','table-value','html','url']);
         var renderEngine = new infowall.RenderEngine({
             items : dashboard.items,
             templates: templates,
             views : {
                 "single-value" : new infowall.SingleValueView(),
                 "table-value"  : new infowall.TableValueView(),
-                "html"         : new infowall.HtmlView()
+                "html"         : new infowall.HtmlView(),
+                "url"          : new infowall.HtmlView()
             },
             baseUrl : "<c:url value='/app/item/${dashboard.id}'/>"
         });
