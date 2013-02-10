@@ -25,9 +25,16 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/jsp/include/messages.jsp" %>
-<div class="navigation">
-    <h1>${model.dashboardTitle}</h1>
-    <h2>${model.itemTitle}</h2>
+
+<%@ include file="/WEB-INF/jsp/include/navbar.jsp" %>
+
+<div class="container">
+
+    <ul class="breadcrumb">
+        <li><a href="<c:url value='/app/dashboard/'/>">Home</a> <span class="divider">/</span></li>
+        <li><a href="<c:url value='/app/configure/dashboard/${model.itemRef.dashboardId}'/>">${model.dashboardTitle}</a> <span class="divider">/</span></li>
+        <li class="active">${model.itemTitle}</li>
+    </ul>
 
     <form action="<c:url value="/app/configure/save/dashboard"/>" method="POST">
         <input type="hidden" name="dashboardId" value="${model.itemRef.dashboardId}">
@@ -35,15 +42,18 @@
         <div>
             <label for="insert-data">Enter the item's data as JSON:</label>
         </div>
-        <textarea id="insert-data" name="data" rows="10" cols="50">${model.data}</textarea>
+        <textarea id="insert-data" name="data" rows="10">${model.data}</textarea>
         <div>
-            <button type="submit">Save</button>
+            <button class="btn btn-primary" type="submit">Save</button>
+            <a class="btn" href="<c:url value='/app/configure/dashboard/${model.itemRef.dashboardId}'/>">Cancel</a>
         </div>
     </form>
 
     <div>
-        <a href="<c:url value='/app/configure/dashboard/${model.itemRef.dashboardId}'/>">Back</a>
+
     </div>
+
 </div>
+<!-- /container -->
 </body>
 </html>
