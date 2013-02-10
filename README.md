@@ -126,7 +126,7 @@ DB_FILE=/tmp/infowall-prod.db
 java org.hsqldb.cmdline.SqlTool --inlineRc=url=jdbc:hsqldb:file:$DB_FILE,user=sa,password= src/main/resources/sql/create-schema.sql
 </pre>
 1. Insert some example data into infowall
-1. run the server `mvn jetty:run`
+1. run the server `gradle jettyRun -Pinfowall.config-root=DIR_TO_CONFIG`
 
 ## Known limitations
 - Just looks great on a Webkit based browser like Google Chrome
