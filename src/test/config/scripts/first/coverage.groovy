@@ -48,7 +48,7 @@ http.request( Method.GET, ContentType.JSON ) {
     logger.info(json as String)
     Number val = json.msr.val[0][0]
     logger.info("coverage:" + val)
-    resultBuilder.result(value:val)
+    resultBuilder(value : val);
 
     println resultBuilder.toString()
 

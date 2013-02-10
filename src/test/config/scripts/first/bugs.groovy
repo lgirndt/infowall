@@ -27,7 +27,6 @@ def builder = new JsonBuilder()
 
 def rndVal = new Random().nextInt(30);
 logger.info("Decided, we have #${rndVal} bugs now.");
-
-builder.result(value:rndVal);
+builder(value:rndVal);
 
 print builder.toString()
