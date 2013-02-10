@@ -91,7 +91,8 @@ public class ItemValueDao {
                         "   v.dashboard_id = t.dashboard_id " +
                         "   and v.item_name = t.item_name " +
                         "   and v.last_update = t.last_update " +
-                        "   and v.dashboard_id = ? and v.item_name = ?",
+                        "   and v.dashboard_id = ? and v.item_name = ?" +
+                        "   ORDER BY id DESC LIMIT 0,1",
                 new ItemValueRowMapper(),
                 itemRef.getDashboardId(), itemRef.getItemName()));
     }
