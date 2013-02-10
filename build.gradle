@@ -60,8 +60,8 @@ dependencies {
 }
 
 task prepareJetty << {
-    if(project.hasProperty('infowall.root')) {
-        def configRoot = project.getProperty('infowall.root')
+    if(project.hasProperty('infowall.config-root')) {
+        def configRoot = project.getProperty('infowall.config-root')
         System.properties['infowall.config-root'] = configRoot
         System.properties['log4j.configuration'] = "file:${configRoot}/log4j.properties"
     }
