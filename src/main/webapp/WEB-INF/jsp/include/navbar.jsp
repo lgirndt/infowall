@@ -6,7 +6,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="brand" href="#">Infowall</a>
+            <a class="brand" href="<c:url value='/app/dashboard/'/>">Infowall</a>
 
             <!--/.nav-collapse -->
         </div>
