@@ -20,6 +20,8 @@
             {
                 "name" : "coverage",
                 "title": "Coverage Example",
+                "statusThreshold" : 68,
+                "statusRelation" : "gt",
                 "conf" : {
                     "unit" : "%"
                 }

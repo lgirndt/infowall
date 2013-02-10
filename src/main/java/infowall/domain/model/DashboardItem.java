@@ -29,6 +29,7 @@ public class DashboardItem {
     private String name;
     private String title;
     private int statusThreshold;
+    private String statusRelation;
     private ObjectNode conf;
     private String scheduler;
 
@@ -54,6 +55,14 @@ public class DashboardItem {
 
     public void setStatusThreshold(int statusThreshold) {
         this.statusThreshold = statusThreshold;
+    }
+
+    public String getStatusRelation() {
+        return statusRelation;
+    }
+
+    public void setStatusRelation(final String statusRelation) {
+        this.statusRelation = statusRelation;
     }
 
     public ObjectNode getConf() {
