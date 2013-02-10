@@ -39,6 +39,8 @@ public class Dashboard  {
 
     private int delay;
 
+    private String theme = "";
+
     public Dashboard() {
     }
 
@@ -92,6 +94,14 @@ public class Dashboard  {
 
     public void setDelay(final int delay) {
         this.delay = delay;
+    }
+
+    public String getTheme() {
+        return theme;
+    }
+
+    public void setTheme(final String theme) {
+        this.theme = theme;
     }
 
     public String toJSON() {

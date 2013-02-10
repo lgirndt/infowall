@@ -35,8 +35,13 @@ body.dashboard {
         rgb(0,0,0) 100%
     );
     color:#fef;
-
 }
+
+body.dashboard-theme-blue {
+    background: #4682b4;
+    color:white;
+}
+
 
 #title {
     position:absolute;

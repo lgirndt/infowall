@@ -63,7 +63,7 @@
     </div>
     -->
 </script>
-<body class="dashboard">
+<body class="dashboard <c:if test='${not empty dashboard.theme}'>dashboard-theme-${dashboard.theme}</c:if>">
 
 
 <h1 id="title"></h1>
