@@ -59,8 +59,3 @@ dependencies {
 
 }
 
-idea {
-    module {
-        scopes.TEST.plus+= configurations.detachedConfiguration(dependencies.create(files('src/test/resources')))
-        scopes.RUNTIME.plus+= configurations.detachedConfiguration(dependencies.create(files('src/main/resources'))) }
-}
