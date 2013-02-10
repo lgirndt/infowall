@@ -17,17 +17,17 @@
  * under the License.
  */
 
-import infowall.infrastructure.json.SimpleJSONBuilder
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import groovy.json.JsonBuilder
 
 final Logger logger = LoggerFactory.getLogger("bugs randomizer")
 
-def builder = new SimpleJSONBuilder()
+def builder = new JsonBuilder()
 
 def rndVal = new Random().nextInt(30);
 logger.info("Decided, we have #${rndVal} bugs now.");
 
 builder.result(value:rndVal);
 
-print builder.json
+print builder.toString()
