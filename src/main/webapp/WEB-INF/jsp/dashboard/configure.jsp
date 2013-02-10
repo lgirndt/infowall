@@ -52,17 +52,17 @@
                 </td>
                 <td>
 
-                    <a class="btn btn-small" href="<c:url value="/app/configure/edit/dashboard/${dashboard.id}/${cItem.item.name}"/>">Edit</a>
+                    <a class="btn btn-mini" href="<c:url value="/app/configure/edit/dashboard/${dashboard.id}/${cItem.item.name}"/>">Edit</a>
                     <c:if test="${cItem.executable}">
-                        <a  class="btn btn-small"  href="<c:url value='/app/configure/exec/dashboard/${dashboard.id}/${cItem.item.name}'/>">Execute</a>
+                        <a  class="btn btn-mini"  href="<c:url value='/app/configure/exec/dashboard/${dashboard.id}/${cItem.item.name}'/>">Execute</a>
                     </c:if>
                 </td>
             </tr>
         </c:forEach>
     </table>
     <p>
-        <a class="btn btn-primary" href="<c:url value='/app/dashboard/${dashboard.id}'/>">View</a>
-        <a class="btn" href="<c:url value='/app/reload/dashboard/${dashboard.id}'/>">Reload Config</a>
+        <a class="btn btn-primary" href="<c:url value='/app/dashboard/${dashboard.id}'/>"><i class="icon-eye-open icon-white"></i> View</a>
+        <a class="btn" href="<c:url value='/app/reload/dashboard/${dashboard.id}'/>"><i class="icon-refresh"></i> Reload Config</a>
     <p>
 </div>
 <!-- /container -->

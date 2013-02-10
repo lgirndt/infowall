@@ -38,11 +38,10 @@
     <table class="table table-striped table-bordered table-hover">
         <c:forEach var="dashboard" items="${dashboards}">
             <tr>
-                <td>
-                    <a href="<c:url value='/app/dashboard/${dashboard.id}'/>">${dashboard.title}</a>
-                </td>
+                <td>${dashboard.title}</td>
                 <td >
-                    <a class="btn btn-small" href="<c:url value='/app/configure/dashboard/${dashboard.id}'/>">Configure</a>
+                    <a class="btn btn-mini btn-primary"  href="<c:url value='/app/dashboard/${dashboard.id}'/>">View</a>
+                    <a class="btn btn-mini" href="<c:url value='/app/configure/dashboard/${dashboard.id}'/>">Configure</a>
                 </td>
             </tr>
         </c:forEach>
