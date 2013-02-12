@@ -42,6 +42,11 @@ body.dashboard-theme-blue {
     color:white;
 }
 
+body.dashboard-theme-black {
+    background: #000;
+    color:white;
+}
+
 
 #title {
     position:absolute;
@@ -51,6 +56,7 @@ body.dashboard-theme-blue {
     width:100%;
     text-align:center;
     font-size:5em;
+    padding: 0.4em 0;
 }
 
 #container {
@@ -72,8 +78,7 @@ body.dashboard-theme-blue {
     padding: 15px;
     font-size: 1.8em;
     border: 3px solid #fff;
-    -webkit-border-radius:1em;
-    -moz-border-radius:1em;
+    border-radius:1em;
     margin: 10px;
 }
 
@@ -88,7 +93,7 @@ body.dashboard-theme-blue {
 
 .view {
     position:absolute;
-    font-size:14em;
+    font-size:15em;
 }
 
 .view .single-value {
@@ -104,11 +109,9 @@ body.dashboard-theme-blue {
     text-align:center;
     color:#fff;
     border: 0.06em solid #fff;
-    -webkit-border-radius:0.1em;
-    -moz-border-radius:0.1em;
+    border-radius:0.4em;
     text-shadow:rgba(1,1,1,0.8) 0px 0px 10px;
-    -webkit-box-shadow: inset 0 0 10px rgba(1,1,1,0.8);
-    -moz-box-shadow: inset 0 0 10px rgba(1,1,1,0.8);
+    box-shadow: inset 0 0 10px rgba(1,1,1,0.8);
 }
 
 .view .single-value .diff {
@@ -117,10 +120,8 @@ body.dashboard-theme-blue {
     top:-0.3em;
     width:0.8em;
     height:0.8em;
-    -webkit-border-radius:0.5em;
-    -moz-border-radius:0.5em;
-    -webkit-box-shadow: 0 0 10px rgba(1,1,1,0.8);
-    -moz-box-shadow: 0 0 10px rgba(1,1,1,0.8);
+    border-radius:0.5em;
+    box-shadow: 0 0 10px rgba(1,1,1,0.8);
     background-color:#121;
     padding:0;
     margin:0;
