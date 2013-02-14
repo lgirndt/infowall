@@ -66,7 +66,7 @@
 <script type="text/mustache" id="template-url">
     <!--
     <div class="url-value">
-        <iframe src="{{url}}" width="100%" height="88%"></iframe>
+        <iframe src="{{url}}" width="100%" height="85%"></iframe>
     </div>
     -->
 </script>
