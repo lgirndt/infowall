@@ -21,6 +21,8 @@
 <html>
 <head>
     <title>${dashboard.title}</title>
+    <!-- force reload after 6 hours -->
+    <meta http-equiv="refresh" content="21600;">
 
     <link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
 
