@@ -73,6 +73,13 @@
     </div>
     -->
 </script>
+<script type="text/mustache" id="template-chart">
+    <!--
+    <div class="chart">
+        Hello
+    </div>
+    -->
+</script>
 <body class="dashboard <c:if test='${not empty dashboard.theme}'>dashboard-theme-${dashboard.theme}</c:if>">
 
 
@@ -92,7 +99,7 @@
     $(document).ready(function(){
         var dashboard = ${json};
         var templateManager = new infowall.TemplateManager();
-        var templates = templateManager.getTemplates(['single-value','table-value','html','url']);
+        var templates = templateManager.getTemplates(['single-value','table-value','html','url','chart']);
         var renderEngine = new infowall.RenderEngine({
             items : dashboard.items,
             templates: templates,
@@ -100,7 +107,8 @@
                 "single-value" : new infowall.SingleValueView(),
                 "table-value"  : new infowall.TableValueView(),
                 "html"         : new infowall.HtmlView(),
-                "url"          : new infowall.HtmlView()
+                "url"          : new infowall.HtmlView(),
+                "chart"        : new infowall.HtmlView()
             },
             baseUrl : "<c:url value='/app/item/${dashboard.id}'/>"
         });

@@ -47,6 +47,21 @@ body.dashboard-theme-black {
     color:white;
 }
 
+body.dashboard-theme-white {
+    background: white;
+    color:black;
+}
+
+
+body.dashboard-theme-white .control-panel {
+    border: 3px solid #000;
+}
+
+body.dashboard-theme-white .control-panel a {
+    color: #000;
+}
+
+
 
 #title {
     position:absolute;
