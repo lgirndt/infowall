@@ -253,3 +253,7 @@ body.dashboard-theme-white .control-panel a {
     position:fixed;
     padding:4px;
 }
+
+.legend {
+    position: fixed;
+}

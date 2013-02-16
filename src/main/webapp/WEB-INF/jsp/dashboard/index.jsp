@@ -75,9 +75,7 @@
 </script>
 <script type="text/mustache" id="template-chart">
     <!--
-    <div class="chart">
-        Hello
-    </div>
+    <div class="chart"></div>
     -->
 </script>
 <body class="dashboard <c:if test='${not empty dashboard.theme}'>dashboard-theme-${dashboard.theme}</c:if>">
