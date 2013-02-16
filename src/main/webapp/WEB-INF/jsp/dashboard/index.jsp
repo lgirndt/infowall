@@ -108,7 +108,7 @@
                 "table-value"  : new infowall.TableValueView(),
                 "html"         : new infowall.HtmlView(),
                 "url"          : new infowall.HtmlView(),
-                "chart"        : new infowall.HtmlView()
+                "chart"        : new infowall.ChartView()
             },
             baseUrl : "<c:url value='/app/item/${dashboard.id}'/>"
         });

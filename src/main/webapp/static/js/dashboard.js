@@ -20,7 +20,7 @@
 /*global window,jQuery*/
 (function (window, $, undefined) {
 
-    var TemplateManager,RenderEngine,SingleValueView,TableValueView,HtmlView,SlideShow;
+    var TemplateManager,RenderEngine,SingleValueView,TableValueView,HtmlView,ChartView,SlideShow;
 
     function error(msg){
         if(window.console){
@@ -185,6 +185,17 @@
         return model.current.data;
     };
 
+    ChartView = function() {
+    };
+
+    ChartView.prototype.transformModel = function(model,item) {
+        return model.current;
+    };
+
+    ChartView.prototype.onRender = function() {
+        console.log("Hello");
+    };
+
     /**
      * The TemplateManager is responsible to extract the Mustache template code from the hosting DOM tree.
      *
@@ -301,6 +312,10 @@
                 var model = view.transformModel(data,item);
                 var html = $.mustache(template,model);
                 $(dest).html(html);
+                console.log("hasonRender?");
+                if('onRender' in view) {
+                    view.onRender();
+                }
                 if(callback){
                     callback();
                 }
@@ -433,6 +448,7 @@
     window.infowall.SingleValueView = SingleValueView;
     window.infowall.TableValueView = TableValueView;
     window.infowall.HtmlView = HtmlView;
+    window.infowall.ChartView = ChartView;
     window.infowall.SlideShow = SlideShow;
 
 }(window, jQuery));
