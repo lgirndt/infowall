@@ -30,6 +30,7 @@
     <link href="<c:url value='/static/css/text.css'/>" rel="stylesheet" type="text/css">
     <link href="<c:url value='/static/css/default.css'/>" rel="stylesheet" type="text/css">
 
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.4/require.min.js" data-main='<c:url value='/static/js/main'/>'></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.0.1/d3.v3.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
@@ -95,38 +96,41 @@
 </body>
 <script type="text/javascript">
 (function($){
-    $(document).ready(function(){
-        var dashboard = ${json};
-        var templateManager = new infowall.TemplateManager();
-        var templates = templateManager.getTemplates(['single-value','table-value','html','url','chart']);
-        var renderEngine = new infowall.RenderEngine({
-            items : dashboard.items,
-            templates: templates,
-            views : {
-                "single-value" : new infowall.SingleValueView(),
-                "table-value"  : new infowall.TableValueView(),
-                "html"         : new infowall.HtmlView(),
-                "url"          : new infowall.HtmlView(),
-                "chart"        : new infowall.ChartView()
-            },
-            baseUrl : "<c:url value='/app/item/${dashboard.id}'/>"
-        });
-        var slideShow = new infowall.SlideShow({
-            items : dashboard.items,
-            renderEngine : renderEngine,
-            container : '#container',
-            fxDuration: 600,
-            animation: dashboard.animation,
-            delay: dashboard.delay
-        });
-        slideShow.start();
 
-        $('#bottom').hover(function(){
-            $('.control-panel').fadeIn();
-        },function(){
-            $('.control-panel').fadeOut();
+    requirejs(['dashboard/TemplateManager'], function (TemplateManager) {
+        $(document).ready(function () {
+            var dashboard = ${json};
+            var templateManager = new TemplateManager();
+            var templates = templateManager.getTemplates(['single-value', 'table-value', 'html', 'url', 'chart']);
+            var renderEngine = new infowall.RenderEngine({
+                items:dashboard.items,
+                templates:templates,
+                views:{
+                    "single-value":new infowall.SingleValueView(),
+                    "table-value":new infowall.TableValueView(),
+                    "html":new infowall.HtmlView(),
+                    "url":new infowall.HtmlView(),
+                    "chart":new infowall.ChartView()
+                },
+                baseUrl:"<c:url value='/app/item/${dashboard.id}'/>"
+            });
+            var slideShow = new infowall.SlideShow({
+                items:dashboard.items,
+                renderEngine:renderEngine,
+                container:'#container',
+                fxDuration:600,
+                animation:dashboard.animation,
+                delay:dashboard.delay
+            });
+            slideShow.start();
+
+            $('#bottom').hover(function () {
+                $('.control-panel').fadeIn();
+            }, function () {
+                $('.control-panel').fadeOut();
+            });
+            $('.control-panel').delay(1200).fadeOut();
         });
-        $('.control-panel').delay(1200).fadeOut();
     });
 })(jQuery);
 </script>
