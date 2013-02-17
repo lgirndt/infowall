@@ -100,11 +100,13 @@
     requirejs([
             'dashboard/TemplateManager',
             'dashboard/RenderEngine',
-            'dashboard/SlideShow'
+            'dashboard/SlideShow',
+            'dashboard/views/TableValueView'
         ], function (
             TemplateManager,
             RenderEngine,
-            SlideShow
+            SlideShow,
+            TableValueView
         ) {
         $(document).ready(function () {
             var dashboard = ${json};
@@ -115,7 +117,7 @@
                 templates:templates,
                 views:{
                     "single-value":new infowall.SingleValueView(),
-                    "table-value":new infowall.TableValueView(),
+                    "table-value":new TableValueView(),
                     "html":new infowall.HtmlView(),
                     "url":new infowall.HtmlView(),
                     "chart":new infowall.ChartView()
