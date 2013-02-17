@@ -4,6 +4,7 @@ define(['text!./TableValue.html'],function(template) {
     };
 
     TableValueView.prototype.template = template;
+    TableValueView.prototype.name = 'table-value';
 
     TableValueView.prototype.transformModel = function(model,item){
         var idx,entry;

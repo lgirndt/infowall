@@ -5,5 +5,7 @@ define(['./GenericView','text!./Html.html'],function(GenericView, template) {
 
     HtmlView.prototype = new GenericView();
     HtmlView.prototype.template = template;
+    HtmlView.prototype.name     = 'html';
+
     return HtmlView;
 });

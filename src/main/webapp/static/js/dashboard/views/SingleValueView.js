@@ -17,6 +17,7 @@ define(['text!./SingleValue.html'],function(template) {
     };
 
     SingleValueView.prototype.template = template;
+    SingleValueView.prototype.name = 'single-value';
 
     SingleValueView.prototype.transformModel = function(model,item){
 

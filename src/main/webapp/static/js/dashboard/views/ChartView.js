@@ -2,6 +2,9 @@ define(['d3','text!./Chart.html'],function(d3, template) {
     var ChartView = function() {
     };
 
+    ChartView.prototype.template = template;
+    ChartView.prototype.name = 'chart';
+
     ChartView.prototype.transformModel = function(model,item) {
 
         model.current.data.data.sort(function(a,b){
@@ -10,9 +13,6 @@ define(['d3','text!./Chart.html'],function(d3, template) {
 
         return model.current.data;
     };
-
-    ChartView.prototype.template = template;
-
     ChartView.prototype.onRender = function(html,model) {
         $elem = $(html);
         var canvasWidth = $elem.width(), //width
