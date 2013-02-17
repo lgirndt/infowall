@@ -101,12 +101,14 @@
             'dashboard/TemplateManager',
             'dashboard/RenderEngine',
             'dashboard/SlideShow',
-            'dashboard/views/TableValueView'
+            'dashboard/views/TableValueView',
+            'dashboard/views/SingleValueView'
         ], function (
             TemplateManager,
             RenderEngine,
             SlideShow,
-            TableValueView
+            TableValueView,
+            SingleValueView
         ) {
         $(document).ready(function () {
             var dashboard = ${json};
@@ -116,7 +118,7 @@
                 items:dashboard.items,
                 templates:templates,
                 views:{
-                    "single-value":new infowall.SingleValueView(),
+                    "single-value":new SingleValueView(),
                     "table-value":new TableValueView(),
                     "html":new infowall.HtmlView(),
                     "url":new infowall.HtmlView(),
