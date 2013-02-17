@@ -1,4 +1,4 @@
-define(['./GenericView','text!dashboard/templates/Url.html'],function(GenericView, template) {
+define(['./GenericView','text!./Url.html'],function(GenericView, template) {
     var UrlView = function() {
 
     };

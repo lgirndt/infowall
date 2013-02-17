@@ -1,4 +1,4 @@
-define(['text!dashboard/templates/SingleValue.html'],function(template) {
+define(['text!./SingleValue.html'],function(template) {
     // TODO move to somewhere else!
     function error(msg){
         if(window.console){

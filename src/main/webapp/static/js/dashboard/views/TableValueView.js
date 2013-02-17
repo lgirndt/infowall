@@ -1,4 +1,4 @@
-define(['text!dashboard/templates/TableValue.html'],function(template) {
+define(['text!./TableValue.html'],function(template) {
     var TableValueView = function(){
 
     };

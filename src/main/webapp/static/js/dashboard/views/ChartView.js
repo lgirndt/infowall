@@ -1,4 +1,4 @@
-define(['d3','text!dashboard/templates/Chart.html'],function(d3, template) {
+define(['d3','text!./Chart.html'],function(d3, template) {
     var ChartView = function() {
     };
 
