@@ -69,7 +69,8 @@
             'dashboard/SlideShow',
             'dashboard/views/TableValueView',
             'dashboard/views/SingleValueView',
-            'dashboard/views/GenericView',
+            'dashboard/views/HtmlView',
+            'dashboard/views/UrlView',
             'dashboard/views/ChartView',
 
             'text!dashboard/templates/SingleValue.html',
@@ -83,7 +84,8 @@
             SlideShow,
             TableValueView,
             SingleValueView,
-            GenericView,
+            HtmlView,
+            UrlView,
             ChartView,
 
             singleValueTemplate,
@@ -107,8 +109,8 @@
                 views:{
                     "single-value":new SingleValueView(),
                     "table-value":new TableValueView(),
-                    "html":new GenericView(),
-                    "url":new GenericView(),
+                    "html":new HtmlView(),
+                    "url":new UrlView(),
                     "chart":new ChartView()
                 },
                 baseUrl:"<c:url value='/app/item/${dashboard.id}'/>"

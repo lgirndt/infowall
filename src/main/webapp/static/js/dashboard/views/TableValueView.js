@@ -1,7 +1,9 @@
-define(function() {
+define(['text!dashboard/templates/TableValue.html'],function(template) {
     var TableValueView = function(){
 
     };
+
+    TableValueView.prototype.template = template;
 
     TableValueView.prototype.transformModel = function(model,item){
         var idx,entry;

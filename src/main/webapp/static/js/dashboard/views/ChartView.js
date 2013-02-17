@@ -1,4 +1,4 @@
-define(['d3'],function(d3) {
+define(['d3','text!dashboard/templates/Chart.html'],function(d3, template) {
     var ChartView = function() {
     };
 
@@ -10,6 +10,8 @@ define(['d3'],function(d3) {
 
         return model.current.data;
     };
+
+    ChartView.prototype.template = template;
 
     ChartView.prototype.onRender = function(html,model) {
         $elem = $(html);

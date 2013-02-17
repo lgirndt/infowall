@@ -1,4 +1,5 @@
-define(function() {
+define(['text!dashboard/templates/SingleValue.html'],function(template) {
+    // TODO move to somewhere else!
     function error(msg){
         if(window.console){
             console.error(msg);
@@ -14,6 +15,8 @@ define(function() {
         };
         this.defaultRelation = 'lt';
     };
+
+    SingleValueView.prototype.template = template;
 
     SingleValueView.prototype.transformModel = function(model,item){
 

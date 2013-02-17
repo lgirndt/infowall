@@ -34,17 +34,17 @@ define(['jquery','jquery.mustache'], function($) {
         var view = entry.view;
         var item = entry.item;
 
-        var template = this.templates[entry.viewName];
-        if(!template){
-            error('no template found for "' + view+"'.");
-            return;
-        }
+//        var template = this.templates[entry.viewName];
+//        if(!template){
+//            error('no template found for "' + view+"'.");
+//            return;
+//        }
 
         $.ajax({
             url : this.baseUrl + "/" + item.name,
             success:function(data){
                 var model = view.transformModel(data,item);
-                var html = $.mustache(template,model);
+                var html = $.mustache(view.template,model);
                 $(dest).html(html);
                 console.log("hasonRender?");
                 if('onRender' in view) {
