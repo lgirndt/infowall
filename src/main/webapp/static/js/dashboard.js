@@ -220,7 +220,7 @@
 
         // This will create <path> elements for us using arc data...
         var arc = d3.svg.arc()
-        .innerRadius(outerRadius * 0.7)
+        .innerRadius(outerRadius * 0.6)
         .outerRadius(outerRadius);
 //
 
