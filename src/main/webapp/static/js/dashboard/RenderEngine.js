@@ -1,4 +1,4 @@
-define(['jquery','jquery.mustache'], function($) {
+define(['jquery','underscore','jquery.mustache'], function($,_) {
     var RenderEngine = function(opts){
         opts = opts || {};
 
@@ -6,18 +6,17 @@ define(['jquery','jquery.mustache'], function($) {
         this.entries = {};
 
         var items = opts.items || [];
-        for(var idx in items){
-            var item = items[idx];
+        _.each(items,function(item) {
             var itemConf = item.conf || {};
 
             var viewName = itemConf.view || this.defaultViewName;
-            var view = opts.views[viewName];
+            var view = _.find(opts.views, function(v) { return v.name === viewName });
             this.entries[item.name] = {
                 item : item,
                 view : view,
                 viewName : viewName
             }
-        }
+        },this);
 
         this.baseUrl = opts.baseUrl;
     };

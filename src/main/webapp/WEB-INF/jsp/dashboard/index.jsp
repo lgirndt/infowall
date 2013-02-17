@@ -90,13 +90,7 @@
             var dashboard = ${json};
             var renderEngine = new RenderEngine({
                 items:dashboard.items,
-                views:{
-                    "single-value":new SingleValueView(),
-                    "table-value":new TableValueView(),
-                    "html":new HtmlView(),
-                    "url":new UrlView(),
-                    "chart":new ChartView()
-                },
+                views:[new SingleValueView(),new TableValueView(),new HtmlView(),new UrlView(),new ChartView()],
                 baseUrl:"<c:url value='/app/item/${dashboard.id}'/>"
             });
             var slideShow = new SlideShow({
