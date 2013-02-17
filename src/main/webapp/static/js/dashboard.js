@@ -189,6 +189,11 @@
     };
 
     ChartView.prototype.transformModel = function(model,item) {
+
+        model.current.data.data.sort(function(a,b){
+            return a.value > b.value;
+        });
+
         return model.current.data;
     };
 
