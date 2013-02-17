@@ -20,17 +20,7 @@
 /*global window,jQuery*/
 (function (window, $, undefined) {
 
-    var SingleValueView,TableValueView,HtmlView,ChartView;
-
-    HtmlView = function() {
-    };
-
-    HtmlView.prototype.transformModel = function(model,item){
-        if(!model || !model.current || !model.current.data){
-            return {table:[]};
-        }
-        return model.current.data;
-    };
+    var ChartView;
 
     ChartView = function() {
     };
@@ -121,9 +111,6 @@
     };
 
 	window.infowall = {};
-    window.infowall.SingleValueView = SingleValueView;
-    window.infowall.TableValueView = TableValueView;
-    window.infowall.HtmlView = HtmlView;
     window.infowall.ChartView = ChartView;
 
 }(window, jQuery));
