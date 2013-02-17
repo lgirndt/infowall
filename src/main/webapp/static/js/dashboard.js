@@ -20,7 +20,7 @@
 /*global window,jQuery*/
 (function (window, $, undefined) {
 
-    var TemplateManager,RenderEngine,SingleValueView,TableValueView,HtmlView,ChartView,SlideShow;
+    var SingleValueView,TableValueView,HtmlView,ChartView;
 
     function error(msg){
         if(window.console){
@@ -274,12 +274,9 @@
     };
 
 	window.infowall = {};
-	window.infowall.TemplateManager = TemplateManager;
-    window.infowall.RenderEngine = RenderEngine;
     window.infowall.SingleValueView = SingleValueView;
     window.infowall.TableValueView = TableValueView;
     window.infowall.HtmlView = HtmlView;
     window.infowall.ChartView = ChartView;
-    window.infowall.SlideShow = SlideShow;
 
 }(window, jQuery));
