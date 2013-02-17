@@ -30,8 +30,9 @@
     <link href="<c:url value='/static/css/text.css'/>" rel="stylesheet" type="text/css">
     <link href="<c:url value='/static/css/default.css'/>" rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.0.1/d3.v3.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
     <script type="text/javascript" src="<c:url value='/static/js/jquery.mustache.js'/>"></script>
 
     <script type="text/javascript" src="<c:url value='/static/js/dashboard.js'/>"></script>
