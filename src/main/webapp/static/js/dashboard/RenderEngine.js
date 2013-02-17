@@ -20,8 +20,6 @@ define(['jquery','jquery.mustache'], function($) {
         }
 
         this.baseUrl = opts.baseUrl;
-
-        this.templates = opts.templates || {};
     };
 
     RenderEngine.prototype.renderItem = function(name,dest,callback){
@@ -33,12 +31,6 @@ define(['jquery','jquery.mustache'], function($) {
 
         var view = entry.view;
         var item = entry.item;
-
-//        var template = this.templates[entry.viewName];
-//        if(!template){
-//            error('no template found for "' + view+"'.");
-//            return;
-//        }
 
         $.ajax({
             url : this.baseUrl + "/" + item.name,

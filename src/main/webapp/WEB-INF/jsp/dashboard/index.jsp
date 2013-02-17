@@ -72,12 +72,6 @@
             'dashboard/views/HtmlView',
             'dashboard/views/UrlView',
             'dashboard/views/ChartView',
-
-            'text!dashboard/templates/SingleValue.html',
-            'text!dashboard/templates/TableValue.html',
-            'text!dashboard/templates/Html.html',
-            'text!dashboard/templates/Url.html',
-            'text!dashboard/templates/Chart.html'
         ], function (
             $,
             RenderEngine,
@@ -86,26 +80,12 @@
             SingleValueView,
             HtmlView,
             UrlView,
-            ChartView,
-
-            singleValueTemplate,
-            tableValueTemplate,
-            htmlTemplate,
-            urlTemplate,
-            chartTemplate
+            ChartView
         ) {
         $(document).ready(function () {
             var dashboard = ${json};
-            var templates = {
-                'single-value' : singleValueTemplate,
-                'table-value'  : tableValueTemplate,
-                'html'         : htmlTemplate,
-                'url'          : urlTemplate,
-                'chart'        : chartTemplate
-            }
             var renderEngine = new RenderEngine({
                 items:dashboard.items,
-                templates:templates,
                 views:{
                     "single-value":new SingleValueView(),
                     "table-value":new TableValueView(),
