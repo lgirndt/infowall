@@ -50,9 +50,10 @@
 
     require.config({
         paths : {
-            jquery : '//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min',
-            d3 : '//cdnjs.cloudflare.com/ajax/libs/d3/3.0.1/d3.v3.min',
-            'text' : '//cdnjs.cloudflare.com/ajax/libs/require-text/2.0.3/text'
+            jquery     : '//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min',
+            d3         : '//cdnjs.cloudflare.com/ajax/libs/d3/3.0.1/d3.v3.min',
+            'text'     : '//cdnjs.cloudflare.com/ajax/libs/require-text/2.0.3/text',
+            underscore : '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min'
         },
         shim : {
             'jquery.mustache' : {
@@ -60,6 +61,9 @@
             },
             d3 : {
                 exports : 'd3'
+            },
+            underscore : {
+                exports : '_'
             }
         }
     });
