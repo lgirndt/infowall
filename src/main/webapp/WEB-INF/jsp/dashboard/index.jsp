@@ -103,14 +103,16 @@
             'dashboard/SlideShow',
             'dashboard/views/TableValueView',
             'dashboard/views/SingleValueView',
-            'dashboard/views/GenericView'
+            'dashboard/views/GenericView',
+            'dashboard/views/ChartView'
         ], function (
             TemplateManager,
             RenderEngine,
             SlideShow,
             TableValueView,
             SingleValueView,
-            GenericView
+            GenericView,
+            ChartView
         ) {
         $(document).ready(function () {
             var dashboard = ${json};
@@ -124,7 +126,7 @@
                     "table-value":new TableValueView(),
                     "html":new GenericView(),
                     "url":new GenericView(),
-                    "chart":new infowall.ChartView()
+                    "chart":new ChartView()
                 },
                 baseUrl:"<c:url value='/app/item/${dashboard.id}'/>"
             });
