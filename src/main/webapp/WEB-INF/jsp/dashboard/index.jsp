@@ -97,12 +97,18 @@
 <script type="text/javascript">
 (function($){
 
-    requirejs(['dashboard/TemplateManager'], function (TemplateManager) {
+    requirejs([
+            'dashboard/TemplateManager',
+            'dashboard/RenderEngine'
+        ], function (
+            TemplateManager,
+            RenderEngine
+        ) {
         $(document).ready(function () {
             var dashboard = ${json};
             var templateManager = new TemplateManager();
             var templates = templateManager.getTemplates(['single-value', 'table-value', 'html', 'url', 'chart']);
-            var renderEngine = new infowall.RenderEngine({
+            var renderEngine = new RenderEngine({
                 items:dashboard.items,
                 templates:templates,
                 views:{
