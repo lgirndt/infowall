@@ -1,11 +1,4 @@
-define(['text!./SingleValue.html'],function(template) {
-    // TODO move to somewhere else!
-    function error(msg){
-        if(window.console){
-            console.error(msg);
-        }
-    }
-
+define(['Log','text!./SingleValue.html'],function(log,template) {
     var SingleValueView = function(views){
         this.views = views;
         this.defaultStatusThreshold = 1;
@@ -130,7 +123,7 @@ define(['text!./SingleValue.html'],function(template) {
         }
         if(!rel){
             if(name){
-                error("relation does not exist: " + name);
+                log.error("relation does not exist: " + name);
             }
             rel = this.relations[this.defaultRelation];
         }

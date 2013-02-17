@@ -1,4 +1,4 @@
-define(['jquery','underscore','jquery.mustache'], function($,_) {
+define(['jquery','underscore','../Log','jquery.mustache'], function($,_,log) {
     var RenderEngine = function(opts){
         opts = opts || {};
 
@@ -24,7 +24,7 @@ define(['jquery','underscore','jquery.mustache'], function($,_) {
     RenderEngine.prototype.renderItem = function(name,dest,callback){
         var entry = this.entries[name];
         if(!entry){
-            error('Cannot render item "' + name + '", because it does not consist.');
+            log.error('Cannot render item "' + name + '", because it does not consist.');
             return;
         }
 
