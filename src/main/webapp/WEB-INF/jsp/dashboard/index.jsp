@@ -32,48 +32,6 @@
 
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.4/require.min.js" data-main='<c:url value='/static/js/main'/>'></script>
 </head>
-<script type="text/mustache" id="template-single-value">
-<!--
-<div class="single-value">
-    <div class="current back-{{status}}">{{current}}{{unit}}</div>
-    <div>
-        <div class="changes"><span class="text-{{diffStatus}}">{{diff}}</span> {{since}}</div>
-    </div>
-</div>
--->
-</script>
-<script type="text/mustache" id="template-table-value">
-<!--
-<div class="table-value">
-<table>
-    {{#table}}
-     <tr><td class="descr text-{{status}}">{{title}}</td><td class="value text-{{status}}">{{value}}</td></tr>
-    {{/table}}
-</table>
-</div>
--->
-</script>
-<script type="text/mustache" id="template-html">
-    <!--
-    <div class="html-value">
-    <table>
-        {{{html}}}
-    </table>
-    </div>
-    -->
-</script>
-<script type="text/mustache" id="template-url">
-    <!--
-    <div class="url-value">
-        <iframe src="{{url}}" width="100%" height="85%"></iframe>
-    </div>
-    -->
-</script>
-<script type="text/mustache" id="template-chart">
-    <!--
-    <div class="chart"></div>
-    -->
-</script>
 <body class="dashboard <c:if test='${not empty dashboard.theme}'>dashboard-theme-${dashboard.theme}</c:if>">
 
 
@@ -93,7 +51,8 @@
     require.config({
         paths : {
             jquery : '//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min',
-            d3 : '//cdnjs.cloudflare.com/ajax/libs/d3/3.0.1/d3.v3.min'
+            d3 : '//cdnjs.cloudflare.com/ajax/libs/d3/3.0.1/d3.v3.min',
+            'text' : '//cdnjs.cloudflare.com/ajax/libs/require-text/2.0.3/text'
         },
         shim : {
             'jquery.mustache' : {
@@ -106,27 +65,42 @@
     });
     requirejs([
             'jquery',
-            'dashboard/TemplateManager',
             'dashboard/RenderEngine',
             'dashboard/SlideShow',
             'dashboard/views/TableValueView',
             'dashboard/views/SingleValueView',
             'dashboard/views/GenericView',
-            'dashboard/views/ChartView'
+            'dashboard/views/ChartView',
+
+            'text!dashboard/templates/SingleValue.html',
+            'text!dashboard/templates/TableValue.html',
+            'text!dashboard/templates/Html.html',
+            'text!dashboard/templates/Url.html',
+            'text!dashboard/templates/Chart.html'
         ], function (
             $,
-            TemplateManager,
             RenderEngine,
             SlideShow,
             TableValueView,
             SingleValueView,
             GenericView,
-            ChartView
+            ChartView,
+
+            singleValueTemplate,
+            tableValueTemplate,
+            htmlTemplate,
+            urlTemplate,
+            chartTemplate
         ) {
         $(document).ready(function () {
             var dashboard = ${json};
-            var templateManager = new TemplateManager();
-            var templates = templateManager.getTemplates(['single-value', 'table-value', 'html', 'url', 'chart']);
+            var templates = {
+                'single-value' : singleValueTemplate,
+                'table-value'  : tableValueTemplate,
+                'html'         : htmlTemplate,
+                'url'          : urlTemplate,
+                'chart'        : chartTemplate
+            }
             var renderEngine = new RenderEngine({
                 items:dashboard.items,
                 templates:templates,
