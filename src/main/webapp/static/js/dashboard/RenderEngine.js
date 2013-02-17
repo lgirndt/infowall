@@ -37,7 +37,6 @@ define(['jquery','underscore','../Log','jquery.mustache'], function($,_,log) {
                 var model = view.transformModel(data,item);
                 var html = $.mustache(view.template,model);
                 $(dest).html(html);
-                console.log("hasonRender?");
                 if('onRender' in view) {
                     view.onRender(dest[0], model);
                 }
