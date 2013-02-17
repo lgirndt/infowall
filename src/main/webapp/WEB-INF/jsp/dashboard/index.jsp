@@ -99,10 +99,12 @@
 
     requirejs([
             'dashboard/TemplateManager',
-            'dashboard/RenderEngine'
+            'dashboard/RenderEngine',
+            'dashboard/SlideShow'
         ], function (
             TemplateManager,
-            RenderEngine
+            RenderEngine,
+            SlideShow
         ) {
         $(document).ready(function () {
             var dashboard = ${json};
@@ -120,7 +122,7 @@
                 },
                 baseUrl:"<c:url value='/app/item/${dashboard.id}'/>"
             });
-            var slideShow = new infowall.SlideShow({
+            var slideShow = new SlideShow({
                 items:dashboard.items,
                 renderEngine:renderEngine,
                 container:'#container',
