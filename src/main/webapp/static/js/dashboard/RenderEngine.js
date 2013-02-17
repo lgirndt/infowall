@@ -1,4 +1,4 @@
-define(function() {
+define(['jquery','jquery.mustache'], function($) {
     var RenderEngine = function(opts){
         opts = opts || {};
 

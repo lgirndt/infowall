@@ -31,10 +31,7 @@
     <link href="<c:url value='/static/css/default.css'/>" rel="stylesheet" type="text/css">
 
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.4/require.min.js" data-main='<c:url value='/static/js/main'/>'></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.0.1/d3.v3.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
-    <script type="text/javascript" src="<c:url value='/static/js/jquery.mustache.js'/>"></script>
 </head>
 <script type="text/mustache" id="template-single-value">
 <!--
@@ -93,9 +90,19 @@
 </div>
 </body>
 <script type="text/javascript">
-(function($){
 
+    require.config({
+        paths : {
+            jquery : '//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min'
+        },
+        shim : {
+            'jquery.mustache' : {
+                deps : ['jquery']
+            }
+        }
+    });
     requirejs([
+            'jquery',
             'dashboard/TemplateManager',
             'dashboard/RenderEngine',
             'dashboard/SlideShow',
@@ -104,6 +111,7 @@
             'dashboard/views/GenericView',
             'dashboard/views/ChartView'
         ], function (
+            $,
             TemplateManager,
             RenderEngine,
             SlideShow,
@@ -146,6 +154,6 @@
             $('.control-panel').delay(1200).fadeOut();
         });
     });
-})(jQuery);
+
 </script>
 </html>

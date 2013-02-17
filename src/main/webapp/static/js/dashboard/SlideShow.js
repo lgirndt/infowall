@@ -1,4 +1,4 @@
-define(function() {
+define(['jquery'],function($) {
     var slideShowAnimation = {
         slide : {
             initNewSlide : function(elem) {
