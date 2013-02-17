@@ -30,7 +30,7 @@
     <link href="<c:url value='/static/css/text.css'/>" rel="stylesheet" type="text/css">
     <link href="<c:url value='/static/css/default.css'/>" rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.4/require.min.js" data-main='<c:url value='/static/js/main'/>'></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.4/require.min.js"></script>
 </head>
 <body class="dashboard <c:if test='${not empty dashboard.theme}'>dashboard-theme-${dashboard.theme}</c:if>">
 
@@ -49,6 +49,7 @@
 <script type="text/javascript">
 
     require.config({
+        baseUrl:'<c:url value='/static/js'/>',
         paths : {
             jquery     : '//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min',
             d3         : '//cdnjs.cloudflare.com/ajax/libs/d3/3.0.1/d3.v3.min',
